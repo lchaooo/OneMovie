@@ -1,0 +1,52 @@
+PODS:
+  - AFNetworking (2.5.1):
+    - AFNetworking/NSURLConnection (= 2.5.1)
+    - AFNetworking/NSURLSession (= 2.5.1)
+    - AFNetworking/Reachability (= 2.5.1)
+    - AFNetworking/Security (= 2.5.1)
+    - AFNetworking/Serialization (= 2.5.1)
+    - AFNetworking/UIKit (= 2.5.1)
+  - AFNetworking/NSURLConnection (2.5.1):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/NSURLSession (2.5.1):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (2.5.1)
+  - AFNetworking/Security (2.5.1)
+  - AFNetworking/Serialization (2.5.1)
+  - AFNetworking/UIKit (2.5.1):
+    - AFNetworking/NSURLConnection
+    - AFNetworking/NSURLSession
+  - FMDB (2.5):
+    - FMDB/standard (= 2.5)
+  - FMDB/common (2.5)
+  - FMDB/standard (2.5):
+    - FMDB/common
+  - GPUImage (0.1.6)
+  - Masonry (0.6.1)
+  - MBProgressHUD (0.9.1)
+  - pop (1.0.7)
+  - YTKKeyValueStore (0.1.2):
+    - FMDB (~> 2.0)
+
+DEPENDENCIES:
+  - AFNetworking
+  - GPUImage
+  - Masonry
+  - MBProgressHUD
+  - pop
+  - YTKKeyValueStore
+
+SPEC CHECKSUMS:
+  AFNetworking: 8bee59492a6ff15d69130efa4d0dc67e0094a52a
+  FMDB: 0efa188cf0dd1ce82c27a478cd5f5fa245308677
+  GPUImage: cecb0830bb9428f50192042e3c7b53810f51388e
+  Masonry: 2cb49fd14d203d2db5ca6bb017135b235dde9980
+  MBProgressHUD: f3747dcbd45a9e855a6b0674550651e0b7ed250c
+  pop: 2f14a1ea61339767af9e66741b418c831b3844df
+  YTKKeyValueStore: a37a3ee636c1e064b7e2a2bcd016d016966f35ce
+
+COCOAPODS: 0.35.0
