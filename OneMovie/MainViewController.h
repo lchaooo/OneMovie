@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  MainViewController.h
 //  OneMovie
 //
 //  Created by 李超 on 15/3/20.
@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-
+@interface MainViewController : UIViewController
 
 @end
-
