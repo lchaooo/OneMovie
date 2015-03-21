@@ -11,7 +11,8 @@
 #import "DropViewController.h"
 #import "PresentingAnimator.h"
 #import "DismissingAnimator.h"
-
+#import <YTKKeyValueStore.h>
+#import "WebModel.h"
 
 
 @interface MainViewController ()<UIViewControllerTransitioningDelegate>
@@ -20,25 +21,45 @@
 @property (weak, nonatomic) IBOutlet RQShineLabel *nameLabel;
 @property (weak, nonatomic) IBOutlet RQShineLabel *ratingLabel;
 @property (weak, nonatomic) IBOutlet RQShineLabel *typeLabel;
-
-
+@property (strong,nonatomic) YTKKeyValueStore *store;//数据储存
+@property (strong,nonatomic) NSString *tableName;//fmdb tablename
+@property (strong,nonatomic) WebModel *model;
 
 @end
 
 @implementation MainViewController
 
+- (id)init{
+    self = [super init];
+    if (self) {
+        _tableName = @"movieTable";
+        _store = [[YTKKeyValueStore alloc] initDBWithName:@"movie.db"];
+        _model = [[WebModel alloc] init];
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    _nameLabel.text = @"教父";
-    _ratingLabel.text = @"评分：9.1";
-    _typeLabel.text = @"类型：剧情／犯罪";
-    [_nameLabel shine];
-    [_ratingLabel shine];
-    [_typeLabel shine];
+    [self getMovieIDAndSendRequest];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
+
+#pragma CustomMethods
+//随即选择电影并发出网络请求
+- (void)getMovieIDAndSendRequest{
+    NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"MovieID" ofType:@"plist"];
+    NSMutableArray *movieIDArray = [[NSMutableArray alloc] initWithContentsOfFile:plistPath];
+    NSString *ID = [movieIDArray objectAtIndex:arc4random()%249];
+    [_model getDictionaryByMovieID:ID];
+}
+
+//页面显示
+- (void)showMovieDetails{
+    NSDictionary *dic 
 }
 
 
