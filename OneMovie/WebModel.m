@@ -27,6 +27,7 @@
 }
 
 - (void)getDictionaryByMovieID:(NSString *)ID{
+    NSLog(@"Request has been sent");
     NSString *path = [NSString stringWithFormat:@"https://api.douban.com/v2/movie/subject/%@",ID];
     NSURL *url = [NSURL URLWithString:path];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
@@ -37,9 +38,11 @@
         NSDictionary *dic = (NSDictionary *)responseData;
         NSString *id = @"movie";
         [_store putObject:dic withId:id intoTable:@"movieTable"];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"Dictionary has been downloaded" object:nil];
     }failure:^(AFHTTPRequestOperation *operation,NSError *error){
         
     }];
+    [requestOperation start];
 }
 
 @end

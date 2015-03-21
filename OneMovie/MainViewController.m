@@ -34,6 +34,7 @@
     if (self) {
         _tableName = @"movieTable";
         _store = [[YTKKeyValueStore alloc] initDBWithName:@"movie.db"];
+        [_store createTableWithName:_tableName];
         _model = [[WebModel alloc] init];
     }
     return self;
@@ -41,6 +42,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showMovieDetails) name:@"Dictionary has been downloaded" object:nil];
     [self getMovieIDAndSendRequest];
 }
 
@@ -59,7 +61,20 @@
 
 //页面显示
 - (void)showMovieDetails{
-    NSDictionary *dic 
+    NSLog(@"showMovieDetails Method");
+    NSDictionary *dic = [_store getObjectById:@"movie" fromTable:_tableName];
+    NSLog(@"%@",dic);
+    _nameLabel.text = dic[@"title"];
+    _ratingLabel.text = [NSString stringWithFormat:@"评分：%@",dic[@"rating"][@"average"]];
+    NSString *type = @"类型：";
+    for (int i=0; i<[dic[@"genres"] count]; i++) {
+        type = [type stringByAppendingString:[NSString stringWithFormat:@"%@/",[dic[@"genres"] objectAtIndex:i]]];
+    }
+    NSString *realType = [type substringToIndex:[type length]-1];
+    _typeLabel.text = realType;
+    [_nameLabel shine];
+    [_ratingLabel shine];
+    [_typeLabel shine];
 }
 
 
