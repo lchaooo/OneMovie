@@ -46,7 +46,7 @@
         _circlePathLayer.strokeColor = self.tintColor.CGColor;
         _circlePathLayer.strokeEnd = _progress;
         [self.layer addSublayer:_circlePathLayer];
-        self.backgroundColor = [UIColor whiteColor];
+        self.backgroundColor = [UIColor clearColor];
     }
     return self;
 }

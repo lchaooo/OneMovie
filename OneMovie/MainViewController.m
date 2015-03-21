@@ -13,11 +13,13 @@
 #import "DismissingAnimator.h"
 #import <YTKKeyValueStore.h>
 #import "WebModel.h"
-
+#import <UIImageView+RJLoader.h>
+#import <UIImageView+WebCache.h>
 
 @interface MainViewController ()<UIViewControllerTransitioningDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundImage;
-@property (weak, nonatomic) IBOutlet UIView *posterImage;
+@property (weak, nonatomic) IBOutlet UIImageView *posterImage;
+
 @property (weak, nonatomic) IBOutlet RQShineLabel *nameLabel;
 @property (weak, nonatomic) IBOutlet RQShineLabel *ratingLabel;
 @property (weak, nonatomic) IBOutlet RQShineLabel *typeLabel;
@@ -79,6 +81,17 @@
     }
     NSString *realType = [type substringToIndex:[type length]-1];
     _typeLabel.text = realType;
+    
+    //poster
+    [_posterImage startLoaderWithTintColor:[UIColor blackColor]];
+    __weak typeof(self)weakSelf = self;
+    [_posterImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",dic[@"images"][@"large"]]] placeholderImage:[UIImage imageNamed:@"透明.png"] options:SDWebImageCacheMemoryOnly | SDWebImageRefreshCached progress:^(NSInteger receivedSize,NSInteger expectedSize){
+        [weakSelf.posterImage updateImageDownloadProgress:(CGFloat)receivedSize/expectedSize];
+    }completed:^(UIImage *image,NSError *error,SDImageCacheType cacheType,NSURL *imageURL){
+        [weakSelf.posterImage reveal];
+        weakSelf.backgroundImage.image = image;
+    }];
+
     
     [_nameLabel shine];
     [_ratingLabel shine];

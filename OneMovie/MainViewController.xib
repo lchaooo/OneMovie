@@ -9,7 +9,7 @@
             <connections>
                 <outlet property="backgroundImage" destination="Y7U-es-KyW" id="oAA-Rp-HEb"/>
                 <outlet property="nameLabel" destination="umD-m8-mkQ" id="ujx-CW-cYD"/>
-                <outlet property="posterImage" destination="MAU-df-Jab" id="XZc-7F-kBw"/>
+                <outlet property="posterImage" destination="h7v-za-ItW" id="X4Z-Sa-dDU"/>
                 <outlet property="ratingLabel" destination="iLv-Nl-XV0" id="qUh-IL-Teo"/>
                 <outlet property="typeLabel" destination="ILX-dJ-Kzo" id="mvM-9I-Iaw"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -34,6 +34,7 @@
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="h7v-za-ItW">
                                 <rect key="frame" x="180" y="80" width="240" height="340"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="h7v-za-ItW" secondAttribute="height" multiplier="300:425" id="1Po-B0-1Wa"/>
                                 </constraints>
@@ -66,6 +67,7 @@
                                 </connections>
                             </button>
                         </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="ILX-dJ-Kzo" secondAttribute="centerX" id="09m-sx-sJb"/>
                             <constraint firstItem="h7v-za-ItW" firstAttribute="top" secondItem="MAU-df-Jab" secondAttribute="top" constant="80" id="EMa-2y-V8c"/>

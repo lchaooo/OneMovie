@@ -22,6 +22,7 @@
 		9DB6986C1ABB38A9009C3283 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9DB6986B1ABB38A9009C3283 /* Images.xcassets */; };
 		9DB6986F1ABB38A9009C3283 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DB6986D1ABB38A9009C3283 /* LaunchScreen.xib */; };
 		9DB6987B1ABB38A9009C3283 /* OneMovieTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DB6987A1ABB38A9009C3283 /* OneMovieTests.m */; };
+		9DD6657A1ABD62BA008E7125 /* 透明.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DD665791ABD62BA008E7125 /* 透明.png */; };
 		9DFD426F1ABC7F6100448029 /* MovieID.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9DFD426E1ABC7F6100448029 /* MovieID.plist */; };
 /* End PBXBuildFile section */
 
@@ -63,6 +64,7 @@
 		9DB698741ABB38A9009C3283 /* OneMovieTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OneMovieTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DB698791ABB38A9009C3283 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9DB6987A1ABB38A9009C3283 /* OneMovieTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OneMovieTests.m; sourceTree = "<group>"; };
+		9DD665791ABD62BA008E7125 /* 透明.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "透明.png"; sourceTree = "<group>"; };
 		9DFD426E1ABC7F6100448029 /* MovieID.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = MovieID.plist; sourceTree = "<group>"; };
 		DC26DA788150665D3AB319B6 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -183,6 +185,7 @@
 		9DB6985E1ABB38A9009C3283 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				9DD665791ABD62BA008E7125 /* 透明.png */,
 				9D0D82E81ABD2275009DC6DC /* p1910907404.jpg */,
 				9D7BCA591ABD4B140027A2F8 /* PresentAnimation */,
 				9DFD426E1ABC7F6100448029 /* MovieID.plist */,
@@ -295,6 +298,7 @@
 				9D0D82E91ABD2275009DC6DC /* p1910907404.jpg in Resources */,
 				9D8C5CE81ABB3A4500B10FD5 /* MainViewController.xib in Resources */,
 				9DFD426F1ABC7F6100448029 /* MovieID.plist in Resources */,
+				9DD6657A1ABD62BA008E7125 /* 透明.png in Resources */,
 				9DB6986C1ABB38A9009C3283 /* Images.xcassets in Resources */,
 				404A90F01ABD44EC007E2932 /* DropViewController.xib in Resources */,
 			);

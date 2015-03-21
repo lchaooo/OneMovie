@@ -7,3 +7,4 @@ pod 'MBProgressHUD'
 pod 'GPUImage'
 pod "RQShineLabel"
 pod "RJImageLoader"
+pod 'SDWebImage'
