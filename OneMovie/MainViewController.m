@@ -15,16 +15,15 @@
 #import "WebModel.h"
 #import <UIImageView+RJLoader.h>
 #import <UIImageView+WebCache.h>
-#import "ContentView.h"
 
 @interface MainViewController ()<UIViewControllerTransitioningDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundImage;
-
+@property (weak, nonatomic) IBOutlet UIImageView *posterImage;
 
 @property (weak, nonatomic) IBOutlet RQShineLabel *nameLabel;
 @property (weak, nonatomic) IBOutlet RQShineLabel *ratingLabel;
 @property (weak, nonatomic) IBOutlet RQShineLabel *typeLabel;
-@property (strong,nonatomic) ContentView *contentView;
+
 @property (strong,nonatomic) YTKKeyValueStore *store;//数据储存
 @property (strong,nonatomic) NSString *tableName;//fmdb tablename
 @property (strong,nonatomic) WebModel *model;
@@ -53,15 +52,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self becomeFirstResponder];
-    _contentView = [[ContentView alloc] initWithFrame:CGRectMake(180, 80, 240, 340)];
-    [self.view addSubview:_contentView];
-    
-    _contentView.posterImage.image = nil;
-    _contentView.posterImage.layer.cornerRadius = 10;
-    _contentView.posterImage.clipsToBounds=YES;
+    _posterImage.image = nil;
+    _posterImage.layer.cornerRadius = 10;
+    _posterImage.clipsToBounds=YES;
     
     UITapGestureRecognizer *tapGR = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageClicked)];
-    [_contentView.posterImage addGestureRecognizer:tapGR];
+    [_posterImage addGestureRecognizer:tapGR];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showMovieDetails) name:@"Dictionary has been downloaded" object:nil];
     [self getMovieIDAndSendRequest];
 }
@@ -107,14 +103,14 @@
     [_typeLabel shine];
     
     //poster
-    [_contentView.posterImage startLoaderWithTintColor:[UIColor blackColor]];
+    [_posterImage startLoaderWithTintColor:[UIColor blackColor]];
     __weak typeof(self)weakSelf = self;
-    [_contentView.posterImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",dic[@"images"][@"large"]]] placeholderImage:[UIImage imageNamed:@"透明.png"] options:SDWebImageCacheMemoryOnly | SDWebImageRefreshCached progress:^(NSInteger receivedSize,NSInteger expectedSize){
-        [weakSelf.contentView.posterImage updateImageDownloadProgress:(CGFloat)receivedSize/expectedSize];
+    [_posterImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",dic[@"images"][@"large"]]] placeholderImage:[UIImage imageNamed:@"透明.png"] options:SDWebImageCacheMemoryOnly | SDWebImageRefreshCached progress:^(NSInteger receivedSize,NSInteger expectedSize){
+        [weakSelf.posterImage updateImageDownloadProgress:(CGFloat)receivedSize/expectedSize];
     }completed:^(UIImage *image,NSError *error,SDImageCacheType cacheType,NSURL *imageURL){
-        [weakSelf.contentView.posterImage reveal];
+        [weakSelf.posterImage reveal];
         weakSelf.backgroundImage.image = image;
-        weakSelf.contentView.posterImage.userInteractionEnabled = YES;
+        weakSelf.posterImage.userInteractionEnabled = YES;
     }];
 }
 
@@ -127,7 +123,7 @@
 }
 
 - (void)disappearPicture{
-    _contentView.posterImage.userInteractionEnabled = NO;
+    _posterImage.userInteractionEnabled = NO;
 }
 
 #pragma shake
