@@ -61,17 +61,25 @@
 
 //页面显示
 - (void)showMovieDetails{
-    NSLog(@"showMovieDetails Method");
+    
     NSDictionary *dic = [_store getObjectById:@"movie" fromTable:_tableName];
-    NSLog(@"%@",dic);
+    
+    //nameLabel
     _nameLabel.text = dic[@"title"];
-    _ratingLabel.text = [NSString stringWithFormat:@"评分：%@",dic[@"rating"][@"average"]];
+    
+    //ratingLabel
+    NSString *rating = [NSString stringWithFormat:@"评分：%@",dic[@"rating"][@"average"]];
+    rating = [rating substringToIndex:6];
+    _ratingLabel.text = rating;
+    
+    //typeLabel
     NSString *type = @"类型：";
     for (int i=0; i<[dic[@"genres"] count]; i++) {
         type = [type stringByAppendingString:[NSString stringWithFormat:@"%@/",[dic[@"genres"] objectAtIndex:i]]];
     }
     NSString *realType = [type substringToIndex:[type length]-1];
     _typeLabel.text = realType;
+    
     [_nameLabel shine];
     [_ratingLabel shine];
     [_typeLabel shine];

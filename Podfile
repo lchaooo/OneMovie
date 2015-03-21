@@ -6,3 +6,4 @@ pod 'YTKKeyValueStore'
 pod 'MBProgressHUD'
 pod 'GPUImage'
 pod "RQShineLabel"
+pod "RJImageLoader"

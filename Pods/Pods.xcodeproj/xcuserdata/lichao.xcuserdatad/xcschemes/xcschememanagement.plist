@@ -29,6 +29,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-RJImageLoader.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-RQShineLabel.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -52,47 +57,52 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>1AEDCF7107D30DA9325B7EC0</key>
+		<key>49F7E0DFF1D865ACBA7C9041</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>1DCE801BB524348D0743EB90</key>
+		<key>50BE3F38C00F10CBB4C6103E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>1F95AC6378C2E8B3A9764C86</key>
+		<key>5668700D07FC4DA3F2765809</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>36452164E4063259CC2C8338</key>
+		<key>605F9F5A85DEE91A15922D7C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>525EBC8B1E06C1BB3E4D6007</key>
+		<key>6770F2ECA9011CBB491B1B1F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>53561126B421BD81018C2B86</key>
+		<key>6EF3E485255AE67FF14A93F6</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>6957787163A5855C1E2F6119</key>
+		<key>7411CA026311CDF82672E791</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>CC88E7C5C8F2B002B7EF2DA8</key>
+		<key>890C79A9A5CA70F59DED0EAA</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>FC7B107621F38CFFFC667BFE</key>
+		<key>C9DF0AF4A0FB7D3C9F7C32F8</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FABF428170180CBC9C652F03</key>
 		<dict>
 			<key>primary</key>
 			<true/>
