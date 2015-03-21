@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "4DDF648ECED7BD14E99A00CE"
+               BlueprintIdentifier = "1AEDCF7107D30DA9325B7EC0"
                BuildableName = "libPods-RQShineLabel.a"
                BlueprintName = "Pods-RQShineLabel"
                ReferencedContainer = "container:Pods.xcodeproj">

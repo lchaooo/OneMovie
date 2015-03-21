@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		2D9B54269700A8D44C03013D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B47FD9F4DFE44CE8D46563B /* libPods.a */; };
+		9D0D82E31ABD19EA009DC6DC /* WebModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D0D82E21ABD19EA009DC6DC /* WebModel.m */; };
+		9D0D82E91ABD2275009DC6DC /* p1910907404.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9D0D82E81ABD2275009DC6DC /* p1910907404.jpg */; };
+		9D6558491ABD3777009A3DD8 /* ContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D6558481ABD3777009A3DD8 /* ContentView.m */; };
 		9D8C5CE71ABB3A4500B10FD5 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D8C5CE51ABB3A4500B10FD5 /* MainViewController.m */; };
 		9D8C5CE81ABB3A4500B10FD5 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D8C5CE61ABB3A4500B10FD5 /* MainViewController.xib */; };
 		9DA1C3421ABD0DC800FAC1DC /* DismissingAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DA1C33F1ABD0DC800FAC1DC /* DismissingAnimator.m */; };
@@ -34,6 +37,11 @@
 /* Begin PBXFileReference section */
 		6B47FD9F4DFE44CE8D46563B /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E17B7A7533FA3D6E6C326CE /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		9D0D82E11ABD19EA009DC6DC /* WebModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebModel.h; sourceTree = "<group>"; };
+		9D0D82E21ABD19EA009DC6DC /* WebModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebModel.m; sourceTree = "<group>"; };
+		9D0D82E81ABD2275009DC6DC /* p1910907404.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = p1910907404.jpg; sourceTree = "<group>"; };
+		9D6558471ABD3777009A3DD8 /* ContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentView.h; sourceTree = "<group>"; };
+		9D6558481ABD3777009A3DD8 /* ContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentView.m; sourceTree = "<group>"; };
 		9D8C5CE41ABB3A4500B10FD5 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		9D8C5CE51ABB3A4500B10FD5 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		9D8C5CE61ABB3A4500B10FD5 /* MainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
@@ -93,6 +101,34 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		9D0D82DE1ABD19AD009DC6DC /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				9D8C5CE41ABB3A4500B10FD5 /* MainViewController.h */,
+				9D8C5CE51ABB3A4500B10FD5 /* MainViewController.m */,
+				9D8C5CE61ABB3A4500B10FD5 /* MainViewController.xib */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		9D0D82DF1ABD19B6009DC6DC /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				9D0D82E11ABD19EA009DC6DC /* WebModel.h */,
+				9D0D82E21ABD19EA009DC6DC /* WebModel.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		9D65584A1ABD377E009A3DD8 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				9D6558471ABD3777009A3DD8 /* ContentView.h */,
+				9D6558481ABD3777009A3DD8 /* ContentView.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
 		9DB698521ABB38A9009C3283 = {
 			isa = PBXGroup;
 			children = (
@@ -118,9 +154,9 @@
 			children = (
 				9DB698621ABB38A9009C3283 /* AppDelegate.h */,
 				9DB698631ABB38A9009C3283 /* AppDelegate.m */,
-				9D8C5CE41ABB3A4500B10FD5 /* MainViewController.h */,
-				9D8C5CE51ABB3A4500B10FD5 /* MainViewController.m */,
-				9D8C5CE61ABB3A4500B10FD5 /* MainViewController.xib */,
+				9D65584A1ABD377E009A3DD8 /* Views */,
+				9D0D82DF1ABD19B6009DC6DC /* Models */,
+				9D0D82DE1ABD19AD009DC6DC /* Controllers */,
 				9DB6986B1ABB38A9009C3283 /* Images.xcassets */,
 				9DB6986D1ABB38A9009C3283 /* LaunchScreen.xib */,
 				9DB6985E1ABB38A9009C3283 /* Supporting Files */,
@@ -131,6 +167,7 @@
 		9DB6985E1ABB38A9009C3283 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				9D0D82E81ABD2275009DC6DC /* p1910907404.jpg */,
 				9DA1C33E1ABD0DC800FAC1DC /* DismissingAnimator.h */,
 				9DA1C33F1ABD0DC800FAC1DC /* DismissingAnimator.m */,
 				9DA1C3401ABD0DC800FAC1DC /* PresentingAnimator.h */,
@@ -244,6 +281,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9DB6986F1ABB38A9009C3283 /* LaunchScreen.xib in Resources */,
+				9D0D82E91ABD2275009DC6DC /* p1910907404.jpg in Resources */,
 				9D8C5CE81ABB3A4500B10FD5 /* MainViewController.xib in Resources */,
 				9DFD426F1ABC7F6100448029 /* MovieID.plist in Resources */,
 				9DB6986C1ABB38A9009C3283 /* Images.xcassets in Resources */,
@@ -298,10 +336,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				9DA1C3461ABD0DE500FAC1DC /* UIColor+CustomColors.m in Sources */,
+				9D0D82E31ABD19EA009DC6DC /* WebModel.m in Sources */,
 				9DA1C3421ABD0DC800FAC1DC /* DismissingAnimator.m in Sources */,
 				9DB698641ABB38A9009C3283 /* AppDelegate.m in Sources */,
 				9DA1C3431ABD0DC800FAC1DC /* PresentingAnimator.m in Sources */,
 				9D8C5CE71ABB3A4500B10FD5 /* MainViewController.m in Sources */,
+				9D6558491ABD3777009A3DD8 /* ContentView.m in Sources */,
 				9DB698611ABB38A9009C3283 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -2,10 +2,13 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MainViewController">
             <connections>
+                <outlet property="backgroundImage" destination="Y7U-es-KyW" id="oAA-Rp-HEb"/>
+                <outlet property="posterImage" destination="MAU-df-Jab" id="XZc-7F-kBw"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -14,28 +17,57 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="az8-VY-TGU">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="p1910907404.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Y7U-es-KyW">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                 </imageView>
+                <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PkP-tV-1yH">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="MAU-df-Jab">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <userGuides>
+                            <userLayoutGuide location="256" affinity="minY"/>
+                        </userGuides>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="p1910907404.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="h7v-za-ItW">
+                                <rect key="frame" x="180" y="80" width="240" height="340"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="h7v-za-ItW" secondAttribute="height" multiplier="300:425" id="1Po-B0-1Wa"/>
+                                </constraints>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ycm-Fw-VeG" customClass="ContentView">
+                                <rect key="frame" x="0.0" y="430" width="600" height="162"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="h7v-za-ItW" firstAttribute="top" secondItem="MAU-df-Jab" secondAttribute="top" constant="80" id="EMa-2y-V8c"/>
+                            <constraint firstAttribute="centerX" secondItem="Ycm-Fw-VeG" secondAttribute="centerX" id="KZO-Bd-LXQ"/>
+                            <constraint firstAttribute="centerY" secondItem="h7v-za-ItW" secondAttribute="centerY" constant="50" id="L6g-Vn-0E6"/>
+                            <constraint firstAttribute="bottom" secondItem="Ycm-Fw-VeG" secondAttribute="bottom" constant="8" id="Qdy-db-hEi"/>
+                            <constraint firstAttribute="trailing" secondItem="Ycm-Fw-VeG" secondAttribute="trailing" id="lRl-hj-K0j"/>
+                            <constraint firstItem="Ycm-Fw-VeG" firstAttribute="leading" secondItem="MAU-df-Jab" secondAttribute="leading" id="qJ2-et-OGz"/>
+                            <constraint firstAttribute="centerX" secondItem="h7v-za-ItW" secondAttribute="centerX" id="uVz-x1-H54"/>
+                            <constraint firstItem="Ycm-Fw-VeG" firstAttribute="top" secondItem="h7v-za-ItW" secondAttribute="bottom" constant="10" id="za2-II-Ntb"/>
+                        </constraints>
+                    </view>
+                    <blurEffect style="dark"/>
+                </visualEffectView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="centerX" secondItem="az8-VY-TGU" secondAttribute="centerX" id="At9-Zv-isW"/>
-                <constraint firstItem="az8-VY-TGU" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="YWW-eI-PgK"/>
-                <constraint firstItem="az8-VY-TGU" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="aaw-pb-dhn"/>
-                <constraint firstAttribute="centerY" secondItem="az8-VY-TGU" secondAttribute="centerY" id="jV9-Eg-UTe"/>
+                <constraint firstItem="PkP-tV-1yH" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="0oy-OK-vpF"/>
+                <constraint firstItem="PkP-tV-1yH" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="5cc-Ef-psD"/>
+                <constraint firstAttribute="centerY" secondItem="PkP-tV-1yH" secondAttribute="centerY" id="75b-yT-xuP"/>
+                <constraint firstItem="Y7U-es-KyW" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="N01-vA-VeD"/>
+                <constraint firstAttribute="centerX" secondItem="Y7U-es-KyW" secondAttribute="centerX" id="fPp-QR-ZlK"/>
+                <constraint firstAttribute="centerX" secondItem="PkP-tV-1yH" secondAttribute="centerX" id="ugm-Rg-QlO"/>
+                <constraint firstAttribute="centerY" secondItem="Y7U-es-KyW" secondAttribute="centerY" id="vv4-eF-fbI"/>
+                <constraint firstItem="Y7U-es-KyW" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="xap-C2-osx"/>
             </constraints>
         </view>
-        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="KOS-ks-ASl">
-            <rect key="frame" x="0.0" y="0.0" width="42" height="21"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-            <nil key="highlightedColor"/>
-        </label>
-        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="kYn-jK-Eu3">
-            <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-        </imageView>
     </objects>
+    <resources>
+        <image name="p1910907404.jpg" width="300" height="425"/>
+    </resources>
 </document>
