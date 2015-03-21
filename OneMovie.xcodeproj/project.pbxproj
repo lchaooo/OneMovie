@@ -11,6 +11,7 @@
 		404A90F01ABD44EC007E2932 /* DropViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 404A90EE1ABD44EC007E2932 /* DropViewController.xib */; };
 		9D0D82E31ABD19EA009DC6DC /* WebModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D0D82E21ABD19EA009DC6DC /* WebModel.m */; };
 		9D0D82E91ABD2275009DC6DC /* p1910907404.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9D0D82E81ABD2275009DC6DC /* p1910907404.jpg */; };
+		9D7A1C461ABDD4C60013E4CE /* ContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D7A1C451ABDD4C60013E4CE /* ContentView.m */; };
 		9D8C5CE71ABB3A4500B10FD5 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D8C5CE51ABB3A4500B10FD5 /* MainViewController.m */; };
 		9D8C5CE81ABB3A4500B10FD5 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D8C5CE61ABB3A4500B10FD5 /* MainViewController.xib */; };
 		9DA1C3421ABD0DC800FAC1DC /* DismissingAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DA1C33F1ABD0DC800FAC1DC /* DismissingAnimator.m */; };
@@ -45,6 +46,8 @@
 		9D0D82E11ABD19EA009DC6DC /* WebModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebModel.h; sourceTree = "<group>"; };
 		9D0D82E21ABD19EA009DC6DC /* WebModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebModel.m; sourceTree = "<group>"; };
 		9D0D82E81ABD2275009DC6DC /* p1910907404.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = p1910907404.jpg; sourceTree = "<group>"; };
+		9D7A1C441ABDD4C60013E4CE /* ContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentView.h; sourceTree = "<group>"; };
+		9D7A1C451ABDD4C60013E4CE /* ContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentView.m; sourceTree = "<group>"; };
 		9D8C5CE41ABB3A4500B10FD5 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		9D8C5CE51ABB3A4500B10FD5 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		9D8C5CE61ABB3A4500B10FD5 /* MainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
@@ -132,6 +135,8 @@
 			children = (
 				9D8C5CE61ABB3A4500B10FD5 /* MainViewController.xib */,
 				404A90EE1ABD44EC007E2932 /* DropViewController.xib */,
+				9D7A1C441ABDD4C60013E4CE /* ContentView.h */,
+				9D7A1C451ABDD4C60013E4CE /* ContentView.m */,
 				9D7BCA591ABD4B140027A2F8 /* PresentAnimation */,
 			);
 			name = Views;
@@ -361,6 +366,7 @@
 				9DB3298D1ABDA27C00B70179 /* DropViewController.m in Sources */,
 				9DB698641ABB38A9009C3283 /* AppDelegate.m in Sources */,
 				9DA1C3431ABD0DC800FAC1DC /* PresentingAnimator.m in Sources */,
+				9D7A1C461ABDD4C60013E4CE /* ContentView.m in Sources */,
 				9D8C5CE71ABB3A4500B10FD5 /* MainViewController.m in Sources */,
 				9DB698611ABB38A9009C3283 /* main.m in Sources */,
 			);
