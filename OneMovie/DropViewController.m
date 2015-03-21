@@ -84,7 +84,6 @@
                                options:0
                                metrics:nil
                                views:NSDictionaryOfVariableBindings(dismissButton)]];
-    // Do any additional setup after loading the view from its nib.
 }
 
 - (void)shining{

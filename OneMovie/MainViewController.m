@@ -23,6 +23,7 @@
 @property (weak, nonatomic) IBOutlet RQShineLabel *nameLabel;
 @property (weak, nonatomic) IBOutlet RQShineLabel *ratingLabel;
 @property (weak, nonatomic) IBOutlet RQShineLabel *typeLabel;
+
 @property (strong,nonatomic) YTKKeyValueStore *store;//数据储存
 @property (strong,nonatomic) NSString *tableName;//fmdb tablename
 @property (strong,nonatomic) WebModel *model;
@@ -54,6 +55,7 @@
     _posterImage.image = nil;
     _posterImage.layer.cornerRadius = 10;
     _posterImage.clipsToBounds=YES;
+    
     UITapGestureRecognizer *tapGR = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageClicked)];
     [_posterImage addGestureRecognizer:tapGR];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showMovieDetails) name:@"Dictionary has been downloaded" object:nil];
