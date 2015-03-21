@@ -29,6 +29,11 @@
 			<key>orderHint</key>
 			<integer>6</integer>
 		</dict>
+		<key>Pods-RQShineLabel.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>9</integer>
+		</dict>
 		<key>Pods-YTKKeyValueStore.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -47,7 +52,42 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>1AEDCF7107D30DA9325B7EC0</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>1DCE801BB524348D0743EB90</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>1F95AC6378C2E8B3A9764C86</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>36452164E4063259CC2C8338</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>525EBC8B1E06C1BB3E4D6007</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>53561126B421BD81018C2B86</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>5BEF4B952BC2C7694F34641C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6957787163A5855C1E2F6119</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -83,6 +123,16 @@
 			<true/>
 		</dict>
 		<key>BF385AEC7C472F0C00AAC86E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>CC88E7C5C8F2B002B7EF2DA8</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FC7B107621F38CFFFC667BFE</key>
 		<dict>
 			<key>primary</key>
 			<true/>

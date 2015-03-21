@@ -8,10 +8,13 @@
 
 #import "MainViewController.h"
 #import <RQShineLabel.h>
+#import "DropViewController.h"
+#import "PresentingAnimator.h"
+#import "DismissingAnimator.h"
 
 
 
-@interface MainViewController ()
+@interface MainViewController ()<UIViewControllerTransitioningDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundImage;
 @property (weak, nonatomic) IBOutlet UIView *posterImage;
 @property (weak, nonatomic) IBOutlet RQShineLabel *nameLabel;
@@ -36,6 +39,31 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
+
+
+#pragma UIViewControllerTransitioningDelegate
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented
+                                                                  presentingController:(UIViewController *)presenting
+                                                                      sourceController:(UIViewController *)source
+{
+    return [PresentingAnimator new];
+}
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed
+{
+    return [DismissingAnimator new];
+}
+
+
+- (IBAction)buttonClicked:(id)sender {
+    DropViewController *dropViewController = [DropViewController new];
+    dropViewController.transitioningDelegate = self;
+    dropViewController.modalPresentationStyle = UIModalPresentationCustom;
+    
+    [self presentViewController:dropViewController
+                                            animated:YES
+                                          completion:NULL];
 }
 
 
