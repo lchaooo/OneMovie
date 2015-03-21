@@ -30,10 +30,10 @@
     UIView *toView = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey].view;
     toView.frame = CGRectMake(0,
                               0,
-                              CGRectGetWidth(transitionContext.containerView.bounds) - 104.f,
-                              CGRectGetHeight(transitionContext.containerView.bounds) - 288.f);
+                              CGRectGetWidth(transitionContext.containerView.bounds) - 74.f,
+                              CGRectGetHeight(transitionContext.containerView.bounds) - 238.f);
     toView.center = CGPointMake(transitionContext.containerView.center.x, -transitionContext.containerView.center.y);
-
+    NSLog(@"%@",NSStringFromCGRect(toView.frame));
     [transitionContext.containerView addSubview:dimmingView];
     [transitionContext.containerView addSubview:toView];
 

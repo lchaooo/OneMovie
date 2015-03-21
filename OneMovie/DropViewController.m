@@ -21,19 +21,28 @@
     _store = [[YTKKeyValueStore alloc] initDBWithName:@"movie.db"];
     NSDictionary *movieDetails = [_store getObjectById:@"movie" fromTable:@"movieTable"];
     
+    
     self.view.layer.cornerRadius = 8.f;
-    self.view.backgroundColor = [UIColor customBlueColor];
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"QTUW88Z~7$2H$3L08TB5VYN.jpg"]];
+    
+    
     self.automaticallyAdjustsScrollViewInsets = NO;
     
     //w = width - 104.f,
     //h = height - 288.f
     
-    float currentWidth = [[UIScreen mainScreen] bounds].size.width - 104.f;
-    float currentHeight = [[UIScreen mainScreen] bounds].size.height - 288.f;
+    float currentWidth = [[UIScreen mainScreen] bounds].size.width - 74.f;
+    float currentHeight = [[UIScreen mainScreen] bounds].size.height - 238.f;
     
+    NSArray *castsArray= [NSArray arrayWithArray:[movieDetails objectForKey:@"casts"]];
     
     _rqLabel = [[RQShineLabel alloc]initWithFrame:CGRectMake(0 , 0, currentWidth-40 , currentHeight-80)];
     _rqLabel.text = movieDetails[@"summary"];
+    _rqLabel.text = [NSString stringWithFormat:@"%@\n\n主演:",_rqLabel.text];
+    for (NSDictionary *dic in castsArray) {
+        _rqLabel.text = [NSString stringWithFormat:@"%@%@/",_rqLabel.text,dic[@"name"]];
+    }
+    _rqLabel.text = [_rqLabel.text substringToIndex:[_rqLabel.text length]-1];
     _rqLabel.numberOfLines = 0;
     UIFont *tfont = [UIFont systemFontOfSize:18.0];
     NSDictionary * dic = [NSDictionary dictionaryWithObjectsAndKeys:tfont,NSFontAttributeName,nil];
@@ -58,7 +67,7 @@
     dismissButton.translatesAutoresizingMaskIntoConstraints = NO;
     dismissButton.tintColor = [UIColor whiteColor];
     dismissButton.titleLabel.font = [UIFont fontWithName:@"Avenir" size:20];
-    [dismissButton setTitle:@"Dismiss" forState:UIControlStateNormal];
+    [dismissButton setTitle:@"关 闭" forState:UIControlStateNormal];
     [dismissButton addTarget:self action:@selector(dismiss:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:dismissButton];
     

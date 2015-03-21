@@ -42,10 +42,20 @@
     return self;
 }
 
+- (void) viewWillAppear:(BOOL)animated
+{
+    [self resignFirstResponder];
+    [super viewWillAppear:animated];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self becomeFirstResponder];
+    _posterImage.image = nil;
     _posterImage.layer.cornerRadius = 10;
     _posterImage.clipsToBounds=YES;
+    UITapGestureRecognizer *tapGR = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageClicked)];
+    [_posterImage addGestureRecognizer:tapGR];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showMovieDetails) name:@"Dictionary has been downloaded" object:nil];
     [self getMovieIDAndSendRequest];
 }
@@ -86,6 +96,10 @@
     NSString *realType = [type substringToIndex:[type length]-1];
     _typeLabel.text = realType;
     
+    [_nameLabel shine];
+    [_ratingLabel shine];
+    [_typeLabel shine];
+    
     //poster
     [_posterImage startLoaderWithTintColor:[UIColor blackColor]];
     __weak typeof(self)weakSelf = self;
@@ -94,14 +108,32 @@
     }completed:^(UIImage *image,NSError *error,SDImageCacheType cacheType,NSURL *imageURL){
         [weakSelf.posterImage reveal];
         weakSelf.backgroundImage.image = image;
+        weakSelf.posterImage.userInteractionEnabled = YES;
     }];
-
-    
-    [_nameLabel shine];
-    [_ratingLabel shine];
-    [_typeLabel shine];
 }
 
+- (void)disappearAndSendNewRequest{
+    [_nameLabel fadeOut];
+    [_ratingLabel fadeOut];
+    [_typeLabel fadeOut];
+    [self performSelector:@selector(disappearPicture) withObject:self afterDelay:1.5];
+    [self performSelector:@selector(getMovieIDAndSendRequest) withObject:self afterDelay:1.5];
+}
+
+- (void)disappearPicture{
+    _posterImage.userInteractionEnabled = NO;
+}
+
+#pragma shake
+-(BOOL)canBecomeFirstResponder
+{
+    return YES;
+}
+- (void) motionBegan:(UIEventSubtype)motion withEvent:(UIEvent *)event
+{
+    [self disappearAndSendNewRequest];
+    
+}
 
 #pragma UIViewControllerTransitioningDelegate
 - (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented
@@ -117,11 +149,11 @@
 }
 
 
-- (IBAction)buttonClicked:(id)sender {
+- (void)imageClicked {
     DropViewController *dropViewController = [DropViewController new];
     dropViewController.transitioningDelegate = self;
     dropViewController.modalPresentationStyle = UIModalPresentationCustom;
-    
+
     [self presentViewController:dropViewController
                                             animated:YES
                                           completion:NULL];
