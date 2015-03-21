@@ -50,7 +50,8 @@
     else {
         [self.view addSubview:_rqLabel];
     }
-    [_rqLabel shine];
+    [self performSelector:@selector(shining) withObject:self afterDelay:0.3];
+    
     
     
     UIButton *dismissButton = [UIButton buttonWithType:UIButtonTypeSystem];
@@ -75,6 +76,10 @@
                                metrics:nil
                                views:NSDictionaryOfVariableBindings(dismissButton)]];
     // Do any additional setup after loading the view from its nib.
+}
+
+- (void)shining{
+    [_rqLabel shine];
 }
 
 - (void)didReceiveMemoryWarning {

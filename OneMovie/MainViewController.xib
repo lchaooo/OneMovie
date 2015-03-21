@@ -38,6 +38,11 @@
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="h7v-za-ItW" secondAttribute="height" multiplier="300:425" id="1Po-B0-1Wa"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="umD-m8-mkQ" customClass="RQShineLabel">
                                 <rect key="frame" x="270" y="430" width="60" height="36"/>

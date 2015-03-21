@@ -44,6 +44,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _posterImage.layer.cornerRadius = 10;
+    _posterImage.clipsToBounds=YES;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showMovieDetails) name:@"Dictionary has been downloaded" object:nil];
     [self getMovieIDAndSendRequest];
 }
@@ -71,7 +73,9 @@
     
     //ratingLabel
     NSString *rating = [NSString stringWithFormat:@"评分：%@",dic[@"rating"][@"average"]];
-    rating = [rating substringToIndex:6];
+    if ([rating length]>6) {
+        rating = [rating substringToIndex:6];
+    }
     _ratingLabel.text = rating;
     
     //typeLabel
