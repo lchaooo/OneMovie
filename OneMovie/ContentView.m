@@ -16,12 +16,21 @@
 - (id)initWithFrame:(CGRect)frame  {
     self = [super initWithFrame:frame];
     if (self) {
-        [self setUpImageView];
+        [self setUpLabelAndImageView];
     }
     return self;
 }
 
-- (void)setUpImageView{
+- (void)setUpLabelAndImageView{
+    _noticeLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 140, 250, 70)];
+    _noticeLabel.textAlignment = NSTextAlignmentCenter;
+    _noticeLabel.text = @"松开后搜索";
+    _noticeLabel.alpha = 0;
+    _noticeLabel.font = [UIFont systemFontOfSize:35];
+    _noticeLabel.backgroundColor = [UIColor clearColor];
+    _noticeLabel.textColor = [UIColor whiteColor];
+    [self addSubview:_noticeLabel];
+    
     _posterImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
     _posterImage.layer.anchorPoint = CGPointMake(0.5, 0);
     _posterImage.layer.position = CGPointMake(self.frame.size.width/2, 0);
@@ -55,38 +64,20 @@
         
         y_coordinate = 0.0f;
     }
-    //添加阴影
-//    if ([[_posterImage.layer valueForKeyPath:@"transform.rotation.x"] floatValue] < -M_PI_2) {
-//        
-//        [CATransaction begin];
-//        [CATransaction setValue:(id)kCFBooleanTrue
-//                         forKey:kCATransactionDisableActions];
-//        self.topShadowLayer.opacity = 0.0;
-//        self.bottomShadowLayer.opacity = (location.y-self.initialLocation)/(CGRectGetHeight(self.bounds)-self.initialLocation);
-//        [CATransaction commit];
-//    } else {
-//        
-//        [CATransaction begin];
-//        [CATransaction setValue:(id)kCFBooleanTrue
-//                         forKey:kCATransactionDisableActions];
-//        CGFloat opacity = (location.y-self.initialLocation)/(CGRectGetHeight(self.bounds)-self.initialLocation);
-//        self.bottomShadowLayer.opacity = opacity;
-//        self.topShadowLayer.opacity = opacity;
-//        [CATransaction commit];
-//    }
-    
-    
     
     //如果手指在PageView里面,开始使用POPAnimation
     if (location.y<=_initialLocation) {
         if([self isLocation:location InView:self] || location.y<0){
             //把一个PI平均分成可以下滑的最大距离份
             CGFloat percent = -(M_PI /self.initialLocation)/2;
-        
+            POPBasicAnimation *alphaAnimation = [POPBasicAnimation animationWithPropertyNamed:kPOPViewAlpha];
+            alphaAnimation.toValue = @(((location.y-self.initialLocation)*percent/M_PI-0.45)*0.75*5);
+            NSLog(@"%f",((location.y-self.initialLocation)*percent/M_PI-0.45)*0.75*5);
+            alphaAnimation.duration = 0.01;
+            [_noticeLabel pop_addAnimation:alphaAnimation forKey:@"alphaAnimation"];
+            
             //POPAnimation的使用
-            //创建一个Animation,设置为绕着X轴旋转。还记得我们上面设置的锚点吗？设置为（0.5，0.5）。这时什么意思呢？当我们设置kPOPLayerRotationX（绕X轴旋转），那么x就起作用了，绕x所在轴；kPOPLayerRotationY，y就起作用了，绕y所在轴。
             POPBasicAnimation *rotationAnimation = [POPBasicAnimation animationWithPropertyNamed:kPOPLayerRotationX];
-        
             //给这个animation设值。这个值根据手的滑动而变化，所以值会不断改变。又因为这个方法会实时调用，所以变化的值会实时显示在屏幕上。
             rotationAnimation.duration = 0.01;//默认的duration是0.4
             rotationAnimation.toValue =@((location.y-self.initialLocation)*percent);
@@ -104,8 +95,11 @@
                     recoverAnimation.dynamicsTension = 200;
                     recoverAnimation.toValue = @(0);
                     [_posterImage.layer pop_addAnimation:recoverAnimation forKey:@"recoverAnimation"];
-
+                    _noticeLabel.alpha = 0;
                 } else {
+                    _noticeLabel.text = @"正在搜索";
+                    _noticeLabel.alpha = 1;
+                    
                     POPSpringAnimation *recoverAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerRotationX];
                     recoverAnimation.springBounciness = 18.0f; //弹簧反弹力度
                     recoverAnimation.dynamicsMass = 2.0f;
@@ -117,9 +111,18 @@
                     enlargeAnimation.toValue = [NSValue valueWithCGRect:[[UIScreen mainScreen] bounds]];
                     enlargeAnimation.springSpeed = 1;
                     [self.layer pop_addAnimation:enlargeAnimation forKey:@"enlargeAnimation"];
+                    
+                    POPSpringAnimation *keepLabelAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerPositionX];
+                    keepLabelAnimation.toValue = [NSValue valueWithCGPoint:CGPointMake(CGRectGetMidX([[UIScreen mainScreen] bounds]), 290)];
+                    keepLabelAnimation.springSpeed = 1;
+                    [_noticeLabel.layer pop_addAnimation:keepLabelAnimation forKey:@"keepLabelAnimation"];
+                    
+                    POPSpringAnimation *keepMidAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerPositionX];
+                    keepMidAnimation.toValue = [NSValue valueWithCGPoint:CGPointMake(CGRectGetMidX([[UIScreen mainScreen] bounds]), 0)];
+                    keepMidAnimation.springSpeed = 1;
+                    [_posterImage.layer pop_addAnimation:keepMidAnimation forKey:@"keepMidAnimation"];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"Please Fade Out" object:nil];
                 }
-                //self.topShadowLayer.opacity = 0.0;
-                //self.bottomShadowLayer.opacity = 0.0;
             }
         
         }
@@ -134,10 +137,7 @@
         recoverAnimation.dynamicsTension = 200;
         recoverAnimation.toValue = @(0);
         [_posterImage.layer pop_addAnimation:recoverAnimation forKey:@"recoverAnimation"];
-        //self.topShadowLayer.opacity = 0.0;
-        //self.bottomShadowLayer.opacity = 0.0;
-        
-    }
+}
     
     recognizer.enabled = YES;
     
@@ -154,7 +154,6 @@
 }
 
 -(CATransform3D)setTransform3D{
-    //如果不设置这个值，无论转多少角度都不会有3D效果
     CATransform3D transform = CATransform3DIdentity;
     transform.m34 = 2.5/-2000;
     return transform;

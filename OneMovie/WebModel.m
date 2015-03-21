@@ -40,7 +40,7 @@
         [_store putObject:dic withId:id intoTable:@"movieTable"];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"Dictionary has been downloaded" object:nil];
     }failure:^(AFHTTPRequestOperation *operation,NSError *error){
-        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"Net is not working" object:nil];
     }];
     [requestOperation start];
 }

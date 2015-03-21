@@ -16,6 +16,7 @@
 #import <UIImageView+RJLoader.h>
 #import <UIImageView+WebCache.h>
 #import "ContentView.h"
+#import <MBProgressHUD.h>
 
 @interface MainViewController ()<UIViewControllerTransitioningDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundImage;
@@ -64,7 +65,9 @@
     UITapGestureRecognizer *tapGR = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageClicked)];
     [_contentView.posterImage addGestureRecognizer:tapGR];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showMovieDetails) name:@"Dictionary has been downloaded" object:nil];
-    [self getMovieIDAndSendRequest];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(disappearAndOpenSafari) name:@"Please Fade Out" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showNoticeOfFailure) name:@"Net is not working" object:nil];
+    [self showMovieDetails];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -85,46 +88,79 @@
     
     NSDictionary *dic = [_store getObjectById:@"movie" fromTable:_tableName];
     
-    //nameLabel
-    _nameLabel.text = dic[@"title"];
+    if (dic) {
     
-    //ratingLabel
-    NSString *rating = [NSString stringWithFormat:@"评分：%@",dic[@"rating"][@"average"]];
-    if ([rating length]>6) {
-        rating = [rating substringToIndex:6];
+        //nameLabel
+        _nameLabel.text = dic[@"title"];
+    
+        //ratingLabel
+        NSString *rating = [NSString stringWithFormat:@"评分：%@",dic[@"rating"][@"average"]];
+        if ([rating length]>6) {
+            rating = [rating substringToIndex:6];
+        }
+        _ratingLabel.text = rating;
+        
+        //typeLabel
+        NSString *type = @"类型：";
+        for (int i=0; i<[dic[@"genres"] count]; i++) {
+            type = [type stringByAppendingString:[NSString stringWithFormat:@"%@/",[dic[@"genres"] objectAtIndex:i]]];
+        }
+        NSString *realType = [type substringToIndex:[type length]-1];
+        _typeLabel.text = realType;
+    
+        [_nameLabel shine];
+        [_ratingLabel shine];
+        [_typeLabel shine];
+    
+        //poster
+        [_contentView.posterImage startLoaderWithTintColor:[UIColor blackColor]];
+        __weak typeof(self)weakSelf = self;
+        [_contentView.posterImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",dic[@"images"][@"large"]]] placeholderImage:[UIImage imageNamed:@"透明.png"] options:SDWebImageCacheMemoryOnly |       SDWebImageRefreshCached progress:^(NSInteger receivedSize,NSInteger expectedSize){
+            [weakSelf.contentView.posterImage updateImageDownloadProgress:(CGFloat)receivedSize/expectedSize];
+        }completed:^(UIImage *image,NSError *error,SDImageCacheType cacheType,NSURL *imageURL){
+            [weakSelf.contentView.posterImage reveal];
+            weakSelf.backgroundImage.image = image;
+            weakSelf.contentView.posterImage.userInteractionEnabled = YES;
+        }];
+    }else{
+        [self getMovieIDAndSendRequest];
     }
-    _ratingLabel.text = rating;
-    
-    //typeLabel
-    NSString *type = @"类型：";
-    for (int i=0; i<[dic[@"genres"] count]; i++) {
-        type = [type stringByAppendingString:[NSString stringWithFormat:@"%@/",[dic[@"genres"] objectAtIndex:i]]];
-    }
-    NSString *realType = [type substringToIndex:[type length]-1];
-    _typeLabel.text = realType;
-    
-    [_nameLabel shine];
-    [_ratingLabel shine];
-    [_typeLabel shine];
-    
-    //poster
-    [_contentView.posterImage startLoaderWithTintColor:[UIColor blackColor]];
-    __weak typeof(self)weakSelf = self;
-    [_contentView.posterImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",dic[@"images"][@"large"]]] placeholderImage:[UIImage imageNamed:@"透明.png"] options:SDWebImageCacheMemoryOnly | SDWebImageRefreshCached progress:^(NSInteger receivedSize,NSInteger expectedSize){
-        [weakSelf.contentView.posterImage updateImageDownloadProgress:(CGFloat)receivedSize/expectedSize];
-    }completed:^(UIImage *image,NSError *error,SDImageCacheType cacheType,NSURL *imageURL){
-        [weakSelf.contentView.posterImage reveal];
-        weakSelf.backgroundImage.image = image;
-        weakSelf.contentView.posterImage.userInteractionEnabled = YES;
+}
+
+- (void)disappearAndOpenSafari{
+    [self disappear];
+    [self performSelector:@selector(openSafari) withObject:self afterDelay:1.5];
+}
+
+- (void)showNoticeOfFailure{
+    _contentView.posterImage.image = nil;
+    _backgroundImage.image = [UIImage imageNamed:@"p1910907404.jpg"];
+    MBProgressHUD *hub = [[MBProgressHUD alloc] initWithView:self.view];
+    [self.view addSubview:hub];
+    hub.labelText = @"网络连接发生错误";
+    hub.mode = MBProgressHUDModeText;
+    [hub showAnimated:YES whileExecutingBlock:^{
+        sleep(2);
+    }completionBlock:^{
+        [hub removeFromSuperViewOnHide];
     }];
 }
 
-- (void)disappearAndSendNewRequest{
+- (void)openSafari{
+    NSString *latterPath = [_store getObjectById:@"movie" fromTable:_tableName][@"title"];
+    NSString *formerPath = @"http://www.soku.com/m/y/video?q=";
+    NSString *path = [NSString stringWithFormat:@"%@%@",formerPath,latterPath];
+    NSLog(@"%@",path);
+    NSString *utf8Path = [path stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSURL *safariURL = [NSURL URLWithString:utf8Path];
+    [[UIApplication sharedApplication] openURL:safariURL];
+}
+
+- (void)disappear{
     [_nameLabel fadeOut];
     [_ratingLabel fadeOut];
     [_typeLabel fadeOut];
     [self performSelector:@selector(disappearPicture) withObject:self afterDelay:1.5];
-    [self performSelector:@selector(getMovieIDAndSendRequest) withObject:self afterDelay:1.5];
 }
 
 - (void)disappearPicture{
@@ -138,8 +174,8 @@
 }
 - (void) motionBegan:(UIEventSubtype)motion withEvent:(UIEvent *)event
 {
-    [self disappearAndSendNewRequest];
-    
+    [self disappear];
+    [self performSelector:@selector(getMovieIDAndSendRequest) withObject:self afterDelay:1.5];
 }
 
 #pragma UIViewControllerTransitioningDelegate
