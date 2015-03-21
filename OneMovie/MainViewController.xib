@@ -63,6 +63,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="ILX-dJ-Kzo" secondAttribute="centerX" id="09m-sx-sJb"/>
+                            <constraint firstAttribute="bottom" secondItem="ILX-dJ-Kzo" secondAttribute="bottom" constant="55" id="Az0-j7-b1U"/>
                             <constraint firstItem="h7v-za-ItW" firstAttribute="top" secondItem="MAU-df-Jab" secondAttribute="top" constant="80" id="EMa-2y-V8c"/>
                             <constraint firstAttribute="centerY" secondItem="h7v-za-ItW" secondAttribute="centerY" constant="50" id="L6g-Vn-0E6"/>
                             <constraint firstItem="umD-m8-mkQ" firstAttribute="top" secondItem="h7v-za-ItW" secondAttribute="bottom" constant="10" id="Tii-ay-g5n"/>
@@ -72,6 +73,11 @@
                             <constraint firstItem="ILX-dJ-Kzo" firstAttribute="top" secondItem="iLv-Nl-XV0" secondAttribute="bottom" constant="3" id="mdx-Pl-qeA"/>
                             <constraint firstAttribute="centerX" secondItem="h7v-za-ItW" secondAttribute="centerX" id="uVz-x1-H54"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="Tii-ay-g5n"/>
+                            </mask>
+                        </variation>
                     </view>
                     <blurEffect style="dark"/>
                 </visualEffectView>

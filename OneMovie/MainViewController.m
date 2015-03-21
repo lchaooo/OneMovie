@@ -54,7 +54,7 @@
     [super viewDidLoad];
     [self becomeFirstResponder];
     
-    _contentView = [[ContentView alloc] initWithFrame:CGRectMake(50, 130, 275, 340)];
+    _contentView = [[ContentView alloc] initWithFrame:CGRectMake(62.5, 150, 250, 354)];
     [self.view addSubview:_contentView];
     
     _contentView.posterImage.image = nil;
