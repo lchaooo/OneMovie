@@ -29,6 +29,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-RQShineLabel.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-YTKKeyValueStore.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -47,42 +52,47 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>5BEF4B952BC2C7694F34641C</key>
+		<key>016B3799DD2BDB9F8D76C305</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>6CF177BFADEFC8B858ADBE57</key>
+		<key>07837F2279306D0D4ED2F56A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>7D1A9EC3714DF6A8F41FDB07</key>
+		<key>2ECFEF0A6406962D55CD940A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>82E9CEC92CD6490BE573DEAE</key>
+		<key>4DDF648ECED7BD14E99A00CE</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A4AAB2B4D5DAC02F6A2B9367</key>
+		<key>4DF6BC90A15714FD7E0A3275</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B87F2C8BBF0DF0AA27FAE543</key>
+		<key>5006BB02F098C988723E16AA</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>BA2D6C3D216C002D77C61C67</key>
+		<key>5502A044B11BBE6BCD558708</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>BF385AEC7C472F0C00AAC86E</key>
+		<key>E5252E61B325026A75AAF8AC</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EB057F5E6B3E1FAD9E4CFDB3</key>
 		<dict>
 			<key>primary</key>
 			<true/>

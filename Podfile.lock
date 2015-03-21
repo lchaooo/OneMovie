@@ -29,6 +29,7 @@ PODS:
   - Masonry (0.6.1)
   - MBProgressHUD (0.9.1)
   - pop (1.0.7)
+  - RQShineLabel (0.1.3)
   - YTKKeyValueStore (0.1.2):
     - FMDB (~> 2.0)
 
@@ -38,6 +39,7 @@ DEPENDENCIES:
   - Masonry
   - MBProgressHUD
   - pop
+  - RQShineLabel
   - YTKKeyValueStore
 
 SPEC CHECKSUMS:
@@ -47,6 +49,7 @@ SPEC CHECKSUMS:
   Masonry: 2cb49fd14d203d2db5ca6bb017135b235dde9980
   MBProgressHUD: f3747dcbd45a9e855a6b0674550651e0b7ed250c
   pop: 2f14a1ea61339767af9e66741b418c831b3844df
+  RQShineLabel: 6fcffdc486a015c015499a99345e6c6fae645959
   YTKKeyValueStore: a37a3ee636c1e064b7e2a2bcd016d016966f35ce
 
 COCOAPODS: 0.35.0

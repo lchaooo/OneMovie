@@ -10,6 +10,9 @@
 		2D9B54269700A8D44C03013D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B47FD9F4DFE44CE8D46563B /* libPods.a */; };
 		9D8C5CE71ABB3A4500B10FD5 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D8C5CE51ABB3A4500B10FD5 /* MainViewController.m */; };
 		9D8C5CE81ABB3A4500B10FD5 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D8C5CE61ABB3A4500B10FD5 /* MainViewController.xib */; };
+		9DA1C3421ABD0DC800FAC1DC /* DismissingAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DA1C33F1ABD0DC800FAC1DC /* DismissingAnimator.m */; };
+		9DA1C3431ABD0DC800FAC1DC /* PresentingAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DA1C3411ABD0DC800FAC1DC /* PresentingAnimator.m */; };
+		9DA1C3461ABD0DE500FAC1DC /* UIColor+CustomColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DA1C3451ABD0DE500FAC1DC /* UIColor+CustomColors.m */; };
 		9DB698611ABB38A9009C3283 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DB698601ABB38A9009C3283 /* main.m */; };
 		9DB698641ABB38A9009C3283 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DB698631ABB38A9009C3283 /* AppDelegate.m */; };
 		9DB6986C1ABB38A9009C3283 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9DB6986B1ABB38A9009C3283 /* Images.xcassets */; };
@@ -34,6 +37,12 @@
 		9D8C5CE41ABB3A4500B10FD5 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		9D8C5CE51ABB3A4500B10FD5 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		9D8C5CE61ABB3A4500B10FD5 /* MainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
+		9DA1C33E1ABD0DC800FAC1DC /* DismissingAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DismissingAnimator.h; sourceTree = "<group>"; };
+		9DA1C33F1ABD0DC800FAC1DC /* DismissingAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DismissingAnimator.m; sourceTree = "<group>"; };
+		9DA1C3401ABD0DC800FAC1DC /* PresentingAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PresentingAnimator.h; sourceTree = "<group>"; };
+		9DA1C3411ABD0DC800FAC1DC /* PresentingAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PresentingAnimator.m; sourceTree = "<group>"; };
+		9DA1C3441ABD0DE500FAC1DC /* UIColor+CustomColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+CustomColors.h"; sourceTree = "<group>"; };
+		9DA1C3451ABD0DE500FAC1DC /* UIColor+CustomColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+CustomColors.m"; sourceTree = "<group>"; };
 		9DB6985B1ABB38A9009C3283 /* OneMovie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OneMovie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DB6985F1ABB38A9009C3283 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9DB698601ABB38A9009C3283 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -122,6 +131,12 @@
 		9DB6985E1ABB38A9009C3283 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				9DA1C33E1ABD0DC800FAC1DC /* DismissingAnimator.h */,
+				9DA1C33F1ABD0DC800FAC1DC /* DismissingAnimator.m */,
+				9DA1C3401ABD0DC800FAC1DC /* PresentingAnimator.h */,
+				9DA1C3411ABD0DC800FAC1DC /* PresentingAnimator.m */,
+				9DA1C3441ABD0DE500FAC1DC /* UIColor+CustomColors.h */,
+				9DA1C3451ABD0DE500FAC1DC /* UIColor+CustomColors.m */,
 				9DFD426E1ABC7F6100448029 /* MovieID.plist */,
 				9DB6985F1ABB38A9009C3283 /* Info.plist */,
 				9DB698601ABB38A9009C3283 /* main.m */,
@@ -282,7 +297,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9DA1C3461ABD0DE500FAC1DC /* UIColor+CustomColors.m in Sources */,
+				9DA1C3421ABD0DC800FAC1DC /* DismissingAnimator.m in Sources */,
 				9DB698641ABB38A9009C3283 /* AppDelegate.m in Sources */,
+				9DA1C3431ABD0DC800FAC1DC /* PresentingAnimator.m in Sources */,
 				9D8C5CE71ABB3A4500B10FD5 /* MainViewController.m in Sources */,
 				9DB698611ABB38A9009C3283 /* main.m in Sources */,
 			);

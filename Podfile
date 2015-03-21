@@ -5,4 +5,4 @@ pod 'AFNetworking'
 pod 'YTKKeyValueStore'
 pod 'MBProgressHUD'
 pod 'GPUImage'
-
+pod "RQShineLabel"
