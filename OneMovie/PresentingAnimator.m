@@ -19,14 +19,17 @@
 
 - (void)animateTransition:(id <UIViewControllerContextTransitioning>)transitionContext
 {
+    //底层viewcontroller截图
     UIView *fromView = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey].view;
     fromView.tintAdjustmentMode = UIViewTintAdjustmentModeDimmed;
     fromView.userInteractionEnabled = NO;
 
+    //颜色变灰
     UIView *dimmingView = [[UIView alloc] initWithFrame:fromView.bounds];
     dimmingView.backgroundColor = [UIColor customGrayColor];
     dimmingView.layer.opacity = 0.0;
 
+    //
     UIView *toView = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey].view;
     toView.frame = CGRectMake(0,
                               0,
@@ -37,6 +40,7 @@
     [transitionContext.containerView addSubview:dimmingView];
     [transitionContext.containerView addSubview:toView];
 
+    //pop animation
     POPSpringAnimation *positionAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerPositionY];
     positionAnimation.toValue = @(transitionContext.containerView.center.y);
     positionAnimation.springBounciness = 10;

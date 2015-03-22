@@ -55,7 +55,10 @@
     [super viewDidLoad];
     [self becomeFirstResponder];
     
+    //iphone6 frame
     _contentView = [[ContentView alloc] initWithFrame:CGRectMake(62.5, 150, 250, 354)];
+    //iphone 5s frame
+    //_contentView = [[ContentView alloc] initWithFrame:CGRectMake(55, 100, 210, 300)];
     [self.view addSubview:_contentView];
     
     _contentView.posterImage.image = nil;

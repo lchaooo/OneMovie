@@ -44,7 +44,7 @@
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
-    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isTerminated"];
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isTerminated"];
 }
 
 @end

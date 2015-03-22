@@ -23,9 +23,12 @@
 
 - (void)setUpLabelAndImageView{
     
+    //iphone6 frame
     _noticeLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 140, 250, 70)];
+    //iphone 5s frame
+    //_noticeLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 140, 210, 70)];
     _noticeLabel.textAlignment = NSTextAlignmentCenter;
-    _noticeLabel.text = @"松开后搜索";
+    _noticeLabel.text = @"松开搜索片源";
     _noticeLabel.alpha = 0;
     _noticeLabel.font = [UIFont systemFontOfSize:35];
     _noticeLabel.backgroundColor = [UIColor clearColor];
@@ -99,7 +102,7 @@
                     [_posterImage.layer pop_addAnimation:recoverAnimation forKey:@"recoverAnimation"];
                     _noticeLabel.alpha = 0;
                 } else {
-                    _noticeLabel.text = @"正在搜索";
+                    _noticeLabel.text = @"正在跳转";
                     _noticeLabel.alpha = 1;
                     
                     
