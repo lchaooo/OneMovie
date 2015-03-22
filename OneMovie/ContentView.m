@@ -22,6 +22,7 @@
 }
 
 - (void)setUpLabelAndImageView{
+    
     _noticeLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 140, 250, 70)];
     _noticeLabel.textAlignment = NSTextAlignmentCenter;
     _noticeLabel.text = @"松开后搜索";
@@ -30,6 +31,7 @@
     _noticeLabel.backgroundColor = [UIColor clearColor];
     _noticeLabel.textColor = [UIColor whiteColor];
     [self addSubview:_noticeLabel];
+    
     
     _posterImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
     _posterImage.layer.anchorPoint = CGPointMake(0.5, 0);
@@ -85,7 +87,7 @@
             //把这个animation加到topView的layer,key只是个识别符。
             [_posterImage.layer pop_addAnimation:rotationAnimation forKey:@"rotationAnimation"];
         
-        //当松手的时候，自动复原
+            //当松手的时候，自动复原
             if (recognizer.state == UIGestureRecognizerStateEnded ||
                 recognizer.state == UIGestureRecognizerStateCancelled) {
                 if ((location.y-self.initialLocation)*percent <= M_PI/4) {
@@ -99,6 +101,7 @@
                 } else {
                     _noticeLabel.text = @"正在搜索";
                     _noticeLabel.alpha = 1;
+                    
                     
                     POPSpringAnimation *recoverAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerRotationX];
                     recoverAnimation.springBounciness = 18.0f; //弹簧反弹力度
@@ -127,20 +130,20 @@
         
         }
     }
+    if (location.y>0) {
+        //手指超出边界也自动复原
+        if ( location.x<0 || location.x > self.bounds.size.width || (location.y - self.initialLocation)>(CGRectGetHeight(self.bounds))-(self.initialLocation)) {
+            recognizer.enabled = NO;
+            POPSpringAnimation *recoverAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerRotationX];
+            recoverAnimation.springBounciness = 18.0f; //弹簧反弹力度
+            recoverAnimation.dynamicsMass = 2.0f;
+            recoverAnimation.dynamicsTension = 200;
+            recoverAnimation.toValue = @(0);
+            [_posterImage.layer pop_addAnimation:recoverAnimation forKey:@"recoverAnimation"];
+        }
     
-    //手指超出边界也自动复原
-    if ( location.x<0 || location.x > self.bounds.size.width || (location.y - self.initialLocation)>(CGRectGetHeight(self.bounds))-(self.initialLocation)) {
-        recognizer.enabled = NO;
-        POPSpringAnimation *recoverAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerRotationX];
-        recoverAnimation.springBounciness = 18.0f; //弹簧反弹力度
-        recoverAnimation.dynamicsMass = 2.0f;
-        recoverAnimation.dynamicsTension = 200;
-        recoverAnimation.toValue = @(0);
-        [_posterImage.layer pop_addAnimation:recoverAnimation forKey:@"recoverAnimation"];
-}
-    
-    recognizer.enabled = YES;
-    
+        recognizer.enabled = YES;
+    }
     
 }
 

@@ -26,6 +26,7 @@
     return self;
 }
 
+//获取电影信息并储存
 - (void)getDictionaryByMovieID:(NSString *)ID{
     NSLog(@"Request has been sent");
     NSString *path = [NSString stringWithFormat:@"https://api.douban.com/v2/movie/subject/%@",ID];

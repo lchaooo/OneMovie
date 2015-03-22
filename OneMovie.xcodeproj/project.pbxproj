@@ -115,8 +115,10 @@
 			children = (
 				9D8C5CE41ABB3A4500B10FD5 /* MainViewController.h */,
 				9D8C5CE51ABB3A4500B10FD5 /* MainViewController.m */,
+				9D8C5CE61ABB3A4500B10FD5 /* MainViewController.xib */,
 				404A90EC1ABD44EC007E2932 /* DropViewController.h */,
 				9DB3298C1ABDA27C00B70179 /* DropViewController.m */,
+				404A90EE1ABD44EC007E2932 /* DropViewController.xib */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -133,8 +135,6 @@
 		9D65584A1ABD377E009A3DD8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				9D8C5CE61ABB3A4500B10FD5 /* MainViewController.xib */,
-				404A90EE1ABD44EC007E2932 /* DropViewController.xib */,
 				9D7A1C471ABDD8C60013E4CE /* ContentView.h */,
 				9D7A1C481ABDD8C60013E4CE /* ContentView.m */,
 				9D7BCA591ABD4B140027A2F8 /* PresentAnimation */,

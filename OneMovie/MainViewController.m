@@ -132,6 +132,7 @@
     [self performSelector:@selector(openSafari) withObject:self afterDelay:1.5];
 }
 
+//显示连接失败提示
 - (void)showNoticeOfFailure{
     _contentView.posterImage.image = nil;
     _backgroundImage.image = [UIImage imageNamed:@"p1910907404.jpg"];
