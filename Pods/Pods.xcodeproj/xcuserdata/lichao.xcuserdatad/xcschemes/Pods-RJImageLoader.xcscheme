@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "365F71465EBD984BE7159B6A"
+               BlueprintIdentifier = "9F1CAA8F54C4A245F659A610"
                BuildableName = "libPods-RJImageLoader.a"
                BlueprintName = "Pods-RJImageLoader"
                ReferencedContainer = "container:Pods.xcodeproj">
