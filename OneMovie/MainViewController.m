@@ -77,6 +77,7 @@
     [super didReceiveMemoryWarning];
 }
 
+
 #pragma CustomMethods
 //随即选择电影并发出网络请求
 - (void)getMovieIDAndSendRequest{

@@ -29,10 +29,20 @@
 			<key>orderHint</key>
 			<integer>6</integer>
 		</dict>
+		<key>Pods-RJImageLoader.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>10</integer>
+		</dict>
 		<key>Pods-RQShineLabel.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>9</integer>
+		</dict>
+		<key>Pods-SDWebImage.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>11</integer>
 		</dict>
 		<key>Pods-YTKKeyValueStore.xcscheme</key>
 		<dict>
@@ -62,12 +72,32 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>1E3123C1B69B5C8C16B79B7D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>1F95AC6378C2E8B3A9764C86</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>303321D75933B71C25574AD5</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>36452164E4063259CC2C8338</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>3D74D696D6061755BFA44AA6</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>4778BE8FC13AACC63F569BC1</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -87,12 +117,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>61D8AC36A8E4CC88ECD1F21A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>6957787163A5855C1E2F6119</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>6CF177BFADEFC8B858ADBE57</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>756371E733F14FF9584A5B6C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -107,7 +147,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>9F1CAA8F54C4A245F659A610</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9FE3F0AA0F851449860FF06C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>A4AAB2B4D5DAC02F6A2B9367</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>AA2C617AC6746BB83901AA58</key>
 		<dict>
 			<key>primary</key>
 			<true/>
