@@ -177,6 +177,7 @@
 {
     return YES;
 }
+
 - (void) motionBegan:(UIEventSubtype)motion withEvent:(UIEvent *)event
 {
     [self disappear];

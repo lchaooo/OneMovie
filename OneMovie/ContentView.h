@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface ContentView : UIView
-@property (strong,nonatomic) UILabel *noticeLabel;
 @property (strong,nonatomic) UIImageView *posterImage;
 @property (nonatomic) NSUInteger      initialLocation;
 @end
