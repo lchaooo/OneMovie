@@ -20,11 +20,8 @@
     [super viewDidLoad];
     _store = [[YTKKeyValueStore alloc] initDBWithName:@"movie.db"];
     NSDictionary *movieDetails = [_store getObjectById:@"movie" fromTable:@"movieTable"];
-    
-    
-    self.view.layer.cornerRadius = 8.f;
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"QTUW88Z~7$2H$3L08TB5VYN.jpg"]];
-    
+    self.view.backgroundColor = [UIColor blackColor];
+    self.view.alpha = 0.7;
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     
