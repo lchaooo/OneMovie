@@ -36,7 +36,8 @@
                               CGRectGetWidth(transitionContext.containerView.bounds) - 74.f,
                               CGRectGetHeight(transitionContext.containerView.bounds) - 238.f);
     toView.center = CGPointMake(transitionContext.containerView.center.x, -transitionContext.containerView.center.y);
-    NSLog(@"%@",NSStringFromCGRect(toView.frame));
+    toView.clipsToBounds = YES;
+    toView.layer.cornerRadius = 8;
     [transitionContext.containerView addSubview:dimmingView];
     [transitionContext.containerView addSubview:toView];
 
