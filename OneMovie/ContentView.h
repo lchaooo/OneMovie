@@ -11,5 +11,5 @@
 @interface ContentView : UIView
 @property (strong,nonatomic) UILabel *noticeLabel;
 @property (strong,nonatomic) UIImageView *posterImage;
-@property (nonatomic) NSUInteger      initialLocation;
+@property (nonatomic) NSUInteger initialLocation;
 @end

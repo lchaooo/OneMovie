@@ -25,6 +25,8 @@
 		9DB6986F1ABB38A9009C3283 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DB6986D1ABB38A9009C3283 /* LaunchScreen.xib */; };
 		9DB6987B1ABB38A9009C3283 /* OneMovieTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DB6987A1ABB38A9009C3283 /* OneMovieTests.m */; };
 		9DD6657A1ABD62BA008E7125 /* 透明.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DD665791ABD62BA008E7125 /* 透明.png */; };
+		9DF980371AC981A30082FD24 /* MovieView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DF980361AC981A30082FD24 /* MovieView.m */; };
+		9DF9803A1AC981AD0082FD24 /* BookView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DF980391AC981AD0082FD24 /* BookView.m */; };
 		9DFD426F1ABC7F6100448029 /* MovieID.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9DFD426E1ABC7F6100448029 /* MovieID.plist */; };
 /* End PBXBuildFile section */
 
@@ -70,6 +72,10 @@
 		9DB698791ABB38A9009C3283 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9DB6987A1ABB38A9009C3283 /* OneMovieTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OneMovieTests.m; sourceTree = "<group>"; };
 		9DD665791ABD62BA008E7125 /* 透明.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "透明.png"; sourceTree = "<group>"; };
+		9DF980351AC981A30082FD24 /* MovieView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieView.h; sourceTree = "<group>"; };
+		9DF980361AC981A30082FD24 /* MovieView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieView.m; sourceTree = "<group>"; };
+		9DF980381AC981AD0082FD24 /* BookView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookView.h; sourceTree = "<group>"; };
+		9DF980391AC981AD0082FD24 /* BookView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookView.m; sourceTree = "<group>"; };
 		9DFD426E1ABC7F6100448029 /* MovieID.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = MovieID.plist; sourceTree = "<group>"; };
 		DC26DA788150665D3AB319B6 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -137,6 +143,10 @@
 			children = (
 				9D7A1C471ABDD8C60013E4CE /* ContentView.h */,
 				9D7A1C481ABDD8C60013E4CE /* ContentView.m */,
+				9DF980351AC981A30082FD24 /* MovieView.h */,
+				9DF980361AC981A30082FD24 /* MovieView.m */,
+				9DF980381AC981AD0082FD24 /* BookView.h */,
+				9DF980391AC981AD0082FD24 /* BookView.m */,
 				9D7BCA591ABD4B140027A2F8 /* PresentAnimation */,
 			);
 			name = Views;
@@ -361,8 +371,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				9DA1C3461ABD0DE500FAC1DC /* UIColor+CustomColors.m in Sources */,
+				9DF980371AC981A30082FD24 /* MovieView.m in Sources */,
 				9D0D82E31ABD19EA009DC6DC /* WebModel.m in Sources */,
 				9D7A1C491ABDD8C60013E4CE /* ContentView.m in Sources */,
+				9DF9803A1AC981AD0082FD24 /* BookView.m in Sources */,
 				9DA1C3421ABD0DC800FAC1DC /* DismissingAnimator.m in Sources */,
 				9DB3298D1ABDA27C00B70179 /* DropViewController.m in Sources */,
 				9DB698641ABB38A9009C3283 /* AppDelegate.m in Sources */,
