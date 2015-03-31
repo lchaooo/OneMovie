@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2D9B54269700A8D44C03013D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B47FD9F4DFE44CE8D46563B /* libPods.a */; };
 		404A90F01ABD44EC007E2932 /* DropViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 404A90EE1ABD44EC007E2932 /* DropViewController.xib */; };
+		405906431ACA745400AE509D /* SwitchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 405906421ACA745400AE509D /* SwitchView.m */; };
 		9D0D82E31ABD19EA009DC6DC /* WebModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D0D82E21ABD19EA009DC6DC /* WebModel.m */; };
 		9D0D82E91ABD2275009DC6DC /* p1910907404.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9D0D82E81ABD2275009DC6DC /* p1910907404.jpg */; };
 		9D7A1C491ABDD8C60013E4CE /* ContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D7A1C481ABDD8C60013E4CE /* ContentView.m */; };
@@ -41,6 +42,8 @@
 /* Begin PBXFileReference section */
 		404A90EC1ABD44EC007E2932 /* DropViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropViewController.h; sourceTree = "<group>"; };
 		404A90EE1ABD44EC007E2932 /* DropViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DropViewController.xib; sourceTree = "<group>"; };
+		405906411ACA745400AE509D /* SwitchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwitchView.h; sourceTree = "<group>"; };
+		405906421ACA745400AE509D /* SwitchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwitchView.m; sourceTree = "<group>"; };
 		6B47FD9F4DFE44CE8D46563B /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E17B7A7533FA3D6E6C326CE /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		9D0D82E11ABD19EA009DC6DC /* WebModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebModel.h; sourceTree = "<group>"; };
@@ -137,6 +140,8 @@
 			children = (
 				9D7A1C471ABDD8C60013E4CE /* ContentView.h */,
 				9D7A1C481ABDD8C60013E4CE /* ContentView.m */,
+				405906411ACA745400AE509D /* SwitchView.h */,
+				405906421ACA745400AE509D /* SwitchView.m */,
 				9D7BCA591ABD4B140027A2F8 /* PresentAnimation */,
 			);
 			name = Views;
@@ -360,6 +365,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				405906431ACA745400AE509D /* SwitchView.m in Sources */,
 				9DA1C3461ABD0DE500FAC1DC /* UIColor+CustomColors.m in Sources */,
 				9D0D82E31ABD19EA009DC6DC /* WebModel.m in Sources */,
 				9D7A1C491ABDD8C60013E4CE /* ContentView.m in Sources */,
