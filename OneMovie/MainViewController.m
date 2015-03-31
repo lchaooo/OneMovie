@@ -15,14 +15,9 @@
 #import "WebModel.h"
 #import <UIImageView+RJLoader.h>
 #import <UIImageView+WebCache.h>
-#import <MBProgressHUD.h>
-<<<<<<< HEAD
-#import "MovieView.h"
-#import "BookView.h"
 #import "ContentView.h"
-=======
+#import <MBProgressHUD.h>
 #import "SwitchView.h"
->>>>>>> origin/master
 
 @interface MainViewController ()<UIViewControllerTransitioningDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundImage;
@@ -35,8 +30,6 @@
 @property (strong,nonatomic) YTKKeyValueStore *store;//数据储存
 @property (strong,nonatomic) NSString *tableName;//fmdb tablename
 @property (strong,nonatomic) WebModel *model;
-@property (strong,nonatomic) MovieView *movieView;
-@property (strong,nonatomic) BookView *bookView;
 
 @end
 
@@ -63,17 +56,11 @@
     [super viewDidLoad];
     [self becomeFirstResponder];
     
-    _movieView = [[MovieView alloc] initWithFrame:CGRectMake(0, [[UIScreen mainScreen] bounds].size.height*0.2, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height*0.8)];
-    [self.view addSubview:_movieView];
-    
-    _bookView = [[BookView alloc] initWithFrame:CGRectMake([[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height*0.2, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height*0.8)];
-    [self.view addSubview:_bookView];
-    
     //iphone6 frame
-    //_contentView = [[ContentView alloc] initWithFrame:CGRectMake(62.5, 150, 250, 354)];
+    _contentView = [[ContentView alloc] initWithFrame:CGRectMake(62.5, 150, 250, 354)];
     //iphone 5s frame
-    _contentView = [[ContentView alloc] initWithFrame:CGRectMake(55, 100, 210, 300)];
-//    [self.view addSubview:_contentView];
+    //_contentView = [[ContentView alloc] initWithFrame:CGRectMake(55, 100, 210, 300)];
+    [self.view addSubview:_contentView];
     
     _contentView.posterImage.image = nil;
     _contentView.posterImage.layer.cornerRadius = 10;
@@ -152,7 +139,7 @@
 
 - (void)disappearAndOpenSafari{
     [self disappear];
-    [self performSelector:@selector(openSafari) withObject:self afterDelay:0.5];
+    [self performSelector:@selector(openSafari) withObject:self afterDelay:1.5];
 }
 
 //显示连接失败提示
@@ -184,7 +171,7 @@
     [_nameLabel fadeOut];
     [_ratingLabel fadeOut];
     [_typeLabel fadeOut];
-    [self performSelector:@selector(disappearPicture) withObject:self afterDelay:0.5];
+    [self performSelector:@selector(disappearPicture) withObject:self afterDelay:1.5];
 }
 
 - (void)disappearPicture{
@@ -199,7 +186,7 @@
 - (void) motionBegan:(UIEventSubtype)motion withEvent:(UIEvent *)event
 {
     [self disappear];
-    [self performSelector:@selector(getMovieIDAndSendRequest) withObject:self afterDelay:0.5];
+    [self performSelector:@selector(getMovieIDAndSendRequest) withObject:self afterDelay:1.5];
 }
 
 #pragma UIViewControllerTransitioningDelegate
