@@ -16,9 +16,13 @@
 #import <UIImageView+RJLoader.h>
 #import <UIImageView+WebCache.h>
 #import <MBProgressHUD.h>
+<<<<<<< HEAD
 #import "MovieView.h"
 #import "BookView.h"
 #import "ContentView.h"
+=======
+#import "SwitchView.h"
+>>>>>>> origin/master
 
 @interface MainViewController ()<UIViewControllerTransitioningDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundImage;
@@ -81,6 +85,11 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(disappearAndOpenSafari) name:@"Please Fade Out" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showNoticeOfFailure) name:@"Net is not working" object:nil];
     [self showMovieDetails];
+    
+    
+    SwitchView *sv = [[SwitchView alloc]initWithFrame:CGRectMake(62.5, 60, 250, 50)];
+    sv.backgroundColor = [UIColor clearColor];
+    [self.view addSubview:sv];
 }
 
 - (void)didReceiveMemoryWarning {
