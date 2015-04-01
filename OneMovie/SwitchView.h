@@ -8,9 +8,20 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol SwitchViewDeletage <NSObject>
+
+- (void)lala;
+
+@end
+
 @interface SwitchView : UIView
+
+
 @property (nonatomic) NSUInteger      initialLocation;
 @property (nonatomic) NSUInteger      initialcenter;
 @property (nonatomic,strong) UIView *switchButton;
+@property (nonatomic,strong) UILabel *movieLabel;
+@property (nonatomic,strong) UILabel *bookLabel;
+@property  BOOL isMovie;
 
 @end

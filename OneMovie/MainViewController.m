@@ -31,6 +31,7 @@
 @property (strong,nonatomic) NSString *tableName;//fmdb tablename
 @property (strong,nonatomic) WebModel *model;
 
+
 @end
 
 @implementation MainViewController
@@ -38,8 +39,8 @@
 - (id)init{
     self = [super init];
     if (self) {
-        _tableName = @"movieTable";
-        _store = [[YTKKeyValueStore alloc] initDBWithName:@"movie.db"];
+        _tableName = @"detailsTable";
+        _store = [[YTKKeyValueStore alloc] initDBWithName:@"details.db"];
         [_store createTableWithName:_tableName];
         _model = [[WebModel alloc] init];
     }
@@ -53,6 +54,7 @@
 }
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
     [self becomeFirstResponder];
     
@@ -68,7 +70,7 @@
     
     UITapGestureRecognizer *tapGR = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageClicked)];
     [_contentView.posterImage addGestureRecognizer:tapGR];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showMovieDetails) name:@"Dictionary has been downloaded" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showMovieDetails) name:@"MovieDictionary has been downloaded" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(disappearAndOpenSafari) name:@"Please Fade Out" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showNoticeOfFailure) name:@"Net is not working" object:nil];
     [self showMovieDetails];
@@ -77,11 +79,13 @@
     SwitchView *sv = [[SwitchView alloc]initWithFrame:CGRectMake(62.5, 60, 250, 50)];
     sv.backgroundColor = [UIColor clearColor];
     [self.view addSubview:sv];
+    
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
+
 
 
 #pragma CustomMethods
@@ -90,7 +94,7 @@
     NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"MovieID" ofType:@"plist"];
     NSMutableArray *movieIDArray = [[NSMutableArray alloc] initWithContentsOfFile:plistPath];
     NSString *ID = [movieIDArray objectAtIndex:arc4random()%249];
-    [_model getDictionaryByMovieID:ID];
+    [_model getMovieDictionaryByMovieID:ID];
 }
 
 //页面显示

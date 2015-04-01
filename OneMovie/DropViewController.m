@@ -18,8 +18,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    _store = [[YTKKeyValueStore alloc] initDBWithName:@"movie.db"];
-    NSDictionary *movieDetails = [_store getObjectById:@"movie" fromTable:@"movieTable"];
+    _store = [[YTKKeyValueStore alloc] initDBWithName:@"details.db"];
+    NSDictionary *movieDetails = [_store getObjectById:@"movie" fromTable:@"detailsTable"];
     self.view.backgroundColor = [UIColor blackColor];
     self.view.alpha = 0.7;
     

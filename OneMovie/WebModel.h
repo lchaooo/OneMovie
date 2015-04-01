@@ -10,6 +10,6 @@
 
 @interface WebModel : NSObject
 
-- (void)getDictionaryByMovieID:(NSString *)ID;
+- (void)getMovieDictionaryByMovieID:(NSString *)ID;
 
 @end
