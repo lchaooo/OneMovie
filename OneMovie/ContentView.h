@@ -12,4 +12,5 @@
 @property (strong,nonatomic) UILabel *noticeLabel;
 @property (strong,nonatomic) UIImageView *posterImage;
 @property (nonatomic) NSUInteger      initialLocation;
+@property (strong,nonatomic) UIView *backView;
 @end

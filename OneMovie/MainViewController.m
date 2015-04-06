@@ -79,6 +79,7 @@
     SwitchView *sv = [[SwitchView alloc]initWithFrame:CGRectMake(62.5, 60, 250, 50)];
     sv.backgroundColor = [UIColor clearColor];
     [self.view addSubview:sv];
+    [self.view bringSubviewToFront:_contentView];
     
 }
 
