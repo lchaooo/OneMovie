@@ -8,10 +8,11 @@
 
 #import "ContentView.h"
 #import <POP.h>
-
+#import <YTKKeyValueStore.h>
 
 
 @implementation ContentView
+@synthesize scrollView;
 
 - (id)initWithFrame:(CGRect)frame  {
     self = [super initWithFrame:frame];
@@ -23,19 +24,6 @@
 
 - (void)setUpLabelAndImageView{
     
-    //    //iphone6 frame
-    //    _noticeLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 140, 250, 70)];
-    //    //iphone 5s frame
-    //    //_noticeLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 140, 210, 70)];
-    //    _noticeLabel.textAlignment = NSTextAlignmentCenter;
-    //    _noticeLabel.text = @"松开搜索片源";
-    //    _noticeLabel.alpha = 0;
-    //    _noticeLabel.font = [UIFont systemFontOfSize:35];
-    //    _noticeLabel.backgroundColor = [UIColor clearColor];
-    //    _noticeLabel.textColor = [UIColor whiteColor];
-    //    [self addSubview:_noticeLabel];
-    
-    
     
     _posterImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
     //_posterImage.layer.anchorPoint = CGPointMake(0.5, 0);
@@ -46,21 +34,59 @@
     [_posterImage addGestureRecognizer:panGesture];
     [self addSubview:_posterImage];
     
+    
     _backView = [[UIView alloc]init];
     _backView.frame = _posterImage.frame;
     _backView.layer.cornerRadius = 10;
-    _backView.backgroundColor = [UIColor whiteColor];
+    _backView.backgroundColor = [UIColor grayColor];
     [self addSubview:_backView];
-    UILabel *detailLabel = [[UILabel alloc]initWithFrame:CGRectMake(100, 100, 100, 100)];
-    detailLabel.backgroundColor = [UIColor purpleColor];
-    detailLabel.text = @"简介。。";
-    [_backView addSubview:detailLabel];
+    
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tap1:)];
-    [_backView addGestureRecognizer:tapGesture];
+    _backView.hidden = YES;
     
     [self bringSubviewToFront:_posterImage];
     
+    _noticeLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, self.bounds.size.height+130, self.bounds.size.width, 100)];
+    _noticeLabel.textAlignment = NSTextAlignmentCenter;
+    _noticeLabel.text = @"   点 击 返 回";
+    _noticeLabel.font = [UIFont systemFontOfSize:24];
+    _noticeLabel.backgroundColor = [UIColor clearColor];
+    _noticeLabel.textColor = [UIColor whiteColor];
+    _noticeLabel.hidden = YES;
+    [self.backView addSubview:_noticeLabel];
+    _noticeLabel.userInteractionEnabled = YES;
+    //[_noticeLabel addGestureRecognizer:tapGesture];
+    [_backView addGestureRecognizer:tapGesture];
     
+    _detailLabel = [[UILabel alloc]init];
+    _detailLabel.backgroundColor = [UIColor clearColor];
+    _detailLabel.textColor =  [UIColor whiteColor]  ;
+    _detailLabel.numberOfLines = 0;
+    
+    YTKKeyValueStore *store = [[YTKKeyValueStore alloc] initDBWithName:@"details.db"];
+    NSDictionary *movieDetails = [store getObjectById:@"movie" fromTable:@"detailsTable"];
+    NSArray *castsArray= [NSArray arrayWithArray:[movieDetails objectForKey:@"casts"]];
+    _detailLabel.text = movieDetails[@"summary"];
+    _detailLabel.text = [NSString stringWithFormat:@"%@\n\n主演:",_detailLabel.text];
+    for (NSDictionary *dic in castsArray) {
+        _detailLabel.text = [NSString stringWithFormat:@"%@%@/",_detailLabel.text,dic[@"name"]];
+    }
+    _detailLabel.text = [_detailLabel.text substringToIndex:[_detailLabel.text length]-1];
+    _detailLabel.numberOfLines = 0;
+    UIFont *tfont = [UIFont systemFontOfSize:16.0];
+    _detailLabel.font = tfont;
+    NSDictionary * dic = [NSDictionary dictionaryWithObjectsAndKeys:tfont,NSFontAttributeName,nil];
+    CGSize sizeText = [_detailLabel.text boundingRectWithSize:CGSizeMake(self.frame.size.width*1.1-40, 2000) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
+    
+        scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(20, 20, self.frame.size.width*1.1-40, self.frame.size.height-80)];
+        scrollView.delegate = self;
+        scrollView.showsVerticalScrollIndicator = NO;
+        [_backView addSubview:scrollView];
+        scrollView.contentSize = CGSizeMake(self.frame.size.width*1.1-40, sizeText.height);
+        _detailLabel.frame = CGRectMake(0, 0, self.frame.size.width*1.1-40, sizeText.height);
+        [scrollView addSubview:_detailLabel];
+    
+
     
 }
 
@@ -87,12 +113,12 @@
     //    }
     
     
-    
+    CGFloat percent = (M_PI /self.initialLocation);
     
     if (location.x<=_initialLocation) {
         if([self isLocation:location InView:self] || location.x<0){
             
-            CGFloat percent = (M_PI /self.initialLocation);
+            
             
             CATransform3D move = CATransform3DMakeTranslation(0, 0, 0.1);
             CATransform3D back = CATransform3DMakeTranslation(0, 0, 0.1);
@@ -129,27 +155,20 @@
                     [_posterImage.layer pop_addAnimation:recoverAnimation forKey:@"recoverAnimation"];
                     
                 } else {
-                    
-                    
-                    //                    POPSpringAnimation *recoverAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerRotationY];
-                    //                    recoverAnimation.springBounciness = 18.0f; //弹簧反弹力度
-                    //                    recoverAnimation.dynamicsMass = 2.0f;
-                    //                    recoverAnimation.dynamicsTension = 200;
-                    //                    recoverAnimation.toValue = @(0);
-                    //                    [_posterImage.layer pop_addAnimation:recoverAnimation forKey:@"recoverAnimation"];
-                    //                    [_backView.layer pop_addAnimation:recoverAnimation forKey:@"recoverAnimation"];
-                    
                     POPSpringAnimation *exAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPViewSize];
                     exAnimation.springBounciness = 18.0f;
                     exAnimation.dynamicsMass = 1.0f;
                     exAnimation.dynamicsTension = 300;
                     exAnimation.toValue = [NSValue valueWithCGPoint:CGPointMake(self.frame.size.width*1.1 , self.frame.size.height*1.6 )];
-                    [_backView pop_addAnimation:exAnimation forKey:@"exAnimation"];
+                    [_backView.layer pop_addAnimation:exAnimation forKey:@"exAnimation"];
                     
                     [UIView animateWithDuration:0.5 animations:^{
                         _backView.layer.transform = CATransform3DMakeRotation(0 , 0, 1, 0);
                         
                     }];
+                    [self performSelector:@selector(changeScrollViewSize) withObject:nil afterDelay:0.1];
+                    
+                    _noticeLabel.hidden = NO;
                 }
             }
         }
@@ -158,17 +177,41 @@
         //手指超出边界也自动复原
         if ( location.y<0 || location.y > self.bounds.size.height || (location.x - self.initialLocation)>(CGRectGetWidth(self.bounds))-(self.initialLocation)||location.x<0) {
             recognizer.enabled = NO;
-            POPSpringAnimation *recoverAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerRotationY];
-            recoverAnimation.springBounciness = 18.0f; //弹簧反弹力度
-            recoverAnimation.dynamicsMass = 2.0f;
-            recoverAnimation.dynamicsTension = 200;
-            recoverAnimation.toValue = @(0);
-            [_posterImage.layer pop_addAnimation:recoverAnimation forKey:@"recoverAnimation"];
+            
+            
+            if ((location.x-self.initialLocation)*percent > -M_PI/2) {
+                POPSpringAnimation *recoverAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerRotationY];
+                recoverAnimation.springBounciness = 18.0f; //弹簧反弹力度
+                recoverAnimation.dynamicsMass = 2.0f;
+                recoverAnimation.dynamicsTension = 200;
+                recoverAnimation.toValue = @(0);
+                [_posterImage.layer pop_addAnimation:recoverAnimation forKey:@"recoverAnimation"];
+                
+            } else {
+                POPSpringAnimation *exAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPViewSize];
+                exAnimation.springBounciness = 18.0f;
+                exAnimation.dynamicsMass = 1.0f;
+                exAnimation.dynamicsTension = 300;
+                exAnimation.toValue = [NSValue valueWithCGPoint:CGPointMake(self.frame.size.width*1.1 , self.frame.size.height*1.6 )];
+                [_backView pop_addAnimation:exAnimation forKey:@"exAnimation"];
+                
+                [UIView animateWithDuration:0.5 animations:^{
+                    _backView.layer.transform = CATransform3DMakeRotation(0 , 0, 1, 0);
+                    
+                }];
+                [self performSelector:@selector(changeScrollViewSize) withObject:nil afterDelay:0.1];
+                _noticeLabel.hidden = NO;
+            }
+
         }
         
         recognizer.enabled = YES;
     }
     
+}
+
+- (void)changeScrollViewSize{
+    scrollView.frame = CGRectMake(20, 20, self.frame.size.width*1.1-40, self.frame.size.height+80);
 }
 
 -(BOOL)isLocation:(CGPoint)location InView:(UIView *)view{
@@ -227,7 +270,10 @@ CATransform3D CATransform3DPerspect(CATransform3D t, CGPoint center, float disZ)
         [self pop_removeAllAnimations];
     }
     ];
-
+    scrollView.frame = CGRectMake(20, 20, self.frame.size.width*1.1-40, self.frame.size.height-80);
+    _noticeLabel.hidden = YES;
 }
+
+
 
 @end

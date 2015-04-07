@@ -21,7 +21,7 @@
 		9DA1C3431ABD0DC800FAC1DC /* PresentingAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DA1C3411ABD0DC800FAC1DC /* PresentingAnimator.m */; };
 		9DA1C3461ABD0DE500FAC1DC /* UIColor+CustomColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DA1C3451ABD0DE500FAC1DC /* UIColor+CustomColors.m */; };
 		9DB3298D1ABDA27C00B70179 /* DropViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DB3298C1ABDA27C00B70179 /* DropViewController.m */; };
-		9DB3298F1ABDA39E00B70179 /* QTUW88Z~7$2H$3L08TB5VYN.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9DB3298E1ABDA39E00B70179 /* QTUW88Z~7$2H$3L08TB5VYN.jpg */; };
+		9DB3298F1ABDA39E00B70179 /* grayground.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9DB3298E1ABDA39E00B70179 /* grayground.jpg */; };
 		9DB698611ABB38A9009C3283 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DB698601ABB38A9009C3283 /* main.m */; };
 		9DB698641ABB38A9009C3283 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DB698631ABB38A9009C3283 /* AppDelegate.m */; };
 		9DB6986C1ABB38A9009C3283 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9DB6986B1ABB38A9009C3283 /* Images.xcassets */; };
@@ -67,7 +67,7 @@
 		9DA1C3441ABD0DE500FAC1DC /* UIColor+CustomColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+CustomColors.h"; sourceTree = "<group>"; };
 		9DA1C3451ABD0DE500FAC1DC /* UIColor+CustomColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+CustomColors.m"; sourceTree = "<group>"; };
 		9DB3298C1ABDA27C00B70179 /* DropViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DropViewController.m; sourceTree = "<group>"; };
-		9DB3298E1ABDA39E00B70179 /* QTUW88Z~7$2H$3L08TB5VYN.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "QTUW88Z~7$2H$3L08TB5VYN.jpg"; sourceTree = "<group>"; };
+		9DB3298E1ABDA39E00B70179 /* grayground.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = grayground.jpg; sourceTree = "<group>"; };
 		9DB6985B1ABB38A9009C3283 /* OneMovie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OneMovie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DB6985F1ABB38A9009C3283 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9DB698601ABB38A9009C3283 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -208,7 +208,7 @@
 		9DB6985E1ABB38A9009C3283 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				9DB3298E1ABDA39E00B70179 /* QTUW88Z~7$2H$3L08TB5VYN.jpg */,
+				9DB3298E1ABDA39E00B70179 /* grayground.jpg */,
 				9DD665791ABD62BA008E7125 /* 透明.png */,
 				9D0D82E81ABD2275009DC6DC /* p1910907404.jpg */,
 				9DFD426E1ABC7F6100448029 /* MovieID.plist */,
@@ -320,7 +320,7 @@
 				9DB6986F1ABB38A9009C3283 /* LaunchScreen.xib in Resources */,
 				9D0D82E91ABD2275009DC6DC /* p1910907404.jpg in Resources */,
 				9D8C5CE81ABB3A4500B10FD5 /* MainViewController.xib in Resources */,
-				9DB3298F1ABDA39E00B70179 /* QTUW88Z~7$2H$3L08TB5VYN.jpg in Resources */,
+				9DB3298F1ABDA39E00B70179 /* grayground.jpg in Resources */,
 				9DFD426F1ABC7F6100448029 /* MovieID.plist in Resources */,
 				9DD6657A1ABD62BA008E7125 /* 透明.png in Resources */,
 				9DB6986C1ABB38A9009C3283 /* Images.xcassets in Resources */,

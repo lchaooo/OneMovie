@@ -18,6 +18,8 @@
 #import "ContentView.h"
 #import <MBProgressHUD.h>
 #import "SwitchView.h"
+#import "MovieView.h"
+#import "BookView.h"
 
 @interface MainViewController ()<UIViewControllerTransitioningDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundImage;
@@ -57,6 +59,7 @@
     
     [super viewDidLoad];
     [self becomeFirstResponder];
+    
     
     //iphone6 frame
     _contentView = [[ContentView alloc] initWithFrame:CGRectMake(62.5, 150, 250, 354)];
@@ -127,6 +130,7 @@
         [_ratingLabel shine];
         [_typeLabel shine];
     
+        
         //poster
         [_contentView.posterImage startLoaderWithTintColor:[UIColor blackColor]];
         __weak typeof(self)weakSelf = self;

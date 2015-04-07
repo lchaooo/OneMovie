@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <RQShineLabel.h>
 
-@interface ContentView : UIView
+@interface ContentView : UIView <UIScrollViewDelegate>
 @property (strong,nonatomic) UILabel *noticeLabel;
 @property (strong,nonatomic) UIImageView *posterImage;
 @property (nonatomic) NSUInteger      initialLocation;
 @property (strong,nonatomic) UIView *backView;
+@property (strong,nonatomic) UILabel *detailLabel;
+@property (strong,nonatomic) UIScrollView *scrollView;
 @end
