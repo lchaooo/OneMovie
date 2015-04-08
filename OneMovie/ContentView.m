@@ -22,6 +22,7 @@
     return self;
 }
 
+
 - (void)setUpLabelAndImageView{
     
     
@@ -35,29 +36,38 @@
     [self addSubview:_posterImage];
     
     
-    _backView = [[UIView alloc]init];
-    _backView.frame = _posterImage.frame;
-    _backView.layer.cornerRadius = 10;
-    _backView.backgroundColor = [UIColor grayColor];
-    [self addSubview:_backView];
+//    _backView = [[UIView alloc]init];
+//    _backView.frame = _posterImage.frame;
+//    _backView.layer.cornerRadius = 10;
+//    _backView.backgroundColor = [UIColor grayColor];
+//    [self addSubview:_backView];
     
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tap1:)];
     _backView.hidden = YES;
     
     [self bringSubviewToFront:_posterImage];
     
-    _noticeLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, self.bounds.size.height+130, self.bounds.size.width, 100)];
-    _noticeLabel.textAlignment = NSTextAlignmentCenter;
-    _noticeLabel.text = @"   点 击 返 回";
-    _noticeLabel.font = [UIFont systemFontOfSize:24];
-    _noticeLabel.backgroundColor = [UIColor clearColor];
-    _noticeLabel.textColor = [UIColor whiteColor];
-    _noticeLabel.hidden = YES;
-    [self.backView addSubview:_noticeLabel];
-    _noticeLabel.userInteractionEnabled = YES;
-    //[_noticeLabel addGestureRecognizer:tapGesture];
-    [_backView addGestureRecognizer:tapGesture];
+//    _noticeLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, self.bounds.size.height-90, self.bounds.size.width, 100)];
+//    _noticeLabel.textAlignment = NSTextAlignmentCenter;
+//    _noticeLabel.text = @"   点 击 返 回";
+//    _noticeLabel.font = [UIFont systemFontOfSize:24];
+//    _noticeLabel.backgroundColor = [UIColor clearColor];
+//    _noticeLabel.textColor = [UIColor whiteColor];
+//    _noticeLabel.hidden = NO;
+//    [self addSubview:_noticeLabel];
+//    _noticeLabel.userInteractionEnabled = YES;
+//    [_noticeLabel addGestureRecognizer:tapGesture];
+    //[_backView addGestureRecognizer:tapGesture];
     
+//    _backButton = [[UIButton alloc]initWithFrame:CGRectMake(0, self.bounds.size.height+80, self.bounds.size.width, 100)];
+//    _backButton.backgroundColor = [UIColor whiteColor];
+//    [_backButton addTarget:nil action:@selector(tap1:) forControlEvents:UIControlEventTouchDown];
+//    [_backView addSubview:_backButton];
+    
+    
+    scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
+    scrollView.layer.cornerRadius = 10;
+    scrollView.backgroundColor = [UIColor grayColor];
     _detailLabel = [[UILabel alloc]init];
     _detailLabel.backgroundColor = [UIColor clearColor];
     _detailLabel.textColor =  [UIColor whiteColor]  ;
@@ -73,18 +83,23 @@
     }
     _detailLabel.text = [_detailLabel.text substringToIndex:[_detailLabel.text length]-1];
     _detailLabel.numberOfLines = 0;
-    UIFont *tfont = [UIFont systemFontOfSize:16.0];
+    UIFont *tfont = [UIFont systemFontOfSize:18.0];
     _detailLabel.font = tfont;
     NSDictionary * dic = [NSDictionary dictionaryWithObjectsAndKeys:tfont,NSFontAttributeName,nil];
-    CGSize sizeText = [_detailLabel.text boundingRectWithSize:CGSizeMake(self.frame.size.width*1.1-40, 2000) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
+    CGSize sizeText = [_detailLabel.text boundingRectWithSize:CGSizeMake(self.frame.size.width*1.2-40, 2000) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
     
-        scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(20, 20, self.frame.size.width*1.1-40, self.frame.size.height-80)];
         scrollView.delegate = self;
         scrollView.showsVerticalScrollIndicator = NO;
-        [_backView addSubview:scrollView];
-        scrollView.contentSize = CGSizeMake(self.frame.size.width*1.1-40, sizeText.height);
-        _detailLabel.frame = CGRectMake(0, 0, self.frame.size.width*1.1-40, sizeText.height);
+        [self addSubview:scrollView];
+        scrollView.contentSize = CGSizeMake(self.frame.size.width*1.2-40, sizeText.height+50);
+        _detailLabel.frame = CGRectMake(0, 20, self.frame.size.width*1.2-40, sizeText.height+50);
         [scrollView addSubview:_detailLabel];
+    _labelheight = sizeText.height;
+    
+    [self bringSubviewToFront:_posterImage];
+    [scrollView addGestureRecognizer:tapGesture];
+    scrollView.hidden = YES;
+    
 }
 
 -(void)pan1:(UIPanGestureRecognizer *)recognizer{
@@ -127,16 +142,16 @@
             CATransform3D mat2 = CATransform3DConcat(CATransform3DConcat(move, rotate2), back);
             
             _posterImage.layer.transform = CATransform3DPerspect(mat1, CGPointMake(0, 0), 800);
-            _backView.layer.transform = CATransform3DPerspect(mat2, CGPointMake(0, 0), 800);
+            scrollView.layer.transform = CATransform3DPerspect(mat2, CGPointMake(0, 0), 800);
             
             
             if ((location.x-self.initialLocation)*percent < -M_PI_2 ){
                 _posterImage.hidden = YES;
-                _backView.hidden = NO;
+                scrollView.hidden = NO;
             }
             else {
                 _posterImage.hidden = NO;
-                _backView.hidden = YES;
+                scrollView.hidden = YES;
             }
             
             //当松手的时候，自动复原
@@ -156,16 +171,18 @@
                     exAnimation.springBounciness = 18.0f;
                     exAnimation.dynamicsMass = 1.0f;
                     exAnimation.dynamicsTension = 300;
-                    exAnimation.toValue = [NSValue valueWithCGPoint:CGPointMake(self.frame.size.width*1.1 , self.frame.size.height*1.6 )];
-                    [_backView.layer pop_addAnimation:exAnimation forKey:@"exAnimation"];
+                    exAnimation.toValue = [NSValue valueWithCGPoint:CGPointMake(self.frame.size.width*1.2 , self.frame.size.height*1.6 )];
+                    [scrollView.layer pop_addAnimation:exAnimation forKey:@"exAnimation"];
+                    
+                
                     
                     [UIView animateWithDuration:0.5 animations:^{
-                        _backView.layer.transform = CATransform3DMakeRotation(0 , 0, 1, 0);
-                        
+                        scrollView.layer.transform = CATransform3DMakeRotation(0 , 0, 1, 0);
+                        _detailLabel.frame = CGRectMake(20, 20, self.frame.size.width*1.2-40, _labelheight+50);
                     }];
                     [self performSelector:@selector(changeScrollViewSize) withObject:nil afterDelay:0.1];
                     
-                    _noticeLabel.hidden = NO;
+                
                 }
             }
         }
@@ -189,15 +206,14 @@
                 exAnimation.springBounciness = 18.0f;
                 exAnimation.dynamicsMass = 1.0f;
                 exAnimation.dynamicsTension = 300;
-                exAnimation.toValue = [NSValue valueWithCGPoint:CGPointMake(self.frame.size.width*1.1 , self.frame.size.height*1.6 )];
-                [_backView pop_addAnimation:exAnimation forKey:@"exAnimation"];
+                exAnimation.toValue = [NSValue valueWithCGPoint:CGPointMake(self.frame.size.width*1.2 , self.frame.size.height*1.6 )];
+                [scrollView pop_addAnimation:exAnimation forKey:@"exAnimation"];
                 
                 [UIView animateWithDuration:0.5 animations:^{
-                    _backView.layer.transform = CATransform3DMakeRotation(0 , 0, 1, 0);
-                    
+                    scrollView.layer.transform = CATransform3DMakeRotation(0 , 0, 1, 0);
+                    _detailLabel.frame = CGRectMake(20, 20, self.frame.size.width*1.2-40, _labelheight+50);
                 }];
                 [self performSelector:@selector(changeScrollViewSize) withObject:nil afterDelay:0.1];
-                _noticeLabel.hidden = NO;
             }
 
         }
@@ -208,7 +224,7 @@
 }
 
 - (void)changeScrollViewSize{
-    scrollView.frame = CGRectMake(20, 20, self.frame.size.width*1.1-40, self.frame.size.height+80);
+   
 }
 
 -(BOOL)isLocation:(CGPoint)location InView:(UIView *)view{
@@ -247,15 +263,19 @@ CATransform3D CATransform3DPerspect(CATransform3D t, CGPoint center, float disZ)
     leAnimation.dynamicsMass = 2.0f;
     leAnimation.dynamicsTension = 200;
     leAnimation.toValue = [NSValue valueWithCGPoint:CGPointMake(self.frame.size.width , self.frame.size.height )];
-    [_backView pop_addAnimation:leAnimation forKey:@"leAnimation"];
+    [scrollView pop_addAnimation:leAnimation forKey:@"leAnimation"];
     
+    [UIView animateWithDuration:0.2 animations:^{
+        scrollView.frame = CGRectMake(20, 20, self.frame.size.width*1-40, self.frame.size.height-80);
+         _detailLabel.frame = CGRectMake(0, 20, self.frame.size.width*1.2-40, _labelheight+50);
+    }];
     
     [UIView animateWithDuration:0.5 animations:^{
         CATransform3D rotate2 = CATransform3DMakeRotation(M_PI/2, 0, 1, 0);
-        _backView.layer.transform = CATransform3DPerspect(rotate2, CGPointMake(0, 0), 800);
+        scrollView.layer.transform = CATransform3DPerspect(rotate2, CGPointMake(0, 0), 800);
     } completion:^(BOOL finished){
         _posterImage.hidden = NO;
-        _backView.hidden = YES;
+        scrollView.hidden = YES;
         CATransform3D rotate1 = CATransform3DMakeRotation(-M_PI/2, 0, 1, 0);
         _posterImage.layer.transform = CATransform3DPerspect(rotate1, CGPointMake(0, 0), 800);
         POPSpringAnimation *recoverAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerRotationY];
@@ -267,7 +287,7 @@ CATransform3D CATransform3DPerspect(CATransform3D t, CGPoint center, float disZ)
         [self pop_removeAllAnimations];
     }
     ];
-    scrollView.frame = CGRectMake(20, 20, self.frame.size.width*1.1-40, self.frame.size.height-80);
+    
     _noticeLabel.hidden = YES;
 }
 

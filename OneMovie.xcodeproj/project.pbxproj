@@ -12,8 +12,8 @@
 		405906431ACA745400AE509D /* SwitchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 405906421ACA745400AE509D /* SwitchView.m */; };
 		40C69CFD1ACC22050033D420 /* WebModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 40C69CFC1ACC22050033D420 /* WebModel.m */; };
 		9D0D82E91ABD2275009DC6DC /* p1910907404.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9D0D82E81ABD2275009DC6DC /* p1910907404.jpg */; };
-		9D7A1C491ABDD8C60013E4CE /* ContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D7A1C481ABDD8C60013E4CE /* ContentView.m */; };
 		9D7FFC7B1AD551F70056FDE7 /* s1072541.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9D7FFC7A1AD551F70056FDE7 /* s1072541.jpg */; };
+		9D7FFC7E1AD560DB0056FDE7 /* ContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D7FFC7D1AD560DB0056FDE7 /* ContentView.m */; };
 		9D8C5CE71ABB3A4500B10FD5 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D8C5CE51ABB3A4500B10FD5 /* MainViewController.m */; };
 		9D8C5CE81ABB3A4500B10FD5 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D8C5CE61ABB3A4500B10FD5 /* MainViewController.xib */; };
 		9DA1C3421ABD0DC800FAC1DC /* DismissingAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DA1C33F1ABD0DC800FAC1DC /* DismissingAnimator.m */; };
@@ -50,9 +50,9 @@
 		6E17B7A7533FA3D6E6C326CE /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		9D0D82E11ABD19EA009DC6DC /* WebModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebModel.h; sourceTree = "<group>"; };
 		9D0D82E81ABD2275009DC6DC /* p1910907404.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = p1910907404.jpg; sourceTree = "<group>"; };
-		9D7A1C471ABDD8C60013E4CE /* ContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentView.h; sourceTree = "<group>"; };
-		9D7A1C481ABDD8C60013E4CE /* ContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentView.m; sourceTree = "<group>"; };
 		9D7FFC7A1AD551F70056FDE7 /* s1072541.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = s1072541.jpg; sourceTree = "<group>"; };
+		9D7FFC7C1AD560DB0056FDE7 /* ContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentView.h; sourceTree = "<group>"; };
+		9D7FFC7D1AD560DB0056FDE7 /* ContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentView.m; sourceTree = "<group>"; };
 		9D8C5CE41ABB3A4500B10FD5 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		9D8C5CE51ABB3A4500B10FD5 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		9D8C5CE61ABB3A4500B10FD5 /* MainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
@@ -140,8 +140,8 @@
 		9D65584A1ABD377E009A3DD8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				9D7A1C471ABDD8C60013E4CE /* ContentView.h */,
-				9D7A1C481ABDD8C60013E4CE /* ContentView.m */,
+				9D7FFC7C1AD560DB0056FDE7 /* ContentView.h */,
+				9D7FFC7D1AD560DB0056FDE7 /* ContentView.m */,
 				405906411ACA745400AE509D /* SwitchView.h */,
 				405906421ACA745400AE509D /* SwitchView.m */,
 				9D7BCA591ABD4B140027A2F8 /* PresentAnimation */,
@@ -371,8 +371,8 @@
 			files = (
 				405906431ACA745400AE509D /* SwitchView.m in Sources */,
 				9DA1C3461ABD0DE500FAC1DC /* UIColor+CustomColors.m in Sources */,
+				9D7FFC7E1AD560DB0056FDE7 /* ContentView.m in Sources */,
 				40C69CFD1ACC22050033D420 /* WebModel.m in Sources */,
-				9D7A1C491ABDD8C60013E4CE /* ContentView.m in Sources */,
 				9DA1C3421ABD0DC800FAC1DC /* DismissingAnimator.m in Sources */,
 				9DB3298D1ABDA27C00B70179 /* DropViewController.m in Sources */,
 				9DB698641ABB38A9009C3283 /* AppDelegate.m in Sources */,

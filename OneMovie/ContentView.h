@@ -16,4 +16,6 @@
 @property (strong,nonatomic) UIView *backView;
 @property (strong,nonatomic) UILabel *detailLabel;
 @property (strong,nonatomic) UIScrollView *scrollView;
+@property (strong,nonatomic) UIButton *backButton;
+@property (nonatomic) NSUInteger      labelheight;
 @end
