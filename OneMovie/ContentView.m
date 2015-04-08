@@ -63,28 +63,28 @@
     _detailLabel.textColor =  [UIColor whiteColor]  ;
     _detailLabel.numberOfLines = 0;
     
-//    YTKKeyValueStore *store = [[YTKKeyValueStore alloc] initDBWithName:@"details.db"];
-//    NSDictionary *movieDetails = [store getObjectById:@"movie" fromTable:@"detailsTable"];
-//    NSArray *castsArray= [NSArray arrayWithArray:[movieDetails objectForKey:@"casts"]];
-//    _detailLabel.text = movieDetails[@"summary"];
-//    _detailLabel.text = [NSString stringWithFormat:@"%@\n\n主演:",_detailLabel.text];
-//    for (NSDictionary *dic in castsArray) {
-//        _detailLabel.text = [NSString stringWithFormat:@"%@%@/",_detailLabel.text,dic[@"name"]];
-//    }
-//    _detailLabel.text = [_detailLabel.text substringToIndex:[_detailLabel.text length]-1];
-//    _detailLabel.numberOfLines = 0;
-//    UIFont *tfont = [UIFont systemFontOfSize:16.0];
-//    _detailLabel.font = tfont;
-//    NSDictionary * dic = [NSDictionary dictionaryWithObjectsAndKeys:tfont,NSFontAttributeName,nil];
-//    CGSize sizeText = [_detailLabel.text boundingRectWithSize:CGSizeMake(self.frame.size.width*1.1-40, 2000) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
-//    
-//        scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(20, 20, self.frame.size.width*1.1-40, self.frame.size.height-80)];
-//        scrollView.delegate = self;
-//        scrollView.showsVerticalScrollIndicator = NO;
-//        [_backView addSubview:scrollView];
-//        scrollView.contentSize = CGSizeMake(self.frame.size.width*1.1-40, sizeText.height);
-//        _detailLabel.frame = CGRectMake(0, 0, self.frame.size.width*1.1-40, sizeText.height);
-//        [scrollView addSubview:_detailLabel];
+    YTKKeyValueStore *store = [[YTKKeyValueStore alloc] initDBWithName:@"details.db"];
+    NSDictionary *movieDetails = [store getObjectById:@"movie" fromTable:@"detailsTable"];
+    NSArray *castsArray= [NSArray arrayWithArray:[movieDetails objectForKey:@"casts"]];
+    _detailLabel.text = movieDetails[@"summary"];
+    _detailLabel.text = [NSString stringWithFormat:@"%@\n\n主演:",_detailLabel.text];
+    for (NSDictionary *dic in castsArray) {
+        _detailLabel.text = [NSString stringWithFormat:@"%@%@/",_detailLabel.text,dic[@"name"]];
+    }
+    _detailLabel.text = [_detailLabel.text substringToIndex:[_detailLabel.text length]-1];
+    _detailLabel.numberOfLines = 0;
+    UIFont *tfont = [UIFont systemFontOfSize:16.0];
+    _detailLabel.font = tfont;
+    NSDictionary * dic = [NSDictionary dictionaryWithObjectsAndKeys:tfont,NSFontAttributeName,nil];
+    CGSize sizeText = [_detailLabel.text boundingRectWithSize:CGSizeMake(self.frame.size.width*1.1-40, 2000) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
+    
+        scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(20, 20, self.frame.size.width*1.1-40, self.frame.size.height-80)];
+        scrollView.delegate = self;
+        scrollView.showsVerticalScrollIndicator = NO;
+        [_backView addSubview:scrollView];
+        scrollView.contentSize = CGSizeMake(self.frame.size.width*1.1-40, sizeText.height);
+        _detailLabel.frame = CGRectMake(0, 0, self.frame.size.width*1.1-40, sizeText.height);
+        [scrollView addSubview:_detailLabel];
 }
 
 -(void)pan1:(UIPanGestureRecognizer *)recognizer{
