@@ -82,6 +82,7 @@
     
     _movieView = [[MovieView alloc] initWithFrame:CGRectMake(0, [[UIScreen mainScreen] bounds].size.height*0.3, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height*0.7)];
     _movieView.userInteractionEnabled = YES;
+    _movieView.contentView.userInteractionEnabled = YES;
     [self.view addSubview:_movieView];
     
     SwitchView *sv = [[SwitchView alloc]initWithFrame:CGRectMake(62.5, 60, 250, 50)];
