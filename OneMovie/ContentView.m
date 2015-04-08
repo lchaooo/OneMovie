@@ -176,7 +176,7 @@
                     
                 
                     
-                    [UIView animateWithDuration:0.5 animations:^{
+                    [UIView animateWithDuration:0.2 animations:^{
                         scrollView.layer.transform = CATransform3DMakeRotation(0 , 0, 1, 0);
                         _detailLabel.frame = CGRectMake(20, 20, self.frame.size.width*1.2-40, _labelheight+50);
                     }];
@@ -266,7 +266,7 @@ CATransform3D CATransform3DPerspect(CATransform3D t, CGPoint center, float disZ)
     [scrollView pop_addAnimation:leAnimation forKey:@"leAnimation"];
     
     [UIView animateWithDuration:0.2 animations:^{
-        scrollView.frame = CGRectMake(20, 20, self.frame.size.width*1-40, self.frame.size.height-80);
+        
          _detailLabel.frame = CGRectMake(0, 20, self.frame.size.width*1.2-40, _labelheight+50);
     }];
     
