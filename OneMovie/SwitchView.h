@@ -8,13 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@protocol SwitchViewDeletage <NSObject>
-
-- (void)lala;
-
-@end
-
-@interface SwitchView : UIView
+@interface SwitchView : UIControl
 
 
 @property (nonatomic) NSUInteger      initialLocation;

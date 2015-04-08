@@ -19,6 +19,14 @@
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
 
+- (id)initWithFrame:(CGRect)frame{
+    self = [super initWithFrame:frame];
+    if (self) {
+        self.isMovie = YES;
+    }
+    return self;
+}
+
 - (void)drawRect:(CGRect)rect {
     
     CGSize SIZE = self.bounds.size;
@@ -147,16 +155,18 @@
 }
 
 - (void)SwitchtoMovie{
-    if (self.isMovie == 0) {
+    if (self.isMovie == NO) {
         NSLog(@"SwitchtoMovie");
-        self.isMovie = 1;
+        [self sendActionsForControlEvents:UIControlEventValueChanged];
+        self.isMovie = YES;
     }
 }
 
 - (void)SwitchtoBook{
-    if (self.isMovie == 1){
+    if (self.isMovie == YES){
         NSLog(@"SwitchtoBook");
-        self.isMovie = 0;
+        [self sendActionsForControlEvents:UIControlEventValueChanged];
+        self.isMovie = NO;
     }
 }
 
