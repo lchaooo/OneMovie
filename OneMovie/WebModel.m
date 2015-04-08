@@ -45,10 +45,32 @@
     [requestOperation start];
 }
 
-- (void)getBookDictionaryByBookTag:(NSString *)tag{
+- (void)getBookIDByBookTag{
+    NSArray *tags = [NSArray arrayWithObjects:@"经典",@"名著",@"现代",@"当代",@"文学", nil];
+    int i = arc4random()%5;
+    NSString *tag = [tags objectAtIndex:i];
     int j = arc4random()%181;
     NSString *start = [NSString stringWithFormat:@"%d",j];
     NSString *path = [NSString stringWithFormat:@"https://api.douban.com/v2/book/search?start=%@&tag=%@" ,start, tag];
+    NSURL *url = [NSURL URLWithString:path];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    
+    AFHTTPRequestOperation *requestOperation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    requestOperation.responseSerializer = [AFJSONResponseSerializer serializer];
+    [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation,id responseData){
+        NSDictionary *dic = (NSDictionary *)responseData;
+        NSArray *array = dic[@"books"];
+        int i = arc4random()%20;
+        NSString *id = [array objectAtIndex:i][@"id"];
+        [self getBookDictionaryByID:id];
+    }failure:^(AFHTTPRequestOperation *operation,NSError *error){
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"Net is not working" object:nil];
+    }];
+    [requestOperation start];
+}
+
+- (void)getBookDictionaryByID:(NSString *)ID{
+    NSString *path = [NSString stringWithFormat:@"https://api.douban.com/v2/book/%@",ID];
     NSURL *url = [NSURL URLWithString:path];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     
@@ -62,7 +84,6 @@
     }failure:^(AFHTTPRequestOperation *operation,NSError *error){
         [[NSNotificationCenter defaultCenter] postNotificationName:@"Net is not working" object:nil];
     }];
-    [requestOperation start];
-    
 }
+
 @end

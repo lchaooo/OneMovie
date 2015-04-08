@@ -11,5 +11,6 @@
 @interface WebModel : NSObject
 
 - (void)getMovieDictionaryByMovieID:(NSString *)ID;
+- (void)getBookIDByBookTag;
 
 @end
