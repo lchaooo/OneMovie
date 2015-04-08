@@ -7,8 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ContentView.h"
 
 @interface MovieView : UIView
-@property (strong,nonatomic) ContentView *contentView;
+
 @end

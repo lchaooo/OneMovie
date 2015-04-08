@@ -88,7 +88,6 @@
 }
 
 -(void)pan1:(UIPanGestureRecognizer *)recognizer{
-    NSLog(@"panpanpan");
     CGPoint location = [recognizer locationInView:self];
     
     //    static float y_coordinate;
@@ -115,7 +114,9 @@
     
     if (location.x<=_initialLocation) {
         if([self isLocation:location InView:self] || location.x<0){
-        
+            
+            
+            
             CATransform3D move = CATransform3DMakeTranslation(0, 0, 0.1);
             CATransform3D back = CATransform3DMakeTranslation(0, 0, 0.1);
             
@@ -128,6 +129,7 @@
             _posterImage.layer.transform = CATransform3DPerspect(mat1, CGPointMake(0, 0), 800);
             _backView.layer.transform = CATransform3DPerspect(mat2, CGPointMake(0, 0), 800);
             
+            
             if ((location.x-self.initialLocation)*percent < -M_PI_2 ){
                 _posterImage.hidden = YES;
                 _backView.hidden = NO;
@@ -138,6 +140,7 @@
             }
             
             //当松手的时候，自动复原
+            
             if (recognizer.state == UIGestureRecognizerStateEnded ||
                 recognizer.state == UIGestureRecognizerStateCancelled) {
                 if ((location.x-self.initialLocation)*percent > -M_PI/2) {
