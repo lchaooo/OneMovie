@@ -28,7 +28,7 @@
 
 //获取电影信息并储存
 - (void)getMovieDictionaryByMovieID:(NSString *)ID{
-    NSString *path = [NSString stringWithFormat:@"https://api.douban.com/v2/movie/subject/%@",ID];
+    NSString *path = [NSString stringWithFormat:@"https://api.douban.com/v2/movie/subject/%@&apikey=04aa8823bc4ca4160dff986b34e5ec42",ID];
     NSURL *url = [NSURL URLWithString:path];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     
@@ -51,7 +51,7 @@
     NSString *tag = [tags objectAtIndex:i];
     int j = arc4random()%181;
     NSString *start = [NSString stringWithFormat:@"%d",j];
-    NSString *path = [NSString stringWithFormat:@"https://api.douban.com/v2/book/search?start=%@&tag=%@" ,start, tag];
+    NSString *path = [NSString stringWithFormat:@"https://api.douban.com/v2/book/search?start=%@&tag=%@&apikey=04aa8823bc4ca4160dff986b34e5ec42" ,start, tag];
     NSURL *url = [NSURL URLWithString:path];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     
@@ -70,7 +70,7 @@
 }
 
 - (void)getBookDictionaryByID:(NSString *)ID{
-    NSString *path = [NSString stringWithFormat:@"https://api.douban.com/v2/book/%@",ID];
+    NSString *path = [NSString stringWithFormat:@"https://api.douban.com/v2/book/%@&apikey=04aa8823bc4ca4160dff986b34e5ec42",ID];
     NSURL *url = [NSURL URLWithString:path];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     
