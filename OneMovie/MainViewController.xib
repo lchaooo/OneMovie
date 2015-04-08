@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MainViewController">
             <connections>
                 <outlet property="backgroundImage" destination="Y7U-es-KyW" id="oAA-Rp-HEb"/>
+                <outlet property="nameLabel" destination="umD-m8-mkQ" id="ujx-CW-cYD"/>
+                <outlet property="posterImage" destination="h7v-za-ItW" id="X4Z-Sa-dDU"/>
+                <outlet property="ratingLabel" destination="iLv-Nl-XV0" id="qUh-IL-Teo"/>
+                <outlet property="typeLabel" destination="ILX-dJ-Kzo" id="mvM-9I-Iaw"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -26,7 +31,53 @@
                         <userGuides>
                             <userLayoutGuide location="256" affinity="minY"/>
                         </userGuides>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="h7v-za-ItW">
+                                <rect key="frame" x="180" y="80" width="240" height="340"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="h7v-za-ItW" secondAttribute="height" multiplier="300:425" id="1Po-B0-1Wa"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="umD-m8-mkQ" userLabel="name" customClass="RQShineLabel">
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iLv-Nl-XV0" userLabel="rating" customClass="RQShineLabel">
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ILX-dJ-Kzo" userLabel="type" customClass="RQShineLabel">
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="ILX-dJ-Kzo" secondAttribute="centerX" id="09m-sx-sJb"/>
+                            <constraint firstAttribute="bottom" secondItem="ILX-dJ-Kzo" secondAttribute="bottom" constant="55" id="Az0-j7-b1U"/>
+                            <constraint firstItem="h7v-za-ItW" firstAttribute="top" secondItem="MAU-df-Jab" secondAttribute="top" constant="80" id="EMa-2y-V8c"/>
+                            <constraint firstAttribute="centerY" secondItem="h7v-za-ItW" secondAttribute="centerY" constant="50" id="L6g-Vn-0E6"/>
+                            <constraint firstItem="umD-m8-mkQ" firstAttribute="top" secondItem="h7v-za-ItW" secondAttribute="bottom" constant="10" id="Tii-ay-g5n"/>
+                            <constraint firstAttribute="centerX" secondItem="umD-m8-mkQ" secondAttribute="centerX" id="Uyt-By-GGK"/>
+                            <constraint firstItem="iLv-Nl-XV0" firstAttribute="top" secondItem="umD-m8-mkQ" secondAttribute="bottom" constant="3" id="Xc1-4R-zIx"/>
+                            <constraint firstAttribute="centerX" secondItem="iLv-Nl-XV0" secondAttribute="centerX" id="Y7Q-kn-TJS"/>
+                            <constraint firstItem="ILX-dJ-Kzo" firstAttribute="top" secondItem="iLv-Nl-XV0" secondAttribute="bottom" constant="3" id="mdx-Pl-qeA"/>
+                            <constraint firstAttribute="centerX" secondItem="h7v-za-ItW" secondAttribute="centerX" id="uVz-x1-H54"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="Tii-ay-g5n"/>
+                            </mask>
+                        </variation>
                     </view>
                     <blurEffect style="dark"/>
                 </visualEffectView>
