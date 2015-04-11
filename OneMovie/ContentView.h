@@ -19,4 +19,6 @@
 @property (strong,nonatomic) UILabel *nameLabel;
 @property (strong,nonatomic) UILabel *ratingLabel;
 @property (strong,nonatomic) UILabel *typeLabel;
+
+-(void)reloadDetaillabel;
 @end

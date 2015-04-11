@@ -324,6 +324,8 @@
     }else{
         [self getMovieIDAndSendRequest];
     }
+    
+    [_movieView reloadDetaillabel];
 }
 
 - (void)showBookDetails{
@@ -366,6 +368,8 @@
     }else{
         [self getBookDetails];
     }
+    
+    [_bookView reloadDetaillabel];
 }
 
 //显示连接失败提示

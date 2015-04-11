@@ -165,31 +165,36 @@
     
     scrollView.layer.cornerRadius = 10;
     scrollView.backgroundColor = [UIColor grayColor];
+    
     _detailLabel = [[UILabel alloc]init];
     _detailLabel.backgroundColor = [UIColor clearColor];
     _detailLabel.textColor =  [UIColor whiteColor]  ;
     _detailLabel.numberOfLines = 0;
     
     
-    _detailLabel.text = [_detailLabel.text substringToIndex:[_detailLabel.text length]-1];
-    _detailLabel.numberOfLines = 0;
-    UIFont *tfont = [UIFont systemFontOfSize:18.0];
-    _detailLabel.font = tfont;
-    NSDictionary * dic = [NSDictionary dictionaryWithObjectsAndKeys:tfont,NSFontAttributeName,nil];
-    CGSize sizeText = [_detailLabel.text boundingRectWithSize:CGSizeMake(_standardSize.width*1.2-40, 2000) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
+    
     
     scrollView.delegate = self;
     scrollView.showsVerticalScrollIndicator = NO;
     [self addSubview:scrollView];
-    scrollView.contentSize = CGSizeMake(_standardSize.width*1.2-40, sizeText.height+50);
-    _detailLabel.frame = CGRectMake(0, 20, _standardSize.width*1.2-40, sizeText.height+50);
+    
     [scrollView addSubview:_detailLabel];
-    _labelheight = sizeText.height;
+ 
     
     [self bringSubviewToFront:_posterImage];
     [scrollView addGestureRecognizer:tapGesture];
     scrollView.hidden = YES;
     
+}
+
+-(void)reloadDetaillabel{
+    UIFont *tfont = [UIFont systemFontOfSize:18.0];
+    _detailLabel.font = tfont;
+    NSDictionary * dic = [NSDictionary dictionaryWithObjectsAndKeys:tfont,NSFontAttributeName,nil];
+    CGSize sizeText = [_detailLabel.text boundingRectWithSize:CGSizeMake(_standardSize.width*1.2-40, 2000) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
+    scrollView.contentSize = CGSizeMake(_standardSize.width*1.2-40, sizeText.height+50);
+    _detailLabel.frame = CGRectMake(0, 0, _standardSize.width*1.2-40, sizeText.height+20);
+    _labelheight = sizeText.height;
 }
 
 -(void)pan1:(UIPanGestureRecognizer *)recognizer{
@@ -267,7 +272,7 @@
                     exAnimation.toValue = [NSValue valueWithCGPoint:CGPointMake(_standardSize.width*1.2 , _standardSize.height*1.6 )];
                     [scrollView.layer pop_addAnimation:exAnimation forKey:@"exAnimation"];
                     
-                    [UIView animateWithDuration:0.5 animations:^{_detailLabel.frame = CGRectMake(20, 20, _standardSize.width*1.2-40, _labelheight+50);}];
+                    [UIView animateWithDuration:0.5 animations:^{_detailLabel.frame = CGRectMake(20, 20, _standardSize.width*1.2-40, _labelheight+20);}];
                     
                     [UIView animateWithDuration:0.2 animations:^{
                         _nameLabel.alpha =0;
@@ -305,7 +310,7 @@
                 exAnimation.dynamicsTension = 300;
                 exAnimation.toValue = [NSValue valueWithCGPoint:CGPointMake(_standardSize.width*1.2 , _standardSize.height*1.6 )];
                 [scrollView pop_addAnimation:exAnimation forKey:@"exAnimation"];
-                [UIView animateWithDuration:0.5 animations:^{_detailLabel.frame = CGRectMake(20, 20, _standardSize.width*1.2-40, _labelheight+50);}];
+                [UIView animateWithDuration:0.5 animations:^{_detailLabel.frame = CGRectMake(20, 20, _standardSize.width*1.2-40, _labelheight+20);}];
                 [UIView animateWithDuration:0.2 animations:^{
                     scrollView.layer.transform = CATransform3DMakeRotation(0 , 0, 1, 0);
                     _nameLabel.alpha =0;
@@ -367,7 +372,7 @@ CATransform3D CATransform3DPerspect(CATransform3D t, CGPoint center, float disZ)
     
     [UIView animateWithDuration:0.2 animations:^{
         scrollView.frame = CGRectMake( self.bounds.size.width/6, 10 , self.bounds.size.width*2/3, self.bounds.size.width*850/900);
-         _detailLabel.frame = CGRectMake(0, 20, _standardSize.width*1.2-40, _labelheight+50);
+         _detailLabel.frame = CGRectMake(0, 0, _standardSize.width*1.2-40, _labelheight+20);
         _nameLabel.alpha =1;
         _ratingLabel.alpha = 1;
         _typeLabel.alpha = 1;
