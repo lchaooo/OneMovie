@@ -10,12 +10,13 @@
 #import <RQShineLabel.h>
 
 @interface ContentView : UIView <UIScrollViewDelegate>
-@property (strong,nonatomic) UILabel *noticeLabel;
 @property (strong,nonatomic) UIImageView *posterImage;
 @property (nonatomic) NSUInteger      initialLocation;
-@property (strong,nonatomic) UIView *backView;
 @property (strong,nonatomic) UILabel *detailLabel;
 @property (strong,nonatomic) UIScrollView *scrollView;
-@property (strong,nonatomic) UIButton *backButton;
 @property (nonatomic) NSUInteger      labelheight;
+@property (nonatomic) CGSize standardSize;
+@property (strong,nonatomic) UILabel *nameLabel;
+@property (strong,nonatomic) UILabel *ratingLabel;
+@property (strong,nonatomic) UILabel *typeLabel;
 @end

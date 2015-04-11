@@ -157,16 +157,16 @@
 - (void)SwitchtoMovie{
     if (self.isMovie == NO) {
         NSLog(@"SwitchtoMovie");
-        [self sendActionsForControlEvents:UIControlEventValueChanged];
         self.isMovie = YES;
+        [self sendActionsForControlEvents:UIControlEventValueChanged];
     }
 }
 
 - (void)SwitchtoBook{
     if (self.isMovie == YES){
         NSLog(@"SwitchtoBook");
-        [self sendActionsForControlEvents:UIControlEventValueChanged];
         self.isMovie = NO;
+        [self sendActionsForControlEvents:UIControlEventValueChanged];
     }
 }
 

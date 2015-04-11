@@ -13,9 +13,9 @@
 		40C69CFD1ACC22050033D420 /* WebModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 40C69CFC1ACC22050033D420 /* WebModel.m */; };
 		9D0D82E91ABD2275009DC6DC /* p1910907404.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9D0D82E81ABD2275009DC6DC /* p1910907404.jpg */; };
 		9D7FFC7B1AD551F70056FDE7 /* s1072541.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9D7FFC7A1AD551F70056FDE7 /* s1072541.jpg */; };
-		9D7FFC7E1AD560DB0056FDE7 /* ContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D7FFC7D1AD560DB0056FDE7 /* ContentView.m */; };
 		9D8C5CE71ABB3A4500B10FD5 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D8C5CE51ABB3A4500B10FD5 /* MainViewController.m */; };
 		9D8C5CE81ABB3A4500B10FD5 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D8C5CE61ABB3A4500B10FD5 /* MainViewController.xib */; };
+		9D92EF0D1AD905C400DEEACD /* ContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D92EF0C1AD905C400DEEACD /* ContentView.m */; };
 		9DA1C3421ABD0DC800FAC1DC /* DismissingAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DA1C33F1ABD0DC800FAC1DC /* DismissingAnimator.m */; };
 		9DA1C3431ABD0DC800FAC1DC /* PresentingAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DA1C3411ABD0DC800FAC1DC /* PresentingAnimator.m */; };
 		9DA1C3461ABD0DE500FAC1DC /* UIColor+CustomColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DA1C3451ABD0DE500FAC1DC /* UIColor+CustomColors.m */; };
@@ -51,11 +51,11 @@
 		9D0D82E11ABD19EA009DC6DC /* WebModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebModel.h; sourceTree = "<group>"; };
 		9D0D82E81ABD2275009DC6DC /* p1910907404.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = p1910907404.jpg; sourceTree = "<group>"; };
 		9D7FFC7A1AD551F70056FDE7 /* s1072541.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = s1072541.jpg; sourceTree = "<group>"; };
-		9D7FFC7C1AD560DB0056FDE7 /* ContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentView.h; sourceTree = "<group>"; };
-		9D7FFC7D1AD560DB0056FDE7 /* ContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentView.m; sourceTree = "<group>"; };
 		9D8C5CE41ABB3A4500B10FD5 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		9D8C5CE51ABB3A4500B10FD5 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		9D8C5CE61ABB3A4500B10FD5 /* MainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
+		9D92EF0B1AD905C400DEEACD /* ContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentView.h; sourceTree = "<group>"; };
+		9D92EF0C1AD905C400DEEACD /* ContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentView.m; sourceTree = "<group>"; };
 		9DA1C33E1ABD0DC800FAC1DC /* DismissingAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DismissingAnimator.h; sourceTree = "<group>"; };
 		9DA1C33F1ABD0DC800FAC1DC /* DismissingAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DismissingAnimator.m; sourceTree = "<group>"; };
 		9DA1C3401ABD0DC800FAC1DC /* PresentingAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PresentingAnimator.h; sourceTree = "<group>"; };
@@ -140,8 +140,8 @@
 		9D65584A1ABD377E009A3DD8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				9D7FFC7C1AD560DB0056FDE7 /* ContentView.h */,
-				9D7FFC7D1AD560DB0056FDE7 /* ContentView.m */,
+				9D92EF0B1AD905C400DEEACD /* ContentView.h */,
+				9D92EF0C1AD905C400DEEACD /* ContentView.m */,
 				405906411ACA745400AE509D /* SwitchView.h */,
 				405906421ACA745400AE509D /* SwitchView.m */,
 				9D7BCA591ABD4B140027A2F8 /* PresentAnimation */,
@@ -371,7 +371,7 @@
 			files = (
 				405906431ACA745400AE509D /* SwitchView.m in Sources */,
 				9DA1C3461ABD0DE500FAC1DC /* UIColor+CustomColors.m in Sources */,
-				9D7FFC7E1AD560DB0056FDE7 /* ContentView.m in Sources */,
+				9D92EF0D1AD905C400DEEACD /* ContentView.m in Sources */,
 				40C69CFD1ACC22050033D420 /* WebModel.m in Sources */,
 				9DA1C3421ABD0DC800FAC1DC /* DismissingAnimator.m in Sources */,
 				9DB3298D1ABDA27C00B70179 /* DropViewController.m in Sources */,
@@ -496,7 +496,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = OneMovie/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -508,7 +508,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = OneMovie/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

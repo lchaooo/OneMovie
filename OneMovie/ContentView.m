@@ -26,46 +26,148 @@
 - (void)setUpLabelAndImageView{
     
     
-    _posterImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
-    //_posterImage.layer.anchorPoint = CGPointMake(0.5, 0);
-    //_posterImage.layer.position = CGPointMake(self.frame.size.width/2, 0);
-    //_posterImage.layer.transform   = [self setTransform3D];
+    _nameLabel = [[UILabel alloc]init];
+    _nameLabel.text = @"教父";
+    _nameLabel.font = [UIFont fontWithName:@"Arial" size:36];
+    _nameLabel.textAlignment = NSTextAlignmentCenter;
+    _nameLabel.textColor = [UIColor whiteColor];
+    
+    
+    _ratingLabel = [[UILabel alloc]init];
+    _ratingLabel.text = @"评分:8.9";
+    _ratingLabel.font = [UIFont fontWithName:@"Arial" size:18];
+    _ratingLabel.textAlignment = NSTextAlignmentCenter;
+    _ratingLabel.textColor = [UIColor whiteColor];
+    
+    
+    _typeLabel = [[UILabel alloc]init];
+    _typeLabel.text = @"类型：剧情/喜剧";
+    _typeLabel.font = [UIFont fontWithName:@"Arial" size:18];
+    _typeLabel.textAlignment = NSTextAlignmentCenter;
+    _typeLabel.textColor = [UIColor whiteColor];
+    
+    _posterImage = [[UIImageView alloc] init];
+    scrollView = [[UIScrollView alloc]init];
+    [self addSubview:_nameLabel];
+    [self addSubview:_typeLabel];
+    [self addSubview:_ratingLabel];
+    
+    _nameLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    _typeLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    _ratingLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:_typeLabel
+                                                           attribute:NSLayoutAttributeBottom
+                                                           relatedBy:NSLayoutRelationEqual
+                                                              toItem:self
+                                                           attribute:NSLayoutAttributeBottom
+                                                          multiplier:1
+                                                            constant:-30]];
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:_typeLabel
+                                                     attribute:NSLayoutAttributeCenterX
+                                                     relatedBy:NSLayoutRelationEqual
+                                                        toItem:self
+                                                     attribute:NSLayoutAttributeCenterX
+                                                    multiplier:1
+                                                      constant:0]];
+    [_typeLabel addConstraint:[NSLayoutConstraint constraintWithItem:_typeLabel
+                                                     attribute:NSLayoutAttributeWidth
+                                                     relatedBy:NSLayoutRelationEqual
+                                                        toItem:nil
+                                                     attribute:NSLayoutAttributeNotAnAttribute
+                                                    multiplier:1
+                                                      constant:250]];
+    [_typeLabel addConstraint:[NSLayoutConstraint constraintWithItem:_typeLabel
+                                                           attribute:NSLayoutAttributeHeight
+                                                           relatedBy:NSLayoutRelationEqual
+                                                              toItem:nil
+                                                           attribute:NSLayoutAttributeNotAnAttribute
+                                                          multiplier:1
+                                                            constant:20]];
+    
+    
+    [_ratingLabel addConstraint:[NSLayoutConstraint constraintWithItem:_ratingLabel
+                                                           attribute:NSLayoutAttributeHeight
+                                                           relatedBy:NSLayoutRelationEqual
+                                                              toItem:nil
+                                                           attribute:NSLayoutAttributeNotAnAttribute
+                                                          multiplier:1
+                                                            constant:20]];
+    [_ratingLabel addConstraint:[NSLayoutConstraint constraintWithItem:_ratingLabel
+                                                             attribute:NSLayoutAttributeWidth
+                                                             relatedBy:NSLayoutRelationEqual
+                                                                toItem:nil
+                                                             attribute:NSLayoutAttributeNotAnAttribute
+                                                            multiplier:1
+                                                              constant:250]];
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:_typeLabel
+                                                             attribute:NSLayoutAttributeTop
+                                                             relatedBy:NSLayoutRelationEqual
+                                                                toItem:_ratingLabel
+                                                             attribute:NSLayoutAttributeBottom
+                                                            multiplier:1
+                                                              constant:5]];
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:_ratingLabel
+                                                             attribute:NSLayoutAttributeCenterX
+                                                             relatedBy:NSLayoutRelationEqual
+                                                                toItem:self
+                                                             attribute:NSLayoutAttributeCenterX
+                                                            multiplier:1
+                                                              constant:0]];
+    
+    
+    [_nameLabel addConstraint:[NSLayoutConstraint constraintWithItem:_nameLabel
+                                                           attribute:NSLayoutAttributeWidth
+                                                           relatedBy:NSLayoutRelationEqual
+                                                              toItem:nil
+                                                           attribute:NSLayoutAttributeNotAnAttribute
+                                                          multiplier:1
+                                                            constant:250]];
+    [_nameLabel addConstraint:[NSLayoutConstraint constraintWithItem:_nameLabel
+                                                           attribute:NSLayoutAttributeHeight
+                                                           relatedBy:NSLayoutRelationEqual
+                                                              toItem:nil
+                                                           attribute:NSLayoutAttributeNotAnAttribute
+                                                          multiplier:1
+                                                            constant:50]];
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:_nameLabel
+                                                           attribute:NSLayoutAttributeBottom
+                                                           relatedBy:NSLayoutRelationEqual
+                                                              toItem:_ratingLabel
+                                                           attribute:NSLayoutAttributeTop
+                                                          multiplier:1
+                                                            constant:-5]];
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:_nameLabel
+                                                           attribute:NSLayoutAttributeCenterX
+                                                           relatedBy:NSLayoutRelationEqual
+                                                              toItem:self
+                                                           attribute:NSLayoutAttributeCenterX
+                                                          multiplier:1
+                                                            constant:0]];
+    
+    
+    _posterImage.frame = CGRectMake( self.bounds.size.width*0.15, 0 , self.bounds.size.width*0.7, self.bounds.size.width*0.7/300*425);
+    
+    scrollView.frame = _posterImage.frame;
+
+    _standardSize = scrollView.frame.size;
+    
     _posterImage.contentMode = UIViewContentModeScaleAspectFill;
     UIPanGestureRecognizer *panGesture   = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(pan1:)];
     [_posterImage addGestureRecognizer:panGesture];
     [self addSubview:_posterImage];
     
     
-//    _backView = [[UIView alloc]init];
-//    _backView.frame = _posterImage.frame;
-//    _backView.layer.cornerRadius = 10;
-//    _backView.backgroundColor = [UIColor grayColor];
-//    [self addSubview:_backView];
+
     
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tap1:)];
-    _backView.hidden = YES;
-    
     [self bringSubviewToFront:_posterImage];
     
-//    _noticeLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, self.bounds.size.height-90, self.bounds.size.width, 100)];
-//    _noticeLabel.textAlignment = NSTextAlignmentCenter;
-//    _noticeLabel.text = @"   点 击 返 回";
-//    _noticeLabel.font = [UIFont systemFontOfSize:24];
-//    _noticeLabel.backgroundColor = [UIColor clearColor];
-//    _noticeLabel.textColor = [UIColor whiteColor];
-//    _noticeLabel.hidden = NO;
-//    [self addSubview:_noticeLabel];
-//    _noticeLabel.userInteractionEnabled = YES;
-//    [_noticeLabel addGestureRecognizer:tapGesture];
-    //[_backView addGestureRecognizer:tapGesture];
-    
-//    _backButton = [[UIButton alloc]initWithFrame:CGRectMake(0, self.bounds.size.height+80, self.bounds.size.width, 100)];
-//    _backButton.backgroundColor = [UIColor whiteColor];
-//    [_backButton addTarget:nil action:@selector(tap1:) forControlEvents:UIControlEventTouchDown];
-//    [_backView addSubview:_backButton];
+
     
     
-    scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
+    
     scrollView.layer.cornerRadius = 10;
     scrollView.backgroundColor = [UIColor grayColor];
     _detailLabel = [[UILabel alloc]init];
@@ -86,13 +188,13 @@
     UIFont *tfont = [UIFont systemFontOfSize:18.0];
     _detailLabel.font = tfont;
     NSDictionary * dic = [NSDictionary dictionaryWithObjectsAndKeys:tfont,NSFontAttributeName,nil];
-    CGSize sizeText = [_detailLabel.text boundingRectWithSize:CGSizeMake(self.frame.size.width*1.2-40, 2000) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
+    CGSize sizeText = [_detailLabel.text boundingRectWithSize:CGSizeMake(_standardSize.width*1.2-40, 2000) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
     
         scrollView.delegate = self;
         scrollView.showsVerticalScrollIndicator = NO;
         [self addSubview:scrollView];
-        scrollView.contentSize = CGSizeMake(self.frame.size.width*1.2-40, sizeText.height+50);
-        _detailLabel.frame = CGRectMake(0, 20, self.frame.size.width*1.2-40, sizeText.height+50);
+        scrollView.contentSize = CGSizeMake(_standardSize.width*1.2-40, sizeText.height+50);
+        _detailLabel.frame = CGRectMake(0, 20, _standardSize.width*1.2-40, sizeText.height+50);
         [scrollView addSubview:_detailLabel];
     _labelheight = sizeText.height;
     
@@ -171,14 +273,14 @@
                     exAnimation.springBounciness = 18.0f;
                     exAnimation.dynamicsMass = 1.0f;
                     exAnimation.dynamicsTension = 300;
-                    exAnimation.toValue = [NSValue valueWithCGPoint:CGPointMake(self.frame.size.width*1.2 , self.frame.size.height*1.6 )];
+                    exAnimation.toValue = [NSValue valueWithCGPoint:CGPointMake(_standardSize.width*1.2 , _standardSize.height*1.6 )];
                     [scrollView.layer pop_addAnimation:exAnimation forKey:@"exAnimation"];
                     
-                
+                    [UIView animateWithDuration:0.5 animations:^{_detailLabel.frame = CGRectMake(20, 20, _standardSize.width*1.2-40, _labelheight+50);}];
                     
                     [UIView animateWithDuration:0.2 animations:^{
                         scrollView.layer.transform = CATransform3DMakeRotation(0 , 0, 1, 0);
-                        _detailLabel.frame = CGRectMake(20, 20, self.frame.size.width*1.2-40, _labelheight+50);
+                        
                     }];
                     [self performSelector:@selector(changeScrollViewSize) withObject:nil afterDelay:0.1];
                     
@@ -206,12 +308,11 @@
                 exAnimation.springBounciness = 18.0f;
                 exAnimation.dynamicsMass = 1.0f;
                 exAnimation.dynamicsTension = 300;
-                exAnimation.toValue = [NSValue valueWithCGPoint:CGPointMake(self.frame.size.width*1.2 , self.frame.size.height*1.6 )];
+                exAnimation.toValue = [NSValue valueWithCGPoint:CGPointMake(_standardSize.width*1.2 , _standardSize.height*1.6 )];
                 [scrollView pop_addAnimation:exAnimation forKey:@"exAnimation"];
-                
-                [UIView animateWithDuration:0.5 animations:^{
+                [UIView animateWithDuration:0.5 animations:^{_detailLabel.frame = CGRectMake(20, 20, _standardSize.width*1.2-40, _labelheight+50);}];
+                [UIView animateWithDuration:0.2 animations:^{
                     scrollView.layer.transform = CATransform3DMakeRotation(0 , 0, 1, 0);
-                    _detailLabel.frame = CGRectMake(20, 20, self.frame.size.width*1.2-40, _labelheight+50);
                 }];
                 [self performSelector:@selector(changeScrollViewSize) withObject:nil afterDelay:0.1];
             }
@@ -262,12 +363,12 @@ CATransform3D CATransform3DPerspect(CATransform3D t, CGPoint center, float disZ)
     leAnimation.springBounciness = 18.0f;
     leAnimation.dynamicsMass = 2.0f;
     leAnimation.dynamicsTension = 200;
-    leAnimation.toValue = [NSValue valueWithCGPoint:CGPointMake(self.frame.size.width , self.frame.size.height )];
+    leAnimation.toValue = [NSValue valueWithCGPoint:CGPointMake(_standardSize.width , _standardSize.height )];
     [scrollView pop_addAnimation:leAnimation forKey:@"leAnimation"];
     
     [UIView animateWithDuration:0.2 animations:^{
-        
-         _detailLabel.frame = CGRectMake(0, 20, self.frame.size.width*1.2-40, _labelheight+50);
+        scrollView.frame = CGRectMake( self.bounds.size.width/6, 0 , self.bounds.size.width*2/3, self.bounds.size.width*850/900);
+         _detailLabel.frame = CGRectMake(0, 20, _standardSize.width*1.2-40, _labelheight+50);
     }];
     
     [UIView animateWithDuration:0.5 animations:^{
@@ -288,7 +389,6 @@ CATransform3D CATransform3DPerspect(CATransform3D t, CGPoint center, float disZ)
     }
     ];
     
-    _noticeLabel.hidden = YES;
 }
 
 
