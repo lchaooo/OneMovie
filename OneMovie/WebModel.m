@@ -36,6 +36,7 @@
     requestOperation.responseSerializer = [AFJSONResponseSerializer serializer];
     [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation,id responseData){
         NSDictionary *dic = (NSDictionary *)responseData;
+        NSLog(@"%@",dic);
         NSString *id = @"movie";
         [_store putObject:dic withId:id intoTable:@"detailsTable"];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"MovieDictionary has been downloaded" object:nil];
@@ -46,44 +47,29 @@
 }
 
 - (void)getBookIDByBookTag{
-    NSArray *tags = [NSArray arrayWithObjects:@"经典",@"名著",@"现代",@"当代",@"文学", nil];
-    int i = arc4random()%5;
+    NSArray *tags = [NSArray arrayWithObjects:@"经典",@"名著",@"当代",@"文学", nil];
+    int i = arc4random()%4;
     NSString *tag = [tags objectAtIndex:i];
-    int j = arc4random()%181;
+    int j = arc4random()%199;
     NSString *start = [NSString stringWithFormat:@"%d",j];
-    NSString *path = [NSString stringWithFormat:@"https://api.douban.com/v2/book/search?start=%@&tag=%@" ,start, tag];
+    NSString *path = [NSString stringWithFormat:@"https://api.douban.com/v2/book/search?start=%@&tag=%@&count=1" ,start, [tag stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    NSLog(@"%@",path);
     NSURL *url = [NSURL URLWithString:path];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    
+
     AFHTTPRequestOperation *requestOperation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     requestOperation.responseSerializer = [AFJSONResponseSerializer serializer];
     [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation,id responseData){
         NSDictionary *dic = (NSDictionary *)responseData;
-        NSArray *array = dic[@"books"];
-        int i = arc4random()%20;
-        NSString *id = [array objectAtIndex:i][@"id"];
-        [self getBookDictionaryByID:id];
+        NSDictionary *bookDic = [dic[@"books"] objectAtIndex:0];
+        [_store putObject:bookDic withId:@"book" intoTable:@"detailsTable"];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"BookDictionary has been downloaded" object:nil];
     }failure:^(AFHTTPRequestOperation *operation,NSError *error){
         [[NSNotificationCenter defaultCenter] postNotificationName:@"Net is not working" object:nil];
+        NSLog(@"%@",error.localizedDescription);
     }];
     [requestOperation start];
 }
 
-- (void)getBookDictionaryByID:(NSString *)ID{
-    NSString *path = [NSString stringWithFormat:@"https://api.douban.com/v2/book/%@",ID];
-    NSURL *url = [NSURL URLWithString:path];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    
-    AFHTTPRequestOperation *requestOperation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-    requestOperation.responseSerializer = [AFJSONResponseSerializer serializer];
-    [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation,id responseData){
-        NSDictionary *dic = (NSDictionary *)responseData;
-        NSString *id = @"book";
-        [_store putObject:dic withId:id intoTable:@"detailsTable"];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"BookDictionary has been downloaded" object:nil];
-    }failure:^(AFHTTPRequestOperation *operation,NSError *error){
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"Net is not working" object:nil];
-    }];
-}
 
 @end

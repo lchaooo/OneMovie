@@ -8,18 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		2D9B54269700A8D44C03013D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B47FD9F4DFE44CE8D46563B /* libPods.a */; };
-		404A90F01ABD44EC007E2932 /* DropViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 404A90EE1ABD44EC007E2932 /* DropViewController.xib */; };
 		405906431ACA745400AE509D /* SwitchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 405906421ACA745400AE509D /* SwitchView.m */; };
 		40C69CFD1ACC22050033D420 /* WebModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 40C69CFC1ACC22050033D420 /* WebModel.m */; };
 		9D0D82E91ABD2275009DC6DC /* p1910907404.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9D0D82E81ABD2275009DC6DC /* p1910907404.jpg */; };
 		9D7FFC7B1AD551F70056FDE7 /* s1072541.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9D7FFC7A1AD551F70056FDE7 /* s1072541.jpg */; };
-		9D8C5CE71ABB3A4500B10FD5 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D8C5CE51ABB3A4500B10FD5 /* MainViewController.m */; };
 		9D8C5CE81ABB3A4500B10FD5 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D8C5CE61ABB3A4500B10FD5 /* MainViewController.xib */; };
-		9D92EF0D1AD905C400DEEACD /* ContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D92EF0C1AD905C400DEEACD /* ContentView.m */; };
-		9DA1C3421ABD0DC800FAC1DC /* DismissingAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DA1C33F1ABD0DC800FAC1DC /* DismissingAnimator.m */; };
-		9DA1C3431ABD0DC800FAC1DC /* PresentingAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DA1C3411ABD0DC800FAC1DC /* PresentingAnimator.m */; };
-		9DA1C3461ABD0DE500FAC1DC /* UIColor+CustomColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DA1C3451ABD0DE500FAC1DC /* UIColor+CustomColors.m */; };
-		9DB3298D1ABDA27C00B70179 /* DropViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DB3298C1ABDA27C00B70179 /* DropViewController.m */; };
+		9D92EF101AD915FF00DEEACD /* ContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D92EF0F1AD915FF00DEEACD /* ContentView.m */; };
+		9DAEF43E1AD94FEF00ECC881 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DAEF43D1AD94FEF00ECC881 /* MainViewController.m */; };
 		9DB3298F1ABDA39E00B70179 /* grayground.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9DB3298E1ABDA39E00B70179 /* grayground.jpg */; };
 		9DB698611ABB38A9009C3283 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DB698601ABB38A9009C3283 /* main.m */; };
 		9DB698641ABB38A9009C3283 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DB698631ABB38A9009C3283 /* AppDelegate.m */; };
@@ -41,8 +36,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		404A90EC1ABD44EC007E2932 /* DropViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropViewController.h; sourceTree = "<group>"; };
-		404A90EE1ABD44EC007E2932 /* DropViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DropViewController.xib; sourceTree = "<group>"; };
 		405906411ACA745400AE509D /* SwitchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwitchView.h; sourceTree = "<group>"; };
 		405906421ACA745400AE509D /* SwitchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwitchView.m; sourceTree = "<group>"; };
 		40C69CFC1ACC22050033D420 /* WebModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebModel.m; sourceTree = "<group>"; };
@@ -52,17 +45,10 @@
 		9D0D82E81ABD2275009DC6DC /* p1910907404.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = p1910907404.jpg; sourceTree = "<group>"; };
 		9D7FFC7A1AD551F70056FDE7 /* s1072541.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = s1072541.jpg; sourceTree = "<group>"; };
 		9D8C5CE41ABB3A4500B10FD5 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
-		9D8C5CE51ABB3A4500B10FD5 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		9D8C5CE61ABB3A4500B10FD5 /* MainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
-		9D92EF0B1AD905C400DEEACD /* ContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentView.h; sourceTree = "<group>"; };
-		9D92EF0C1AD905C400DEEACD /* ContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentView.m; sourceTree = "<group>"; };
-		9DA1C33E1ABD0DC800FAC1DC /* DismissingAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DismissingAnimator.h; sourceTree = "<group>"; };
-		9DA1C33F1ABD0DC800FAC1DC /* DismissingAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DismissingAnimator.m; sourceTree = "<group>"; };
-		9DA1C3401ABD0DC800FAC1DC /* PresentingAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PresentingAnimator.h; sourceTree = "<group>"; };
-		9DA1C3411ABD0DC800FAC1DC /* PresentingAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PresentingAnimator.m; sourceTree = "<group>"; };
-		9DA1C3441ABD0DE500FAC1DC /* UIColor+CustomColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+CustomColors.h"; sourceTree = "<group>"; };
-		9DA1C3451ABD0DE500FAC1DC /* UIColor+CustomColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+CustomColors.m"; sourceTree = "<group>"; };
-		9DB3298C1ABDA27C00B70179 /* DropViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DropViewController.m; sourceTree = "<group>"; };
+		9D92EF0E1AD915FF00DEEACD /* ContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentView.h; sourceTree = "<group>"; };
+		9D92EF0F1AD915FF00DEEACD /* ContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentView.m; sourceTree = "<group>"; };
+		9DAEF43D1AD94FEF00ECC881 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		9DB3298E1ABDA39E00B70179 /* grayground.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = grayground.jpg; sourceTree = "<group>"; };
 		9DB6985B1ABB38A9009C3283 /* OneMovie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OneMovie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DB6985F1ABB38A9009C3283 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -119,11 +105,8 @@
 			isa = PBXGroup;
 			children = (
 				9D8C5CE41ABB3A4500B10FD5 /* MainViewController.h */,
-				9D8C5CE51ABB3A4500B10FD5 /* MainViewController.m */,
+				9DAEF43D1AD94FEF00ECC881 /* MainViewController.m */,
 				9D8C5CE61ABB3A4500B10FD5 /* MainViewController.xib */,
-				404A90EC1ABD44EC007E2932 /* DropViewController.h */,
-				9DB3298C1ABDA27C00B70179 /* DropViewController.m */,
-				404A90EE1ABD44EC007E2932 /* DropViewController.xib */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -140,26 +123,12 @@
 		9D65584A1ABD377E009A3DD8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				9D92EF0B1AD905C400DEEACD /* ContentView.h */,
-				9D92EF0C1AD905C400DEEACD /* ContentView.m */,
+				9D92EF0E1AD915FF00DEEACD /* ContentView.h */,
+				9D92EF0F1AD915FF00DEEACD /* ContentView.m */,
 				405906411ACA745400AE509D /* SwitchView.h */,
 				405906421ACA745400AE509D /* SwitchView.m */,
-				9D7BCA591ABD4B140027A2F8 /* PresentAnimation */,
 			);
 			name = Views;
-			sourceTree = "<group>";
-		};
-		9D7BCA591ABD4B140027A2F8 /* PresentAnimation */ = {
-			isa = PBXGroup;
-			children = (
-				9DA1C33E1ABD0DC800FAC1DC /* DismissingAnimator.h */,
-				9DA1C33F1ABD0DC800FAC1DC /* DismissingAnimator.m */,
-				9DA1C3401ABD0DC800FAC1DC /* PresentingAnimator.h */,
-				9DA1C3411ABD0DC800FAC1DC /* PresentingAnimator.m */,
-				9DA1C3441ABD0DE500FAC1DC /* UIColor+CustomColors.h */,
-				9DA1C3451ABD0DE500FAC1DC /* UIColor+CustomColors.m */,
-			);
-			name = PresentAnimation;
 			sourceTree = "<group>";
 		};
 		9DB698521ABB38A9009C3283 = {
@@ -318,7 +287,6 @@
 				9DFD426F1ABC7F6100448029 /* MovieID.plist in Resources */,
 				9DD6657A1ABD62BA008E7125 /* 透明.png in Resources */,
 				9DB6986C1ABB38A9009C3283 /* Images.xcassets in Resources */,
-				404A90F01ABD44EC007E2932 /* DropViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -370,14 +338,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				405906431ACA745400AE509D /* SwitchView.m in Sources */,
-				9DA1C3461ABD0DE500FAC1DC /* UIColor+CustomColors.m in Sources */,
-				9D92EF0D1AD905C400DEEACD /* ContentView.m in Sources */,
+				9DAEF43E1AD94FEF00ECC881 /* MainViewController.m in Sources */,
 				40C69CFD1ACC22050033D420 /* WebModel.m in Sources */,
-				9DA1C3421ABD0DC800FAC1DC /* DismissingAnimator.m in Sources */,
-				9DB3298D1ABDA27C00B70179 /* DropViewController.m in Sources */,
+				9D92EF101AD915FF00DEEACD /* ContentView.m in Sources */,
 				9DB698641ABB38A9009C3283 /* AppDelegate.m in Sources */,
-				9DA1C3431ABD0DC800FAC1DC /* PresentingAnimator.m in Sources */,
-				9D8C5CE71ABB3A4500B10FD5 /* MainViewController.m in Sources */,
 				9DB698611ABB38A9009C3283 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

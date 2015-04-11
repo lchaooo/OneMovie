@@ -24,24 +24,19 @@
 
 
 - (void)setUpLabelAndImageView{
-    
-    
     _nameLabel = [[UILabel alloc]init];
-    _nameLabel.text = @"教父";
     _nameLabel.font = [UIFont fontWithName:@"Arial" size:36];
     _nameLabel.textAlignment = NSTextAlignmentCenter;
     _nameLabel.textColor = [UIColor whiteColor];
     
     
     _ratingLabel = [[UILabel alloc]init];
-    _ratingLabel.text = @"评分:8.9";
     _ratingLabel.font = [UIFont fontWithName:@"Arial" size:18];
     _ratingLabel.textAlignment = NSTextAlignmentCenter;
     _ratingLabel.textColor = [UIColor whiteColor];
     
     
     _typeLabel = [[UILabel alloc]init];
-    _typeLabel.text = @"类型：剧情/喜剧";
     _typeLabel.font = [UIFont fontWithName:@"Arial" size:18];
     _typeLabel.textAlignment = NSTextAlignmentCenter;
     _typeLabel.textColor = [UIColor whiteColor];
@@ -147,7 +142,7 @@
                                                             constant:0]];
     
     
-    _posterImage.frame = CGRectMake([UIScreen mainScreen].bounds.size.width*0.15, 0 , [UIScreen mainScreen].bounds.size.width*0.7, [UIScreen mainScreen].bounds.size.width*0.7/300*425);
+    _posterImage.frame = CGRectMake([UIScreen mainScreen].bounds.size.width*0.15, 10 , [UIScreen mainScreen].bounds.size.width*0.7, [UIScreen mainScreen].bounds.size.width*0.7/300*425);
     
     scrollView.frame = _posterImage.frame;
 
@@ -205,6 +200,9 @@
 }
 
 -(void)pan1:(UIPanGestureRecognizer *)recognizer{
+    
+    
+    
     CGPoint location = [recognizer locationInView:self];
     
     //    static float y_coordinate;
@@ -218,13 +216,13 @@
     if (recognizer.state == UIGestureRecognizerStateBegan) {
         self.initialLocation = location.x;
         [self bringSubviewToFront:_posterImage];
+        [[NSNotificationCenter defaultCenter]postNotificationName:@"enableSwitchview" object:nil];
     }
     
-    //    if (recognizer.state == UIGestureRecognizerStateEnded) {
-    //
-    //
-    //        y_coordinate = 0.0f;
-    //    }
+        if (recognizer.state == UIGestureRecognizerStateEnded) {
+    
+            [[NSNotificationCenter defaultCenter]postNotificationName:@"notenableSwitchview" object:nil];
+        }
     
     
     CGFloat percent = (M_PI /self.initialLocation);
@@ -279,12 +277,16 @@
                     [UIView animateWithDuration:0.5 animations:^{_detailLabel.frame = CGRectMake(20, 20, _standardSize.width*1.2-40, _labelheight+50);}];
                     
                     [UIView animateWithDuration:0.2 animations:^{
+                        _nameLabel.alpha =0;
+                        _ratingLabel.alpha = 0;
+                        _typeLabel.alpha = 0;
                         scrollView.layer.transform = CATransform3DMakeRotation(0 , 0, 1, 0);
                         
                     }];
                     [self performSelector:@selector(changeScrollViewSize) withObject:nil afterDelay:0.1];
                     
                 
+                    
                 }
             }
         }
@@ -313,8 +315,12 @@
                 [UIView animateWithDuration:0.5 animations:^{_detailLabel.frame = CGRectMake(20, 20, _standardSize.width*1.2-40, _labelheight+50);}];
                 [UIView animateWithDuration:0.2 animations:^{
                     scrollView.layer.transform = CATransform3DMakeRotation(0 , 0, 1, 0);
+                    _nameLabel.alpha =0;
+                    _ratingLabel.alpha = 0;
+                    _typeLabel.alpha = 0;
                 }];
                 [self performSelector:@selector(changeScrollViewSize) withObject:nil afterDelay:0.1];
+                
             }
 
         }
@@ -325,7 +331,7 @@
 }
 
 - (void)changeScrollViewSize{
-   
+   [[NSNotificationCenter defaultCenter]postNotificationName:@"enableSwitchview" object:nil];
 }
 
 -(BOOL)isLocation:(CGPoint)location InView:(UIView *)view{
@@ -367,8 +373,11 @@ CATransform3D CATransform3DPerspect(CATransform3D t, CGPoint center, float disZ)
     [scrollView pop_addAnimation:leAnimation forKey:@"leAnimation"];
     
     [UIView animateWithDuration:0.2 animations:^{
-        scrollView.frame = CGRectMake( self.bounds.size.width/6, 0 , self.bounds.size.width*2/3, self.bounds.size.width*850/900);
+        scrollView.frame = CGRectMake( self.bounds.size.width/6, 10 , self.bounds.size.width*2/3, self.bounds.size.width*850/900);
          _detailLabel.frame = CGRectMake(0, 20, _standardSize.width*1.2-40, _labelheight+50);
+        _nameLabel.alpha =1;
+        _ratingLabel.alpha = 1;
+        _typeLabel.alpha = 1;
     }];
     
     [UIView animateWithDuration:0.5 animations:^{
@@ -387,8 +396,9 @@ CATransform3D CATransform3DPerspect(CATransform3D t, CGPoint center, float disZ)
         [_posterImage.layer pop_addAnimation:recoverAnimation forKey:@"recoverAnimation"];
         [self pop_removeAllAnimations];
     }
+     
     ];
-    
+    [[NSNotificationCenter defaultCenter]postNotificationName:@"notenableSwitchview" object:nil];
 }
 
 
