@@ -8,7 +8,6 @@
 
 #import "ContentView.h"
 #import <POP.h>
-#import <YTKKeyValueStore.h>
 
 
 @implementation ContentView
@@ -25,7 +24,8 @@
 
 - (void)setUpLabelAndImageView{
     _nameLabel = [[UILabel alloc]init];
-    _nameLabel.font = [UIFont fontWithName:@"Arial" size:36];
+    _nameLabel.font = [UIFont fontWithName:@"Arial" size:28];
+    _nameLabel.numberOfLines = 0;
     _nameLabel.textAlignment = NSTextAlignmentCenter;
     _nameLabel.textColor = [UIColor whiteColor];
     
@@ -170,14 +170,7 @@
     _detailLabel.textColor =  [UIColor whiteColor]  ;
     _detailLabel.numberOfLines = 0;
     
-    YTKKeyValueStore *store = [[YTKKeyValueStore alloc] initDBWithName:@"details.db"];
-    NSDictionary *movieDetails = [store getObjectById:@"movie" fromTable:@"detailsTable"];
-    NSArray *castsArray= [NSArray arrayWithArray:[movieDetails objectForKey:@"casts"]];
-    _detailLabel.text = movieDetails[@"summary"];
-    _detailLabel.text = [NSString stringWithFormat:@"%@\n\n主演:",_detailLabel.text];
-    for (NSDictionary *dic in castsArray) {
-        _detailLabel.text = [NSString stringWithFormat:@"%@%@/",_detailLabel.text,dic[@"name"]];
-    }
+    
     _detailLabel.text = [_detailLabel.text substringToIndex:[_detailLabel.text length]-1];
     _detailLabel.numberOfLines = 0;
     UIFont *tfont = [UIFont systemFontOfSize:18.0];
@@ -185,12 +178,12 @@
     NSDictionary * dic = [NSDictionary dictionaryWithObjectsAndKeys:tfont,NSFontAttributeName,nil];
     CGSize sizeText = [_detailLabel.text boundingRectWithSize:CGSizeMake(_standardSize.width*1.2-40, 2000) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
     
-        scrollView.delegate = self;
-        scrollView.showsVerticalScrollIndicator = NO;
-        [self addSubview:scrollView];
-        scrollView.contentSize = CGSizeMake(_standardSize.width*1.2-40, sizeText.height+50);
-        _detailLabel.frame = CGRectMake(0, 20, _standardSize.width*1.2-40, sizeText.height+50);
-        [scrollView addSubview:_detailLabel];
+    scrollView.delegate = self;
+    scrollView.showsVerticalScrollIndicator = NO;
+    [self addSubview:scrollView];
+    scrollView.contentSize = CGSizeMake(_standardSize.width*1.2-40, sizeText.height+50);
+    _detailLabel.frame = CGRectMake(0, 20, _standardSize.width*1.2-40, sizeText.height+50);
+    [scrollView addSubview:_detailLabel];
     _labelheight = sizeText.height;
     
     [self bringSubviewToFront:_posterImage];

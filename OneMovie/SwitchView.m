@@ -22,7 +22,7 @@
 - (id)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if (self) {
-        self.isMovie = YES;
+        _isMovie = YES;
     }
     return self;
 }

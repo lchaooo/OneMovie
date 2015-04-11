@@ -26,7 +26,7 @@
 @property (strong,nonatomic) SwitchView *switchView;
 @property (strong,nonatomic) NSArray *movieViewConstraint;
 @property (strong,nonatomic) NSArray *bookViewConstraint;
-
+@property BOOL isDetails;
 @end
 
 @implementation MainViewController
@@ -38,6 +38,7 @@
         _store = [[YTKKeyValueStore alloc] initDBWithName:@"details.db"];
         [_store createTableWithName:_tableName];
         _model = [[WebModel alloc] init];
+        _isDetails = NO;
     }
     return self;
 }
@@ -77,8 +78,17 @@
     
     [self setUpFrame];
     
+    if (_switchView.isMovie) {
+        [self showMovieDetails];
+    } else{
+        [self showBookDetails];
+    }
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(enableSwitchview) name:@"enableSwitchview" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notenableSwitchview) name:@"notenableSwitchview" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showMovieDetails) name:@"MovieDictionary has been downloaded" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showBookDetails) name:@"BookDictionary has been downloaded" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showNoticeOfFailure) name:@"Net is not working" object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -248,10 +258,12 @@
 #pragma CustomMethods
 - (void)enableSwitchview{
     _switchView.userInteractionEnabled = NO;
+    _isDetails = YES;
 }
 
 - (void)notenableSwitchview{
     _switchView.userInteractionEnabled = YES;
+    _isDetails = NO;
 }
 
 //随即选择电影并发出网络请求
@@ -260,12 +272,19 @@
     NSMutableArray *movieIDArray = [[NSMutableArray alloc] initWithContentsOfFile:plistPath];
     NSString *ID = [movieIDArray objectAtIndex:arc4random()%249];
     [_model getMovieDictionaryByMovieID:ID];
+    [self posterUserInterfactionEnbaledNo];
+}
+
+- (void)getBookDetails{
+    [_model getBookIDByBookTag];
+    [self posterUserInterfactionEnbaledNo];
 }
 
 //页面显示
 - (void)showMovieDetails{
     NSDictionary *dic = [_store getObjectById:@"movie" fromTable:_tableName];
     if (dic) {
+        _movieView.posterImage.userInteractionEnabled = YES;
         //nameLabel
         _movieView.nameLabel.text = dic[@"title"];
     
@@ -294,6 +313,14 @@
             weakSelf.backgroundImage.image = image;
             weakSelf.movieView.posterImage.userInteractionEnabled = YES;
         }];
+        
+        _movieView.detailLabel.text = dic[@"summary"];
+        _movieView.detailLabel.text = [NSString stringWithFormat:@"%@\n\n主演:",_movieView.detailLabel.text];
+        for (NSDictionary *castDic in dic[@"casts"]) {
+            _movieView.detailLabel.text = [NSString stringWithFormat:@"%@%@/",_movieView.detailLabel.text,castDic[@"name"]];
+        }
+        _movieView.detailLabel.text = [_movieView.detailLabel.text substringToIndex:[_movieView.detailLabel.text length]-1];
+        _movieView.detailLabel.numberOfLines = 0;
     }else{
         [self getMovieIDAndSendRequest];
     }
@@ -302,6 +329,7 @@
 - (void)showBookDetails{
     NSDictionary *dic = [_store getObjectById:@"book" fromTable:_tableName];
     if (dic) {
+        _bookView.posterImage.userInteractionEnabled = YES;
         //nameLabel
         _bookView.nameLabel.text = dic[@"title"];
         
@@ -330,53 +358,50 @@
             weakSelf.backgroundImage.image = image;
             weakSelf.bookView.posterImage.userInteractionEnabled = YES;
         }];
+        _bookView.detailLabel.text = dic[@"summary"];
+        _bookView.detailLabel.text = [NSString stringWithFormat:@"介绍：%@\n\n作者介绍:",_bookView.detailLabel.text];
+        _bookView.detailLabel.text = [NSString stringWithFormat:@"%@%@/",_bookView.detailLabel.text,dic[@"author_intro"]];
+        _bookView.detailLabel.text = [_bookView.detailLabel.text substringToIndex:[_bookView.detailLabel.text length]-1];
+        _bookView.detailLabel.numberOfLines = 0;
     }else{
-        [_model getBookIDByBookTag];
+        [self getBookDetails];
     }
 }
 
-//- (void)disappearAndOpenSafari{
-//    [self disappear];
-//    [self performSelector:@selector(openSafari) withObject:self afterDelay:1.5];
-//}
+//显示连接失败提示
+- (void)showNoticeOfFailure{
+    _backgroundImage.image = [UIImage imageNamed:@"p1910907404.jpg"];
+    MBProgressHUD *hub = [[MBProgressHUD alloc] initWithView:self.view];
+    [self.view addSubview:hub];
+    hub.labelText = @"网络连接发生错误";
+    hub.mode = MBProgressHUDModeText;
+    [hub showAnimated:YES whileExecutingBlock:^{
+        sleep(2);
+    }completionBlock:^{
+        [hub removeFromSuperViewOnHide];
+    }];
+}
 
-////显示连接失败提示
-//- (void)showNoticeOfFailure{
-//    _contentView.posterImage.image = nil;
-//    _backgroundImage.image = [UIImage imageNamed:@"p1910907404.jpg"];
-//    MBProgressHUD *hub = [[MBProgressHUD alloc] initWithView:self.view];
-//    [self.view addSubview:hub];
-//    hub.labelText = @"网络连接发生错误";
-//    hub.mode = MBProgressHUDModeText;
-//    [hub showAnimated:YES whileExecutingBlock:^{
-//        sleep(2);
-//    }completionBlock:^{
-//        [hub removeFromSuperViewOnHide];
-//    }];
-//}
+- (void)posterUserInterfactionEnbaledNo{
+    _movieView.posterImage.userInteractionEnabled = NO;
+    _bookView.posterImage.userInteractionEnabled = NO;
+}
 
+#pragma shake
+-(BOOL)canBecomeFirstResponder
+{
+    return YES;
+}
 
-//- (void)disappear{
-//    [_nameLabel fadeOut];
-//    [_ratingLabel fadeOut];
-//    [_typeLabel fadeOut];
-//    [self performSelector:@selector(disappearPicture) withObject:self afterDelay:1.5];
-//}
-//
-//- (void)disappearPicture{
-//    _contentView.posterImage.userInteractionEnabled = NO;
-//}
-
-//#pragma shake
-//-(BOOL)canBecomeFirstResponder
-//{
-//    return YES;
-//}
-//- (void) motionBegan:(UIEventSubtype)motion withEvent:(UIEvent *)event
-//{
-//    [self disappear];
-//    [self performSelector:@selector(getMovieIDAndSendRequest) withObject:self afterDelay:1.5];
-//}
+- (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event{
+    if (!_isDetails) {
+        if (_switchView.isMovie) {
+            [self getMovieIDAndSendRequest];
+        } else{
+            [_model getBookIDByBookTag];
+        }
+    }
+}
 
 
 
