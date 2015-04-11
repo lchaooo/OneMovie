@@ -14,8 +14,8 @@
 @implementation ContentView
 @synthesize scrollView;
 
-- (id)initWithFrame:(CGRect)frame  {
-    self = [super initWithFrame:frame];
+- (id)init  {
+    self = [super init];
     if (self) {
         [self setUpLabelAndImageView];
     }
@@ -137,7 +137,7 @@
                                                               toItem:_ratingLabel
                                                            attribute:NSLayoutAttributeTop
                                                           multiplier:1
-                                                            constant:-5]];
+                                                            constant:0]];
     [self addConstraint:[NSLayoutConstraint constraintWithItem:_nameLabel
                                                            attribute:NSLayoutAttributeCenterX
                                                            relatedBy:NSLayoutRelationEqual
@@ -147,7 +147,7 @@
                                                             constant:0]];
     
     
-    _posterImage.frame = CGRectMake( self.bounds.size.width*0.15, 0 , self.bounds.size.width*0.7, self.bounds.size.width*0.7/300*425);
+    _posterImage.frame = CGRectMake([UIScreen mainScreen].bounds.size.width*0.15, 0 , [UIScreen mainScreen].bounds.size.width*0.7, [UIScreen mainScreen].bounds.size.width*0.7/300*425);
     
     scrollView.frame = _posterImage.frame;
 

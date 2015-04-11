@@ -238,7 +238,7 @@
             }
             [self.view layoutIfNeeded];
         }];
-        
+        [self.view bringSubviewToFront:_movieView];
     } else if(!_switchView.isMovie){
         [UIView animateWithDuration:0.5 animations:^{
             for (int i = 0; i<4; ++i) {
@@ -249,6 +249,7 @@
             }
             [self.view layoutIfNeeded];
         }];
+        [self.view bringSubviewToFront:_bookView];
     }
 }
 
