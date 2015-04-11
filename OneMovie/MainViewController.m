@@ -304,6 +304,7 @@
         _movieView.typeLabel.text = realType;
         
         //poster
+        
         [_movieView.posterImage startLoaderWithTintColor:[UIColor blackColor]];
         __weak typeof(self)weakSelf = self;
         [_movieView.posterImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",dic[@"images"][@"large"]]] placeholderImage:[UIImage imageNamed:@"透明.png"] options:SDWebImageCacheMemoryOnly |       SDWebImageRefreshCached progress:^(NSInteger receivedSize,NSInteger expectedSize){
@@ -313,6 +314,8 @@
             weakSelf.backgroundImage.image = image;
             weakSelf.movieView.posterImage.userInteractionEnabled = YES;
         }];
+        
+        
         
         _movieView.detailLabel.text = dic[@"summary"];
         _movieView.detailLabel.text = [NSString stringWithFormat:@"%@\n\n主演:",_movieView.detailLabel.text];
@@ -327,6 +330,7 @@
     
     [_movieView reloadDetaillabel];
 }
+
 
 - (void)showBookDetails{
     NSDictionary *dic = [_store getObjectById:@"book" fromTable:_tableName];

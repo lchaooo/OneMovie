@@ -61,7 +61,7 @@
 - (void)tintColorDidChange
 {
     [super tintColorDidChange];
-    self.circlePathLayer.strokeColor = self.tintColor.CGColor;
+    self.circlePathLayer.strokeColor = [UIColor whiteColor].CGColor;
 }
 
 - (void)reveal
@@ -81,11 +81,12 @@
     
     CGPathRef fromPath = self.circlePathLayer.path;
     CGFloat fromLineWidth = self.circlePathLayer.lineWidth;
-    [CATransaction begin];
-    [CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
-    self.circlePathLayer.lineWidth = 2*finalRadius;
-    self.circlePathLayer.path = toPath.CGPath;
-    [CATransaction commit];
+    
+//    [CATransaction begin];
+//    [CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
+//    self.circlePathLayer.lineWidth = 2*finalRadius;
+//    self.circlePathLayer.path = toPath.CGPath;
+//    [CATransaction commit];
     
     CAAnimationGroup *groupAnimation = [CAAnimationGroup animation];
     groupAnimation.fillMode = kCAFillModeForwards;
