@@ -9,6 +9,9 @@
 #import "ContentView.h"
 #import <POP.h>
 
+@interface ContentView()
+@property (strong,nonatomic) UIVisualEffectView *blurView;
+@end
 
 @implementation ContentView
 @synthesize scrollView;
@@ -17,6 +20,7 @@
     self = [super init];
     if (self) {
         [self setUpLabelAndImageView];
+        self.translatesAutoresizingMaskIntoConstraints = NO;
     }
     return self;
 }
@@ -143,6 +147,8 @@
     
     
     _posterImage.frame = CGRectMake([UIScreen mainScreen].bounds.size.width*0.15, 10 , [UIScreen mainScreen].bounds.size.width*0.7, [UIScreen mainScreen].bounds.size.width*0.7/300*425);
+    _posterImage.layer.cornerRadius = 10;
+    _posterImage.clipsToBounds = YES;
     
     scrollView.frame = _posterImage.frame;
 
@@ -153,38 +159,35 @@
     [_posterImage addGestureRecognizer:panGesture];
     [self addSubview:_posterImage];
     
-    
-
-    
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tap1:)];
     [self bringSubviewToFront:_posterImage];
-    
 
-    
-    
-    
     scrollView.layer.cornerRadius = 10;
-    scrollView.backgroundColor = [UIColor grayColor];
+    scrollView.backgroundColor = [UIColor clearColor];
+    
+    _blurView = [[UIVisualEffectView alloc] initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleDark]];
+    _blurView.layer.cornerRadius = 10;
+    _blurView.clipsToBounds = YES;
     
     _detailLabel = [[UILabel alloc]init];
     _detailLabel.backgroundColor = [UIColor clearColor];
-    _detailLabel.textColor =  [UIColor whiteColor]  ;
+    _detailLabel.layer.cornerRadius = 10;
+    _detailLabel.clipsToBounds = YES;
+    _detailLabel.textColor =  [UIColor whiteColor];
     _detailLabel.numberOfLines = 0;
-    
-    
-    
-    
+
+
     scrollView.delegate = self;
     scrollView.showsVerticalScrollIndicator = NO;
     [self addSubview:scrollView];
     
+    [scrollView addSubview:_blurView];
     [scrollView addSubview:_detailLabel];
  
     
     [self bringSubviewToFront:_posterImage];
     [scrollView addGestureRecognizer:tapGesture];
     scrollView.hidden = YES;
-    
 }
 
 -(void)reloadDetaillabel{
@@ -195,12 +198,10 @@
     scrollView.contentSize = CGSizeMake(_standardSize.width*1.2-40, sizeText.height+50);
     _detailLabel.frame = CGRectMake(0, 0, _standardSize.width*1.2-40, sizeText.height+20);
     _labelheight = sizeText.height;
+    _blurView.frame = _detailLabel.frame;
 }
 
 -(void)pan1:(UIPanGestureRecognizer *)recognizer{
-    
-    
-    
     CGPoint location = [recognizer locationInView:self];
     
     //    static float y_coordinate;
@@ -210,7 +211,6 @@
     //    }
     
     //获取手指在PageView中的初始坐标
-    
     if (recognizer.state == UIGestureRecognizerStateBegan) {
         self.initialLocation = location.x;
         [self bringSubviewToFront:_posterImage];
@@ -267,12 +267,14 @@
                 } else {
                     POPSpringAnimation *exAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPViewSize];
                     exAnimation.springBounciness = 18.0f;
-                    exAnimation.dynamicsMass = 1.0f;
-                    exAnimation.dynamicsTension = 300;
+                    exAnimation.dynamicsMass = 0.8f;
+                    exAnimation.dynamicsTension = 200;
                     exAnimation.toValue = [NSValue valueWithCGPoint:CGPointMake(_standardSize.width*1.2 , _standardSize.height*1.6 )];
                     [scrollView.layer pop_addAnimation:exAnimation forKey:@"exAnimation"];
-                    
-                    [UIView animateWithDuration:0.5 animations:^{_detailLabel.frame = CGRectMake(20, 20, _standardSize.width*1.2-40, _labelheight+20);}];
+                    [UIView animateWithDuration:0.5 animations:^{
+                        _detailLabel.frame = CGRectMake(20, 20, _standardSize.width*1.2-40, _labelheight+20);
+                        _blurView.frame = CGRectMake(_detailLabel.frame.origin.x-10, _detailLabel.frame.origin.y-10, _detailLabel.frame.size.width+20, _detailLabel.frame.size.height+20);
+                    }];
                     
                     [UIView animateWithDuration:0.2 animations:^{
                         _nameLabel.alpha =0;
@@ -310,7 +312,11 @@
                 exAnimation.dynamicsTension = 300;
                 exAnimation.toValue = [NSValue valueWithCGPoint:CGPointMake(_standardSize.width*1.2 , _standardSize.height*1.6 )];
                 [scrollView pop_addAnimation:exAnimation forKey:@"exAnimation"];
-                [UIView animateWithDuration:0.5 animations:^{_detailLabel.frame = CGRectMake(20, 20, _standardSize.width*1.2-40, _labelheight+20);}];
+                [UIView animateWithDuration:0.5 animations:^{
+                    _detailLabel.frame = CGRectMake(20, 20, _standardSize.width*1.2-40, _labelheight+20);
+                    _blurView.frame = _detailLabel.frame;
+                    NSLog(@"2");
+                }];
                 [UIView animateWithDuration:0.2 animations:^{
                     scrollView.layer.transform = CATransform3DMakeRotation(0 , 0, 1, 0);
                     _nameLabel.alpha =0;
@@ -373,9 +379,11 @@ CATransform3D CATransform3DPerspect(CATransform3D t, CGPoint center, float disZ)
     [UIView animateWithDuration:0.2 animations:^{
         scrollView.frame = CGRectMake( self.bounds.size.width/6, 10 , self.bounds.size.width*2/3, self.bounds.size.width*850/900);
          _detailLabel.frame = CGRectMake(0, 0, _standardSize.width*1.2-40, _labelheight+20);
+        _blurView.frame = _detailLabel.frame;
         _nameLabel.alpha =1;
         _ratingLabel.alpha = 1;
         _typeLabel.alpha = 1;
+        NSLog(@"3");
     }];
     
     [UIView animateWithDuration:0.5 animations:^{

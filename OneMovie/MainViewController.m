@@ -7,13 +7,13 @@
 //
 
 #import "MainViewController.h"
-#import <YTKKeyValueStore.h>
 #import "WebModel.h"
+#import "ContentView.h"
+#import "SwitchView.h"
+#import <YTKKeyValueStore.h>
 #import <UIImageView+RJLoader.h>
 #import <UIImageView+WebCache.h>
-#import "ContentView.h"
 #import <MBProgressHUD.h>
-#import "SwitchView.h"
 #import <POP.h>
 
 @interface MainViewController ()
@@ -56,16 +56,10 @@
     
     _movieView = [[ContentView alloc] init];
     _movieView.posterImage.layer.cornerRadius = 10;
-    _movieView.posterImage.clipsToBounds=YES;
-    _movieView.posterImage.userInteractionEnabled = YES;
-    _movieView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.view addSubview:_movieView];
     
     _bookView = [[ContentView alloc] init];
-    _bookView.posterImage.layer.cornerRadius = 10;
-    _bookView.posterImage.clipsToBounds = YES;
     _bookView.posterImage.userInteractionEnabled = YES;
-    _bookView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.view addSubview:_bookView];
     
     _switchView = [[SwitchView alloc]init];
@@ -95,7 +89,10 @@
     [super didReceiveMemoryWarning];
 }
 
+#pragma CustomMethods
+//autolayout
 - (void)setUpFrame{
+    //movieView Center Constraint
     _movieViewConstraint = @[[NSLayoutConstraint constraintWithItem:_movieView
                                                           attribute:NSLayoutAttributeHeight
                                                           relatedBy:NSLayoutRelationEqual
@@ -126,6 +123,7 @@
                                                            constant:0]
                              ];
     
+    //movieView Center Constraint
     _bookViewConstraint = @[[NSLayoutConstraint constraintWithItem:_bookView
                                                           attribute:NSLayoutAttributeHeight
                                                           relatedBy:NSLayoutRelationEqual
@@ -156,6 +154,7 @@
                                                            constant:0]
                              ];
     
+    //switchView Constraint
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_switchView
                                                           attribute:NSLayoutAttributeCenterY
                                                           relatedBy:NSLayoutRelationEqual
@@ -236,9 +235,9 @@
                 [self.view addConstraint:[_movieViewConstraint objectAtIndex:j]];
             }
             [self.view layoutIfNeeded];
+            [self showMovieDetails];
         }];
         [self.view bringSubviewToFront:_movieView];
-        [self showMovieDetails];
     } else if(!_switchView.isMovie){
         [UIView animateWithDuration:0.5 animations:^{
             for (int i = 0; i<4; ++i) {
@@ -248,14 +247,12 @@
                 [self.view addConstraint:[_bookViewConstraint objectAtIndex:j]];
             }
             [self.view layoutIfNeeded];
+            [self showBookDetails];
         }];
         [self.view bringSubviewToFront:_bookView];
-        [self showBookDetails];
     }
 }
 
-
-#pragma CustomMethods
 - (void)enableSwitchview{
     _switchView.userInteractionEnabled = NO;
     _isDetails = YES;
@@ -266,18 +263,18 @@
     _isDetails = NO;
 }
 
-//随即选择电影并发出网络请求
+//发出网络请求
 - (void)getMovieIDAndSendRequest{
     NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"MovieID" ofType:@"plist"];
     NSMutableArray *movieIDArray = [[NSMutableArray alloc] initWithContentsOfFile:plistPath];
     NSString *ID = [movieIDArray objectAtIndex:arc4random()%249];
     [_model getMovieDictionaryByMovieID:ID];
-    [self posterUserInterfactionEnbaledNo];
+    [self posterImageUserInterfactionEnbaledNo];
 }
 
 - (void)getBookDetails{
     [_model getBookIDByBookTag];
-    [self posterUserInterfactionEnbaledNo];
+    [self posterImageUserInterfactionEnbaledNo];
 }
 
 //页面显示
@@ -294,7 +291,7 @@
             rating = [rating substringToIndex:6];
         }
         _movieView.ratingLabel.text = rating;
-        
+
         //typeLabel
         NSString *type = @"类型：";
         for (int i=0; i<[dic[@"genres"] count]; i++) {
@@ -304,7 +301,6 @@
         _movieView.typeLabel.text = realType;
         
         //poster
-        
         [_movieView.posterImage startLoaderWithTintColor:[UIColor blackColor]];
         __weak typeof(self)weakSelf = self;
         [_movieView.posterImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",dic[@"images"][@"large"]]] placeholderImage:[UIImage imageNamed:@"透明.png"] options:SDWebImageCacheMemoryOnly |       SDWebImageRefreshCached progress:^(NSInteger receivedSize,NSInteger expectedSize){
@@ -314,8 +310,6 @@
             weakSelf.backgroundImage.image = image;
             weakSelf.movieView.posterImage.userInteractionEnabled = YES;
         }];
-        
-        
         
         _movieView.detailLabel.text = dic[@"summary"];
         _movieView.detailLabel.text = [NSString stringWithFormat:@"%@\n\n主演:",_movieView.detailLabel.text];
@@ -372,7 +366,6 @@
     }else{
         [self getBookDetails];
     }
-    
     [_bookView reloadDetaillabel];
 }
 
@@ -381,7 +374,7 @@
     _backgroundImage.image = [UIImage imageNamed:@"p1910907404.jpg"];
     MBProgressHUD *hub = [[MBProgressHUD alloc] initWithView:self.view];
     [self.view addSubview:hub];
-    hub.labelText = @"网络连接发生错误";
+    hub.labelText = @"请检查网络连接";
     hub.mode = MBProgressHUDModeText;
     [hub showAnimated:YES whileExecutingBlock:^{
         sleep(2);
@@ -390,7 +383,7 @@
     }];
 }
 
-- (void)posterUserInterfactionEnbaledNo{
+- (void)posterImageUserInterfactionEnbaledNo{
     _movieView.posterImage.userInteractionEnabled = NO;
     _bookView.posterImage.userInteractionEnabled = NO;
 }
