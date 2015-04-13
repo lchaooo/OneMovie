@@ -163,7 +163,6 @@
     [_posterImage addGestureRecognizer:panGesture];
     [self addSubview:_posterImage];
     
-    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tap1:)];
     [self bringSubviewToFront:_posterImage];
 
     scrollView.layer.cornerRadius = 10;
@@ -192,7 +191,6 @@
  
     
     [self bringSubviewToFront:_posterImage];
-    [scrollView addGestureRecognizer:tapGesture];
     scrollView.hidden = YES;
     
     _hasBeginAnimation = NO;
@@ -434,44 +432,6 @@ CATransform3D CATransform3DPerspect(CATransform3D t, CGPoint center, float disZ)
 }
 
 
--(void)tap1:(UIPanGestureRecognizer *)recognizer{
-    POPSpringAnimation *leAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPViewSize];
-    leAnimation.springBounciness = 18.0f;
-    leAnimation.dynamicsMass = 2.0f;
-    leAnimation.dynamicsTension = 200;
-    leAnimation.toValue = [NSValue valueWithCGPoint:CGPointMake(_standardSize.width , _standardSize.height )];
-    [scrollView pop_addAnimation:leAnimation forKey:@"leAnimation"];
-    
-    [UIView animateWithDuration:0.2 animations:^{
-        scrollView.frame = CGRectMake( self.bounds.size.width/6, 10 , self.bounds.size.width*2/3, self.bounds.size.width*850/900);
-         _detailLabel.frame = CGRectMake(0, 0, _standardSize.width*1.2-40, _labelheight+20);
-        _blurView.frame = _detailLabel.frame;
-        _nameLabel.alpha =1;
-        _ratingLabel.alpha = 1;
-        _typeLabel.alpha = 1;
-        //NSLog(@"3");
-    }];
-    
-    [UIView animateWithDuration:0.5 animations:^{
-        CATransform3D rotate2 = CATransform3DMakeRotation(M_PI/2, 0, 1, 0);
-        scrollView.layer.transform = CATransform3DPerspect(rotate2, CGPointMake(0, 0), 800);
-    } completion:^(BOOL finished){
-        _posterImage.hidden = NO;
-        scrollView.hidden = YES;
-        CATransform3D rotate1 = CATransform3DMakeRotation(-M_PI/2, 0, 1, 0);
-        _posterImage.layer.transform = CATransform3DPerspect(rotate1, CGPointMake(0, 0), 800);
-        POPSpringAnimation *recoverAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerRotationY];
-        recoverAnimation.springBounciness = 18.0f; //弹簧反弹力度
-        recoverAnimation.dynamicsMass = 2.0f;
-        recoverAnimation.dynamicsTension = 200;
-        recoverAnimation.toValue = @(0);
-        [_posterImage.layer pop_addAnimation:recoverAnimation forKey:@"recoverAnimation"];
-        [self pop_removeAllAnimations];
-    }
-     
-    ];
-    [[NSNotificationCenter defaultCenter]postNotificationName:@"notenableSwitchview" object:nil];
-}
 
 -(void)pan2:(UIPanGestureRecognizer *)recognizer{
     
@@ -512,6 +472,7 @@ CATransform3D CATransform3DPerspect(CATransform3D t, CGPoint center, float disZ)
             [_posterImage.layer pop_addAnimation:recoverAnimation forKey:@"recoverAnimation"];
             
         }];
+        [[NSNotificationCenter defaultCenter]postNotificationName:@"notenableSwitchview" object:nil];
     }
     if ((location.x-self.initialLocation<-50)&(!_hasBeginAnimation)){
         _hasBeginAnimation = YES;
@@ -546,6 +507,7 @@ CATransform3D CATransform3DPerspect(CATransform3D t, CGPoint center, float disZ)
             [_posterImage.layer pop_addAnimation:recoverAnimation forKey:@"recoverAnimation"];
             
         }];
+        [[NSNotificationCenter defaultCenter]postNotificationName:@"notenableSwitchview" object:nil];
     }
 
 }
