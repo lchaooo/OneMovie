@@ -11,6 +11,7 @@
 
 @interface ContentView()
 @property (strong,nonatomic) UIVisualEffectView *blurView;
+@property BOOL hasBeginAnimation;
 @end
 
 @implementation ContentView
@@ -151,11 +152,14 @@
     _posterImage.clipsToBounds = YES;
     
     scrollView.frame = _posterImage.frame;
+    
 
     _standardSize = scrollView.frame.size;
     
     _posterImage.contentMode = UIViewContentModeScaleAspectFill;
     UIPanGestureRecognizer *panGesture   = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(pan1:)];
+    UIPanGestureRecognizer *panGesture2   = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(pan2:)];
+    panGesture2.delegate = self;
     [_posterImage addGestureRecognizer:panGesture];
     [self addSubview:_posterImage];
     
@@ -164,6 +168,7 @@
 
     scrollView.layer.cornerRadius = 10;
     scrollView.backgroundColor = [UIColor clearColor];
+
     
     _blurView = [[UIVisualEffectView alloc] initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleDark]];
     _blurView.layer.cornerRadius = 10;
@@ -175,7 +180,8 @@
     _detailLabel.clipsToBounds = YES;
     _detailLabel.textColor =  [UIColor whiteColor];
     _detailLabel.numberOfLines = 0;
-
+    _detailLabel.userInteractionEnabled = YES;
+    [_detailLabel addGestureRecognizer:panGesture2];
 
     scrollView.delegate = self;
     scrollView.showsVerticalScrollIndicator = NO;
@@ -188,6 +194,8 @@
     [self bringSubviewToFront:_posterImage];
     [scrollView addGestureRecognizer:tapGesture];
     scrollView.hidden = YES;
+    
+    _hasBeginAnimation = NO;
 }
 
 -(void)reloadDetaillabel{
@@ -204,13 +212,7 @@
 -(void)pan1:(UIPanGestureRecognizer *)recognizer{
     CGPoint location = [recognizer locationInView:self];
     
-    //    static float y_coordinate;
-    //    if (y_coordinate != location.y) {
-    //        y_coordinate = location.y;
-    //        NSLog(@"%f",y_coordinate);
-    //    }
-    
-    //获取手指在PageView中的初始坐标
+
     if (recognizer.state == UIGestureRecognizerStateBegan) {
         self.initialLocation = location.x;
         [self bringSubviewToFront:_posterImage];
@@ -225,10 +227,8 @@
     
     CGFloat percent = (M_PI /self.initialLocation);
     
-    if (location.x<=_initialLocation) {
+    if (location.x<=_initialLocation&_initialLocation>=self.frame.size.width/2) {
         if([self isLocation:location InView:self] || location.x<0){
-            
-            
             
             CATransform3D move = CATransform3DMakeTranslation(0, 0, 0.1);
             CATransform3D back = CATransform3DMakeTranslation(0, 0, 0.1);
@@ -283,10 +283,75 @@
                         scrollView.layer.transform = CATransform3DMakeRotation(0 , 0, 1, 0);
                         
                     }];
-                    [self performSelector:@selector(changeScrollViewSize) withObject:nil afterDelay:0.1];
+                    [self performSelector:@selector(changeSomething) withObject:nil afterDelay:0.1];
                     
                 
                     
+                }
+            }
+        }
+    }
+    
+    
+    if (location.x>=_initialLocation&_initialLocation<=self.frame.size.width/2) {
+        if([self isLocation:location InView:self] || location.x<0){
+            
+            CGFloat percent = (M_PI /([UIScreen mainScreen].bounds.size.width-self.initialLocation));
+            
+            CATransform3D move = CATransform3DMakeTranslation(0, 0, 0.1);
+            CATransform3D back = CATransform3DMakeTranslation(0, 0, 0.1);
+            
+            CATransform3D rotate1 = CATransform3DMakeRotation((location.x-self.initialLocation)*percent, 0, 1, 0);
+            CATransform3D rotate2 = CATransform3DMakeRotation(-M_PI+(location.x-self.initialLocation)*percent, 0, 1, 0);
+            
+            CATransform3D mat1 = CATransform3DConcat(CATransform3DConcat(move, rotate1), back);
+            CATransform3D mat2 = CATransform3DConcat(CATransform3DConcat(move, rotate2), back);
+            
+            _posterImage.layer.transform = CATransform3DPerspect(mat1, CGPointMake(0, 0), 800);
+            scrollView.layer.transform = CATransform3DPerspect(mat2, CGPointMake(0, 0), 800);
+            
+            
+            if ((location.x-self.initialLocation)*percent > M_PI_2 ){
+                _posterImage.hidden = YES;
+                scrollView.hidden = NO;
+            }
+            else {
+                _posterImage.hidden = NO;
+                scrollView.hidden = YES;
+            }
+            
+            //当松手的时候，自动复原
+            
+            if (recognizer.state == UIGestureRecognizerStateEnded ||
+                recognizer.state == UIGestureRecognizerStateCancelled) {
+                if ((location.x-self.initialLocation)*percent < M_PI/2) {
+                    POPSpringAnimation *recoverAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerRotationY];
+                    recoverAnimation.springBounciness = 18.0f; //弹簧反弹力度
+                    recoverAnimation.dynamicsMass = 2.0f;
+                    recoverAnimation.dynamicsTension = 200;
+                    recoverAnimation.toValue = @(0);
+                    [_posterImage.layer pop_addAnimation:recoverAnimation forKey:@"recoverAnimation"];
+                    
+                } else {
+                    POPSpringAnimation *exAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPViewSize];
+                    exAnimation.springBounciness = 18.0f;
+                    exAnimation.dynamicsMass = 0.8f;
+                    exAnimation.dynamicsTension = 200;
+                    exAnimation.toValue = [NSValue valueWithCGPoint:CGPointMake(_standardSize.width*1.2 , _standardSize.height*1.6 )];
+                    [scrollView.layer pop_addAnimation:exAnimation forKey:@"exAnimation"];
+                    [UIView animateWithDuration:0.5 animations:^{
+                        _detailLabel.frame = CGRectMake(20, 20, _standardSize.width*1.2-40, _labelheight+20);
+                        _blurView.frame = CGRectMake(_detailLabel.frame.origin.x-10, _detailLabel.frame.origin.y-10, _detailLabel.frame.size.width+20, _detailLabel.frame.size.height+20);
+                    }];
+                    
+                    [UIView animateWithDuration:0.2 animations:^{
+                        _nameLabel.alpha =0;
+                        _ratingLabel.alpha = 0;
+                        _typeLabel.alpha = 0;
+                        scrollView.layer.transform = CATransform3DMakeRotation(0 , 0, 1, 0);
+                        
+                    }];
+                    [self performSelector:@selector(changeSomething) withObject:nil afterDelay:0.1];
                 }
             }
         }
@@ -318,12 +383,12 @@
                     NSLog(@"2");
                 }];
                 [UIView animateWithDuration:0.2 animations:^{
-                    scrollView.layer.transform = CATransform3DMakeRotation(0 , 0, 1, 0);
+                    scrollView.layer.transform = CATransform3DMakeRotation(0 , 0, 1, -M_PI);
                     _nameLabel.alpha =0;
                     _ratingLabel.alpha = 0;
                     _typeLabel.alpha = 0;
                 }];
-                [self performSelector:@selector(changeScrollViewSize) withObject:nil afterDelay:0.1];
+                [self performSelector:@selector(changeSomething) withObject:nil afterDelay:0.1];
                 
             }
 
@@ -334,8 +399,9 @@
     
 }
 
-- (void)changeScrollViewSize{
+- (void)changeSomething{
    [[NSNotificationCenter defaultCenter]postNotificationName:@"enableSwitchview" object:nil];
+    _hasBeginAnimation = NO;
 }
 
 -(BOOL)isLocation:(CGPoint)location InView:(UIView *)view{
@@ -383,7 +449,7 @@ CATransform3D CATransform3DPerspect(CATransform3D t, CGPoint center, float disZ)
         _nameLabel.alpha =1;
         _ratingLabel.alpha = 1;
         _typeLabel.alpha = 1;
-        NSLog(@"3");
+        //NSLog(@"3");
     }];
     
     [UIView animateWithDuration:0.5 animations:^{
@@ -407,6 +473,90 @@ CATransform3D CATransform3DPerspect(CATransform3D t, CGPoint center, float disZ)
     [[NSNotificationCenter defaultCenter]postNotificationName:@"notenableSwitchview" object:nil];
 }
 
+-(void)pan2:(UIPanGestureRecognizer *)recognizer{
+    
+    CGPoint location = [recognizer locationInView:self];
+    if (recognizer.state == UIGestureRecognizerStateBegan) {
+        self.initialLocation = location.x;
+    }
+    if ((location.x-self.initialLocation>50)&(!_hasBeginAnimation)){
+        _hasBeginAnimation = YES;
+        POPSpringAnimation *leAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPViewSize];
+        leAnimation.springBounciness = 18.0f;
+        leAnimation.dynamicsMass = 2.0f;
+        leAnimation.dynamicsTension = 200;
+        leAnimation.toValue = [NSValue valueWithCGPoint:CGPointMake(_standardSize.width , _standardSize.height )];
+        [scrollView pop_addAnimation:leAnimation forKey:@"leAnimation"];
+        
+        [UIView animateWithDuration:0.2 animations:^{
+            scrollView.frame = CGRectMake( self.bounds.size.width/6, 10 , self.bounds.size.width*2/3, self.bounds.size.width*850/900);
+            _detailLabel.frame = CGRectMake(0, 0, _standardSize.width*1.2-40, _labelheight+20);
+            _blurView.frame = _detailLabel.frame;
+            _nameLabel.alpha =1;
+            _ratingLabel.alpha = 1;
+            _typeLabel.alpha = 1;
+        }];
+        [UIView animateWithDuration:0.5 animations:^{
+            CATransform3D rotate2 = CATransform3DMakeRotation(M_PI/2, 0, 1, 0);
+            scrollView.layer.transform = CATransform3DPerspect(rotate2, CGPointMake(0, 0), 800);
+        } completion:^(BOOL finished){
+            _posterImage.hidden = NO;
+            scrollView.hidden = YES;
+            CATransform3D rotate1 = CATransform3DMakeRotation(-M_PI/2, 0, 1, 0);
+            _posterImage.layer.transform = CATransform3DPerspect(rotate1, CGPointMake(0, 0), 800);
+            POPSpringAnimation *recoverAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerRotationY];
+            recoverAnimation.springBounciness = 18.0f; //弹簧反弹力度
+            recoverAnimation.dynamicsMass = 2.0f;
+            recoverAnimation.dynamicsTension = 200;
+            recoverAnimation.toValue = @(0);
+            [_posterImage.layer pop_addAnimation:recoverAnimation forKey:@"recoverAnimation"];
+            
+        }];
+    }
+    if ((location.x-self.initialLocation<-50)&(!_hasBeginAnimation)){
+        _hasBeginAnimation = YES;
+        POPSpringAnimation *leAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPViewSize];
+        leAnimation.springBounciness = 18.0f;
+        leAnimation.dynamicsMass = 2.0f;
+        leAnimation.dynamicsTension = 200;
+        leAnimation.toValue = [NSValue valueWithCGPoint:CGPointMake(_standardSize.width , _standardSize.height )];
+        [scrollView pop_addAnimation:leAnimation forKey:@"leAnimation"];
+        
+        [UIView animateWithDuration:0.2 animations:^{
+            scrollView.frame = CGRectMake( self.bounds.size.width/6, 10 , self.bounds.size.width*2/3, self.bounds.size.width*850/900);
+            _detailLabel.frame = CGRectMake(0, 0, _standardSize.width*1.2-40, _labelheight+20);
+            _blurView.frame = _detailLabel.frame;
+            _nameLabel.alpha =1;
+            _ratingLabel.alpha = 1;
+            _typeLabel.alpha = 1;
+        }];
+        [UIView animateWithDuration:0.5 animations:^{
+            CATransform3D rotate2 = CATransform3DMakeRotation(-M_PI/2, 0, 1, 0);
+            scrollView.layer.transform = CATransform3DPerspect(rotate2, CGPointMake(0, 0), 800);
+        } completion:^(BOOL finished){
+            _posterImage.hidden = NO;
+            scrollView.hidden = YES;
+            CATransform3D rotate1 = CATransform3DMakeRotation(M_PI/2, 0, 1, 0);
+            _posterImage.layer.transform = CATransform3DPerspect(rotate1, CGPointMake(0, 0), 800);
+            POPSpringAnimation *recoverAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerRotationY];
+            recoverAnimation.springBounciness = 18.0f; //弹簧反弹力度
+            recoverAnimation.dynamicsMass = 2.0f;
+            recoverAnimation.dynamicsTension = 200;
+            recoverAnimation.toValue = @(0);
+            [_posterImage.layer pop_addAnimation:recoverAnimation forKey:@"recoverAnimation"];
+            
+        }];
+    }
 
+}
+
+-(BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer{
+    if ([gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]]){
+        CGPoint translation = [(UIPanGestureRecognizer *)gestureRecognizer translationInView:_detailLabel];
+        return fabs(translation.x)>fabs(translation.y);
+    }
+    return YES;
+    
+}
 
 @end

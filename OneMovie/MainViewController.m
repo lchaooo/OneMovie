@@ -51,6 +51,8 @@
 
 - (void)viewDidLoad {
     
+    [[UIApplication sharedApplication]setStatusBarStyle:UIStatusBarStyleLightContent];
+    
     [super viewDidLoad];
     [self becomeFirstResponder];
     
