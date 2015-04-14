@@ -26,7 +26,6 @@
 @property (strong,nonatomic) SwitchView *switchView;
 @property (strong,nonatomic) NSArray *movieViewConstraint;
 @property (strong,nonatomic) NSArray *bookViewConstraint;
-@property BOOL isDetails;
 @property BOOL ableToShake;
 @end
 
@@ -39,7 +38,7 @@
         _store = [[YTKKeyValueStore alloc] initDBWithName:@"details.db"];
         [_store createTableWithName:_tableName];
         _model = [[WebModel alloc] init];
-        _isDetails = NO;
+        _ableToShake = YES;
     }
     return self;
 }
@@ -258,12 +257,12 @@
 
 - (void)enableSwitchview{
     _switchView.userInteractionEnabled = NO;
-    _isDetails = YES;
+    _ableToShake = NO;
 }
 
 - (void)notenableSwitchview{
     _switchView.userInteractionEnabled = YES;
-    _isDetails = NO;
+    _ableToShake = YES;
 }
 
 //发出网络请求
@@ -400,7 +399,7 @@
 }
 
 - (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event{
-    if (!_isDetails && _ableToShake) {
+    if (_ableToShake) {
         if (_switchView.isMovie) {
             [_movieView allViewShake];
             _ableToShake = NO;

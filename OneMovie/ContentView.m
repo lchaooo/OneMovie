@@ -439,7 +439,7 @@ CATransform3D CATransform3DPerspect(CATransform3D t, CGPoint center, float disZ)
     if (recognizer.state == UIGestureRecognizerStateBegan) {
         self.initialLocation = location.x;
     }
-    if ((location.x-self.initialLocation>50)&(!_hasBeginAnimation)){
+    if ((location.x-self.initialLocation>50)&(!_hasBeginAnimation)&(self.initialLocation<=_detailLabel.frame.size.width/2)){
         _hasBeginAnimation = YES;
         POPSpringAnimation *leAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPViewSize];
         leAnimation.springBounciness = 18.0f;
@@ -474,7 +474,7 @@ CATransform3D CATransform3DPerspect(CATransform3D t, CGPoint center, float disZ)
         }];
         [[NSNotificationCenter defaultCenter]postNotificationName:@"notenableSwitchview" object:nil];
     }
-    if ((location.x-self.initialLocation<-50)&(!_hasBeginAnimation)){
+    if ((location.x-self.initialLocation<-50)&(!_hasBeginAnimation)&(self.initialLocation>=_detailLabel.frame.size.width/2)){
         _hasBeginAnimation = YES;
         POPSpringAnimation *leAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPViewSize];
         leAnimation.springBounciness = 18.0f;
@@ -509,7 +509,7 @@ CATransform3D CATransform3DPerspect(CATransform3D t, CGPoint center, float disZ)
         }];
         [[NSNotificationCenter defaultCenter]postNotificationName:@"notenableSwitchview" object:nil];
     }
-
+    [scrollView scrollRectToVisible:_posterImage.frame animated:YES];
 }
 
 -(BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer{
