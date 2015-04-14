@@ -21,4 +21,5 @@
 @property (strong,nonatomic) UILabel *typeLabel;
 
 -(void)reloadDetaillabel;
+- (void)allViewShake;
 @end

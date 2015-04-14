@@ -27,6 +27,7 @@
 @property (strong,nonatomic) NSArray *movieViewConstraint;
 @property (strong,nonatomic) NSArray *bookViewConstraint;
 @property BOOL isDetails;
+@property BOOL ableToShake;
 @end
 
 @implementation MainViewController
@@ -311,6 +312,7 @@
             [weakSelf.movieView.posterImage reveal];
             weakSelf.backgroundImage.image = image;
             weakSelf.movieView.posterImage.userInteractionEnabled = YES;
+            _ableToShake = YES;
         }];
         
         _movieView.detailLabel.text = dic[@"summary"];
@@ -359,6 +361,7 @@
             [weakSelf.bookView.posterImage reveal];
             weakSelf.backgroundImage.image = image;
             weakSelf.bookView.posterImage.userInteractionEnabled = YES;
+            _ableToShake = YES;
         }];
         _bookView.detailLabel.text = dic[@"summary"];
         _bookView.detailLabel.text = [NSString stringWithFormat:@"介绍：%@\n\n作者介绍:",_bookView.detailLabel.text];
@@ -397,11 +400,15 @@
 }
 
 - (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event{
-    if (!_isDetails) {
+    if (!_isDetails && _ableToShake) {
         if (_switchView.isMovie) {
-            [self getMovieIDAndSendRequest];
+            [_movieView allViewShake];
+            _ableToShake = NO;
+            [self performSelector:@selector(getMovieIDAndSendRequest) withObject:nil afterDelay:0.6];
         } else{
-            [_model getBookIDByBookTag];
+            [_bookView allViewShake];
+            _ableToShake = NO;
+            [self performSelector:@selector(getBookDetails) withObject:nil afterDelay:0.6];
         }
     }
 }
