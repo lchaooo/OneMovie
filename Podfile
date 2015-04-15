@@ -3,6 +3,5 @@ pod 'pop'
 pod 'AFNetworking'
 pod 'YTKKeyValueStore'
 pod 'MBProgressHUD'
-pod "RQShineLabel"
 pod "RJImageLoader"
 pod 'SDWebImage'

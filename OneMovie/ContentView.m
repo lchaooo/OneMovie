@@ -509,7 +509,10 @@ CATransform3D CATransform3DPerspect(CATransform3D t, CGPoint center, float disZ)
         }];
         [[NSNotificationCenter defaultCenter]postNotificationName:@"notenableSwitchview" object:nil];
     }
-    [scrollView scrollRectToVisible:_posterImage.frame animated:YES];
+}
+
+-(void)scrollToTop{
+    [scrollView scrollRectToVisible:CGRectMake(0, 0, _posterImage.frame.size.width, _posterImage.frame.size.height) animated:YES];
 }
 
 -(BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer{

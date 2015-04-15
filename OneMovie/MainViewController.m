@@ -261,6 +261,11 @@
 }
 
 - (void)notenableSwitchview{
+    if (_switchView.isMovie){
+        [_movieView scrollToTop];
+    } else{
+        [_bookView scrollToTop];
+    }
     _switchView.userInteractionEnabled = YES;
     _ableToShake = YES;
 }

@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <RQShineLabel.h>
 
 @interface ContentView : UIView <UIScrollViewDelegate,UIGestureRecognizerDelegate>
 @property (strong,nonatomic) UIImageView *posterImage;
@@ -22,4 +21,5 @@
 
 -(void)reloadDetaillabel;
 - (void)allViewShake;
+-(void)scrollToTop;
 @end
