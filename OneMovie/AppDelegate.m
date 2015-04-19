@@ -40,12 +40,9 @@
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-    MainViewController *mainVC = [[MainViewController alloc] init];
-    self.window.rootViewController = mainVC;
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
-    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isTerminated"];
 }
 
 @end
