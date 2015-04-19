@@ -385,10 +385,12 @@
     [self.view addSubview:hub];
     hub.labelText = @"请检查网络连接";
     hub.mode = MBProgressHUDModeText;
+    __weak typeof(self) WeakSelf = self;
     [hub showAnimated:YES whileExecutingBlock:^{
         sleep(2);
     }completionBlock:^{
         [hub removeFromSuperViewOnHide];
+        WeakSelf.ableToShake = YES;
     }];
 }
 
