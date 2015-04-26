@@ -31,18 +31,6 @@
 
 @implementation MainViewController
 
-- (id)init{
-    self = [super init];
-    if (self) {
-        _tableName = @"detailsTable";
-        _store = [[YTKKeyValueStore alloc] initDBWithName:@"details.db"];
-        [_store createTableWithName:_tableName];
-        _model = [[WebModel alloc] init];
-        _ableToShake = YES;
-    }
-    return self;
-}
-
 - (void) viewWillAppear:(BOOL)animated
 {
     [self resignFirstResponder];
@@ -50,36 +38,25 @@
 }
 
 - (void)viewDidLoad {
-    
+    _ableToShake = YES;
     [[UIApplication sharedApplication]setStatusBarStyle:UIStatusBarStyleLightContent];
     
     [super viewDidLoad];
     [self becomeFirstResponder];
     
-    _movieView = [[ContentView alloc] init];
-    _movieView.posterImage.layer.cornerRadius = 10;
     [self.view addSubview:_movieView];
-    
-    _bookView = [[ContentView alloc] init];
-    _bookView.posterImage.userInteractionEnabled = YES;
     [self.view addSubview:_bookView];
-    
-    _switchView = [[SwitchView alloc]init];
-    _switchView.backgroundColor = [UIColor clearColor];
-    _switchView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.view addSubview:_switchView];
     
-    [_switchView addTarget:self action:@selector(valueChanged) forControlEvents:UIControlEventValueChanged];
+
     [self.view bringSubviewToFront:_movieView];
-    
-    [self setUpFrame];
     
     if (_switchView.isMovie) {
         [self showMovieDetails];
     } else{
         [self showBookDetails];
     }
-    
+    [self setUpFrame];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(enableSwitchview) name:@"enableSwitchview" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notenableSwitchview) name:@"notenableSwitchview" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showMovieDetails) name:@"MovieDictionary has been downloaded" object:nil];
@@ -95,7 +72,7 @@
 //autolayout
 - (void)setUpFrame{
     //movieView Center Constraint
-    _movieViewConstraint = @[[NSLayoutConstraint constraintWithItem:_movieView
+    _movieViewConstraint = @[[NSLayoutConstraint constraintWithItem:self.movieView
                                                           attribute:NSLayoutAttributeHeight
                                                           relatedBy:NSLayoutRelationEqual
                                                              toItem:self.view
@@ -419,6 +396,50 @@
     }
 }
 
+#pragma getters and setters
+- (ContentView *)movieView{
+    if (_movieView == nil) {
+        _movieView = [[ContentView alloc] init];
+        _movieView.posterImage.userInteractionEnabled = YES;
+    }
+    return _movieView;
+}
 
+- (ContentView *)bookView{
+    if (_bookView == nil) {
+        _bookView = [[ContentView alloc] init];
+        _bookView.posterImage.userInteractionEnabled = YES;
+    }
+    return _bookView;
+}
+
+- (SwitchView *)switchView{
+    if (_switchView == nil) {
+        _switchView = [[SwitchView alloc]init];
+        _switchView.backgroundColor = [UIColor clearColor];
+        _switchView.translatesAutoresizingMaskIntoConstraints = NO;
+        [_switchView addTarget:self action:@selector(valueChanged) forControlEvents:UIControlEventValueChanged];
+    }
+    return _switchView;
+}
+
+- (NSString *)tableName{
+    return @"detailsTable";
+}
+
+- (YTKKeyValueStore *)store{
+    if (_store == nil) {
+        _store = [[YTKKeyValueStore alloc] initDBWithName:@"details.db"];
+        [_store createTableWithName:_tableName];
+    }
+    return _store;
+}
+
+- (WebModel *)model{
+    if (_model == nil) {
+        _model = [[WebModel alloc] init];
+    }
+    return _model;
+}
 
 @end
