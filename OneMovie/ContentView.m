@@ -569,4 +569,12 @@ CATransform3D CATransform3DPerspect(CATransform3D t, CGPoint center, float disZ)
     [self shakeAnimationForView:_typeLabel];
 }
 
+- (void)show:(Info *)info{
+    _nameLabel.text = info.name;
+    _ratingLabel.text = info.rating;
+    _typeLabel.text = info.type;
+    _detailLabel.text = info.detail;
+    [self reloadDetaillabel];
+}
+
 @end

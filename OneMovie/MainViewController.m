@@ -11,10 +11,11 @@
 #import "ContentView.h"
 #import "SwitchView.h"
 #import <YTKKeyValueStore.h>
-#import <UIImageView+RJLoader.h>
-#import <UIImageView+WebCache.h>
 #import <MBProgressHUD.h>
 #import <POP.h>
+#import "Info.h"
+#import <UIImageView+RJLoader.h>
+#import <UIImageView+WebCache.h>
 
 @interface MainViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundImage;
@@ -47,6 +48,7 @@
 {
     [self resignFirstResponder];
     [super viewWillAppear:animated];
+    
 }
 
 - (void)viewDidLoad {
@@ -75,9 +77,9 @@
     [self setUpFrame];
     
     if (_switchView.isMovie) {
-        [self showMovieDetails];
+        [self getMovieIDAndSendRequest];
     } else{
-        [self showBookDetails];
+        [self getBookDetails];
     }
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(enableSwitchview) name:@"enableSwitchview" object:nil];
@@ -237,7 +239,7 @@
                 [self.view addConstraint:[_movieViewConstraint objectAtIndex:j]];
             }
             [self.view layoutIfNeeded];
-            [self showMovieDetails];
+            //[self showMovieDetails];
         }];
         [self.view bringSubviewToFront:_movieView];
     } else if(!_switchView.isMovie){
@@ -249,7 +251,7 @@
                 [self.view addConstraint:[_bookViewConstraint objectAtIndex:j]];
             }
             [self.view layoutIfNeeded];
-            [self showBookDetails];
+            //[self showBookDetails];
         }];
         [self.view bringSubviewToFront:_bookView];
     }
@@ -285,97 +287,35 @@
 }
 
 //页面显示
-- (void)showMovieDetails{
-    NSDictionary *dic = [_store getObjectById:@"movie" fromTable:_tableName];
-    if (dic) {
-        _movieView.posterImage.userInteractionEnabled = YES;
-        //nameLabel
-        _movieView.nameLabel.text = dic[@"title"];
-    
-        //ratingLabel
-        NSString *rating = [NSString stringWithFormat:@"评分：%@",dic[@"rating"][@"average"]];
-        if ([rating length]>6) {
-            rating = [rating substringToIndex:6];
-        }
-        _movieView.ratingLabel.text = rating;
 
-        //typeLabel
-        NSString *type = @"类型：";
-        for (int i=0; i<[dic[@"genres"] count]; i++) {
-            type = [type stringByAppendingString:[NSString stringWithFormat:@"%@/",[dic[@"genres"] objectAtIndex:i]]];
-        }
-        NSString *realType = [type substringToIndex:[type length]-1];
-        _movieView.typeLabel.text = realType;
-        
-        //poster
-        [_movieView.posterImage startLoaderWithTintColor:[UIColor blackColor]];
-        __weak typeof(self)weakSelf = self;
-        [_movieView.posterImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",dic[@"images"][@"large"]]] placeholderImage:[UIImage imageNamed:@"透明.png"] options:SDWebImageCacheMemoryOnly |       SDWebImageRefreshCached progress:^(NSInteger receivedSize,NSInteger expectedSize){
-            [weakSelf.movieView.posterImage updateImageDownloadProgress:(CGFloat)receivedSize/expectedSize];
-        }completed:^(UIImage *image,NSError *error,SDImageCacheType cacheType,NSURL *imageURL){
-            [weakSelf.movieView.posterImage reveal];
-            weakSelf.backgroundImage.image = image;
-            weakSelf.movieView.posterImage.userInteractionEnabled = YES;
-            _ableToShake = YES;
-        }];
-        
-        _movieView.detailLabel.text = dic[@"summary"];
-        _movieView.detailLabel.text = [NSString stringWithFormat:@"%@\n\n主演:",_movieView.detailLabel.text];
-        for (NSDictionary *castDic in dic[@"casts"]) {
-            _movieView.detailLabel.text = [NSString stringWithFormat:@"%@%@/",_movieView.detailLabel.text,castDic[@"name"]];
-        }
-        _movieView.detailLabel.text = [_movieView.detailLabel.text substringToIndex:[_movieView.detailLabel.text length]-1];
-        _movieView.detailLabel.numberOfLines = 0;
-    }else{
-        [self getMovieIDAndSendRequest];
-    }
-    
-    [_movieView reloadDetaillabel];
+- (void)showMovieDetails{
+    _movieView.posterImage.userInteractionEnabled = YES;
+    [_movieView show:_model.movieInfo];
+    [self changePosterImageOf:_movieView of:_model.movieInfo];
 }
 
-
 - (void)showBookDetails{
-    NSDictionary *dic = [_store getObjectById:@"book" fromTable:_tableName];
-    if (dic) {
-        _bookView.posterImage.userInteractionEnabled = YES;
-        //nameLabel
-        _bookView.nameLabel.text = dic[@"title"];
-        
-        //ratingLabel
-        NSString *rating = [NSString stringWithFormat:@"评分：%@",dic[@"rating"][@"average"]];
-        if ([rating length]>6) {
-            rating = [rating substringToIndex:6];
-        }
-        _bookView.ratingLabel.text = rating;
-        
-        //typeLabel
-        NSString *type = @"类型：";
-        for (int i=0; i<3; i++) {
-            type = [type stringByAppendingString:[NSString stringWithFormat:@"%@/",[dic[@"tags"] objectAtIndex:i][@"name"]]];
-        }
-        NSString *realType = [type substringToIndex:[type length]-1];
-        _bookView.typeLabel.text = realType;
-        
-        //poster
-        [_bookView.posterImage startLoaderWithTintColor:[UIColor blackColor]];
-        __weak typeof(self)weakSelf = self;
-        [_bookView.posterImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",dic[@"images"][@"large"]]] placeholderImage:[UIImage imageNamed:@"透明.png"] options:SDWebImageCacheMemoryOnly |       SDWebImageRefreshCached progress:^(NSInteger receivedSize,NSInteger expectedSize){
-            [weakSelf.bookView.posterImage updateImageDownloadProgress:(CGFloat)receivedSize/expectedSize];
-        }completed:^(UIImage *image,NSError *error,SDImageCacheType cacheType,NSURL *imageURL){
-            [weakSelf.bookView.posterImage reveal];
-            weakSelf.backgroundImage.image = image;
-            weakSelf.bookView.posterImage.userInteractionEnabled = YES;
-            _ableToShake = YES;
-        }];
-        _bookView.detailLabel.text = dic[@"summary"];
-        _bookView.detailLabel.text = [NSString stringWithFormat:@"介绍：%@\n\n作者介绍:",_bookView.detailLabel.text];
-        _bookView.detailLabel.text = [NSString stringWithFormat:@"%@%@/",_bookView.detailLabel.text,dic[@"author_intro"]];
-        _bookView.detailLabel.text = [_bookView.detailLabel.text substringToIndex:[_bookView.detailLabel.text length]-1];
-        _bookView.detailLabel.numberOfLines = 0;
-    }else{
-        [self getBookDetails];
-    }
-    [_bookView reloadDetaillabel];
+    _bookView.posterImage.userInteractionEnabled = YES;
+    [_bookView show:_model.bookInfo];
+    [self changePosterImageOf:_bookView of:_model.bookInfo];
+}
+
+- (void)changePosterImageOf:(ContentView *)contentView of:(Info *)info{
+    //poster
+    [contentView.posterImage startLoaderWithTintColor:[UIColor blackColor]];
+    __weak typeof(self)weakSelf = self;
+    [contentView.posterImage sd_setImageWithURL:info.posterURL
+                               placeholderImage:[UIImage imageNamed:@"透明.png"]
+                                        options:SDWebImageCacheMemoryOnly |       SDWebImageRefreshCached
+                                       progress:^(NSInteger receivedSize,NSInteger expectedSize){
+                                           [contentView.posterImage updateImageDownloadProgress:(CGFloat)receivedSize/expectedSize];
+                                       }
+                                      completed:^(UIImage *image,NSError *error,SDImageCacheType cacheType,NSURL *imageURL){
+                                          [contentView.posterImage reveal];
+                                          weakSelf.backgroundImage.image = image;
+                                          contentView.posterImage.userInteractionEnabled = YES;
+                                          _ableToShake = YES;
+    }];
 }
 
 //显示连接失败提示

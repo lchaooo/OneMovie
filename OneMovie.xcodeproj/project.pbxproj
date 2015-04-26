@@ -11,9 +11,11 @@
 		405906431ACA745400AE509D /* SwitchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 405906421ACA745400AE509D /* SwitchView.m */; };
 		40C69CFD1ACC22050033D420 /* WebModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 40C69CFC1ACC22050033D420 /* WebModel.m */; };
 		9D0D82E91ABD2275009DC6DC /* p1910907404.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9D0D82E81ABD2275009DC6DC /* p1910907404.jpg */; };
+		9D3FABCE1AECFA1700367348 /* KeyValueObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D3FABCD1AECFA1700367348 /* KeyValueObserver.m */; };
 		9D7FFC7B1AD551F70056FDE7 /* s1072541.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9D7FFC7A1AD551F70056FDE7 /* s1072541.jpg */; };
 		9D8C5CE81ABB3A4500B10FD5 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D8C5CE61ABB3A4500B10FD5 /* MainViewController.xib */; };
 		9D92EF101AD915FF00DEEACD /* ContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D92EF0F1AD915FF00DEEACD /* ContentView.m */; };
+		9DA7DE5F1AEBCE5D008B7D91 /* Info.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DA7DE5E1AEBCE5D008B7D91 /* Info.m */; };
 		9DAEF43E1AD94FEF00ECC881 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DAEF43D1AD94FEF00ECC881 /* MainViewController.m */; };
 		9DB3298F1ABDA39E00B70179 /* grayground.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9DB3298E1ABDA39E00B70179 /* grayground.jpg */; };
 		9DB698611ABB38A9009C3283 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DB698601ABB38A9009C3283 /* main.m */; };
@@ -43,11 +45,15 @@
 		6E17B7A7533FA3D6E6C326CE /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		9D0D82E11ABD19EA009DC6DC /* WebModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebModel.h; sourceTree = "<group>"; };
 		9D0D82E81ABD2275009DC6DC /* p1910907404.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = p1910907404.jpg; sourceTree = "<group>"; };
+		9D3FABCC1AECFA1700367348 /* KeyValueObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyValueObserver.h; sourceTree = "<group>"; };
+		9D3FABCD1AECFA1700367348 /* KeyValueObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyValueObserver.m; sourceTree = "<group>"; };
 		9D7FFC7A1AD551F70056FDE7 /* s1072541.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = s1072541.jpg; sourceTree = "<group>"; };
 		9D8C5CE41ABB3A4500B10FD5 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		9D8C5CE61ABB3A4500B10FD5 /* MainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
 		9D92EF0E1AD915FF00DEEACD /* ContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentView.h; sourceTree = "<group>"; };
 		9D92EF0F1AD915FF00DEEACD /* ContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentView.m; sourceTree = "<group>"; };
+		9DA7DE5D1AEBCE5D008B7D91 /* Info.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Info.h; sourceTree = "<group>"; };
+		9DA7DE5E1AEBCE5D008B7D91 /* Info.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Info.m; sourceTree = "<group>"; };
 		9DAEF43D1AD94FEF00ECC881 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		9DB3298E1ABDA39E00B70179 /* grayground.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = grayground.jpg; sourceTree = "<group>"; };
 		9DB6985B1ABB38A9009C3283 /* OneMovie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OneMovie.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -116,6 +122,8 @@
 			children = (
 				9D0D82E11ABD19EA009DC6DC /* WebModel.h */,
 				40C69CFC1ACC22050033D420 /* WebModel.m */,
+				9DA7DE5D1AEBCE5D008B7D91 /* Info.h */,
+				9DA7DE5E1AEBCE5D008B7D91 /* Info.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -156,6 +164,8 @@
 			children = (
 				9DB698621ABB38A9009C3283 /* AppDelegate.h */,
 				9DB698631ABB38A9009C3283 /* AppDelegate.m */,
+				9D3FABCC1AECFA1700367348 /* KeyValueObserver.h */,
+				9D3FABCD1AECFA1700367348 /* KeyValueObserver.m */,
 				9D65584A1ABD377E009A3DD8 /* Views */,
 				9D0D82DF1ABD19B6009DC6DC /* Models */,
 				9D0D82DE1ABD19AD009DC6DC /* Controllers */,
@@ -339,6 +349,8 @@
 			files = (
 				405906431ACA745400AE509D /* SwitchView.m in Sources */,
 				9DAEF43E1AD94FEF00ECC881 /* MainViewController.m in Sources */,
+				9DA7DE5F1AEBCE5D008B7D91 /* Info.m in Sources */,
+				9D3FABCE1AECFA1700367348 /* KeyValueObserver.m in Sources */,
 				40C69CFD1ACC22050033D420 /* WebModel.m in Sources */,
 				9D92EF101AD915FF00DEEACD /* ContentView.m in Sources */,
 				9DB698641ABB38A9009C3283 /* AppDelegate.m in Sources */,
