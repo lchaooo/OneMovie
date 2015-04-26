@@ -31,17 +31,48 @@
 
 @implementation MainViewController
 
-- (void)viewDidLoad {
+- (id)init{
+    self = [super init];
+    if (self) {
+        _tableName = @"detailsTable";
+        _store = [[YTKKeyValueStore alloc] initDBWithName:@"details.db"];
+        [_store createTableWithName:_tableName];
+        _model = [[WebModel alloc] init];
+        _ableToShake = YES;
+    }
+    return self;
+}
 
+- (void) viewWillAppear:(BOOL)animated
+{
+    [self resignFirstResponder];
+    [super viewWillAppear:animated];
+}
+
+- (void)viewDidLoad {
+    
     [[UIApplication sharedApplication]setStatusBarStyle:UIStatusBarStyleLightContent];
     
     [super viewDidLoad];
     [self becomeFirstResponder];
     
+    _movieView = [[ContentView alloc] init];
+    _movieView.posterImage.layer.cornerRadius = 10;
     [self.view addSubview:_movieView];
+    
+    _bookView = [[ContentView alloc] init];
+    _bookView.posterImage.userInteractionEnabled = YES;
     [self.view addSubview:_bookView];
+    
+    _switchView = [[SwitchView alloc]init];
+    _switchView.backgroundColor = [UIColor clearColor];
+    _switchView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.view addSubview:_switchView];
+    
+    [_switchView addTarget:self action:@selector(valueChanged) forControlEvents:UIControlEventValueChanged];
     [self.view bringSubviewToFront:_movieView];
+    
+    [self setUpFrame];
     
     if (_switchView.isMovie) {
         [self showMovieDetails];
@@ -56,10 +87,76 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showNoticeOfFailure) name:@"Net is not working" object:nil];
 }
 
-- (void) viewWillAppear:(BOOL)animated
-{
-    [self resignFirstResponder];
-    [super viewWillAppear:animated];
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+}
+
+#pragma CustomMethods
+//autolayout
+- (void)setUpFrame{
+    //movieView Center Constraint
+    _movieViewConstraint = @[[NSLayoutConstraint constraintWithItem:_movieView
+                                                          attribute:NSLayoutAttributeHeight
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:self.view
+                                                          attribute:NSLayoutAttributeHeight
+                                                         multiplier:0.8
+                                                           constant:0],
+                             [NSLayoutConstraint constraintWithItem:_movieView
+                                                          attribute:NSLayoutAttributeBottom
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:self.view
+                                                          attribute:NSLayoutAttributeBottom
+                                                         multiplier:1.0
+                                                           constant:0],
+                             [NSLayoutConstraint constraintWithItem:_movieView
+                                                          attribute:NSLayoutAttributeLeft
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:self.view
+                                                          attribute:NSLayoutAttributeLeft
+                                                         multiplier:1.0
+                                                           constant:0],
+                             [NSLayoutConstraint constraintWithItem:_movieView
+                                                          attribute:NSLayoutAttributeRight
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:self.view
+                                                          attribute:NSLayoutAttributeRight
+                                                         multiplier:1.0
+                                                           constant:0]
+                             ];
+    
+    //movieView Center Constraint
+    _bookViewConstraint = @[[NSLayoutConstraint constraintWithItem:_bookView
+                                                          attribute:NSLayoutAttributeHeight
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:self.view
+                                                          attribute:NSLayoutAttributeHeight
+                                                         multiplier:0.8
+                                                           constant:0],
+                             [NSLayoutConstraint constraintWithItem:_bookView
+                                                          attribute:NSLayoutAttributeBottom
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:self.view
+                                                          attribute:NSLayoutAttributeBottom
+                                                         multiplier:1.0
+                                                           constant:0],
+                             [NSLayoutConstraint constraintWithItem:_bookView
+                                                          attribute:NSLayoutAttributeLeft
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:self.view
+                                                          attribute:NSLayoutAttributeLeft
+                                                         multiplier:1.0
+                                                           constant:0],
+                             [NSLayoutConstraint constraintWithItem:_bookView
+                                                          attribute:NSLayoutAttributeRight
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:self.view
+                                                          attribute:NSLayoutAttributeRight
+                                                         multiplier:1.0
+                                                           constant:0]
+                             ];
+    
+    //switchView Constraint
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_switchView
                                                           attribute:NSLayoutAttributeCenterY
                                                           relatedBy:NSLayoutRelationEqual
@@ -129,11 +226,6 @@
                                                            constant:0]];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
-
-#pragma CustomMethods
 - (void)valueChanged{
     NSLog(_switchView.isMovie? @"yes" :@"no");
     if (_switchView.isMovie) {
@@ -327,104 +419,6 @@
     }
 }
 
-#pragma getters and setters
-- (NSString *)tableName{
-    return @"detailsTable";
-}
 
-- (YTKKeyValueStore *)store{
-    _store = [[YTKKeyValueStore alloc] initDBWithName:@"details.db"];
-    [_store createTableWithName:_tableName];
-    return _store;
-}
-
-- (WebModel *)model{
-    _model = [[WebModel alloc] init];
-    return _model;
-}
-
-- (ContentView *)bookView{
-    _bookView = [[ContentView alloc] init];
-    _bookView.posterImage.userInteractionEnabled = YES;
-    return _bookView;
-}
-
-- (ContentView *)movieView{
-    _movieView = [[ContentView alloc] init];
-    _movieView.posterImage.userInteractionEnabled = YES;
-    return _movieView;
-}
-
-- (SwitchView *)switchView{
-    SwitchView *switchV = [[SwitchView alloc] init];
-    switchV.backgroundColor = [UIColor clearColor];
-    switchV.translatesAutoresizingMaskIntoConstraints = NO;
-    [switchV addTarget:self action:@selector(valueChanged) forControlEvents:UIControlEventValueChanged];
-    return switchV;
-}
-
-- (NSArray *)movieViewConstraint{
-    return @[[NSLayoutConstraint constraintWithItem:_movieView
-                                          attribute:NSLayoutAttributeHeight
-                                          relatedBy:NSLayoutRelationEqual
-                                             toItem:self.view
-                                          attribute:NSLayoutAttributeHeight
-                                         multiplier:0.8
-                                           constant:0],
-             [NSLayoutConstraint constraintWithItem:_movieView
-                                          attribute:NSLayoutAttributeBottom
-                                          relatedBy:NSLayoutRelationEqual
-                                             toItem:self.view
-                                          attribute:NSLayoutAttributeBottom
-                                         multiplier:1.0
-                                           constant:0],
-             [NSLayoutConstraint constraintWithItem:_movieView
-                                          attribute:NSLayoutAttributeLeft
-                                          relatedBy:NSLayoutRelationEqual
-                                             toItem:self.view
-                                          attribute:NSLayoutAttributeLeft
-                                         multiplier:1.0
-                                           constant:0],
-             [NSLayoutConstraint constraintWithItem:_movieView
-                                          attribute:NSLayoutAttributeRight
-                                          relatedBy:NSLayoutRelationEqual
-                                             toItem:self.view
-                                          attribute:NSLayoutAttributeRight
-                                         multiplier:1.0
-                                           constant:0]
-             ];
-}
-
-- (NSArray *)bookViewConstraint{
-    return @[[NSLayoutConstraint constraintWithItem:_bookView
-                                          attribute:NSLayoutAttributeHeight
-                                          relatedBy:NSLayoutRelationEqual
-                                             toItem:self.view
-                                          attribute:NSLayoutAttributeHeight
-                                         multiplier:0.8
-                                           constant:0],
-             [NSLayoutConstraint constraintWithItem:_bookView
-                                          attribute:NSLayoutAttributeBottom
-                                          relatedBy:NSLayoutRelationEqual
-                                             toItem:self.view
-                                          attribute:NSLayoutAttributeBottom
-                                         multiplier:1.0
-                                           constant:0],
-             [NSLayoutConstraint constraintWithItem:_bookView
-                                          attribute:NSLayoutAttributeLeft
-                                          relatedBy:NSLayoutRelationEqual
-                                             toItem:self.view
-                                          attribute:NSLayoutAttributeLeft
-                                         multiplier:1.0
-                                           constant:0],
-             [NSLayoutConstraint constraintWithItem:_bookView
-                                          attribute:NSLayoutAttributeRight
-                                          relatedBy:NSLayoutRelationEqual
-                                             toItem:self.view
-                                          attribute:NSLayoutAttributeRight
-                                         multiplier:1.0
-                                           constant:0]
-             ];
-}
 
 @end

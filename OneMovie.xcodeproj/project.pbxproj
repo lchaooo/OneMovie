@@ -23,7 +23,6 @@
 		9DB6987B1ABB38A9009C3283 /* OneMovieTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DB6987A1ABB38A9009C3283 /* OneMovieTests.m */; };
 		9DD6657A1ABD62BA008E7125 /* 透明.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DD665791ABD62BA008E7125 /* 透明.png */; };
 		9DFD426F1ABC7F6100448029 /* MovieID.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9DFD426E1ABC7F6100448029 /* MovieID.plist */; };
-		9DFE0B6F1AED25FB00C61FAF /* Info.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DFE0B6E1AED25FB00C61FAF /* Info.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,8 +62,6 @@
 		9DB6987A1ABB38A9009C3283 /* OneMovieTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OneMovieTests.m; sourceTree = "<group>"; };
 		9DD665791ABD62BA008E7125 /* 透明.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "透明.png"; sourceTree = "<group>"; };
 		9DFD426E1ABC7F6100448029 /* MovieID.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = MovieID.plist; sourceTree = "<group>"; };
-		9DFE0B6D1AED25FB00C61FAF /* Info.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Info.h; sourceTree = "<group>"; };
-		9DFE0B6E1AED25FB00C61FAF /* Info.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Info.m; sourceTree = "<group>"; };
 		DC26DA788150665D3AB319B6 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -119,8 +116,6 @@
 			children = (
 				9D0D82E11ABD19EA009DC6DC /* WebModel.h */,
 				40C69CFC1ACC22050033D420 /* WebModel.m */,
-				9DFE0B6D1AED25FB00C61FAF /* Info.h */,
-				9DFE0B6E1AED25FB00C61FAF /* Info.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -344,7 +339,6 @@
 			files = (
 				405906431ACA745400AE509D /* SwitchView.m in Sources */,
 				9DAEF43E1AD94FEF00ECC881 /* MainViewController.m in Sources */,
-				9DFE0B6F1AED25FB00C61FAF /* Info.m in Sources */,
 				40C69CFD1ACC22050033D420 /* WebModel.m in Sources */,
 				9D92EF101AD915FF00DEEACD /* ContentView.m in Sources */,
 				9DB698641ABB38A9009C3283 /* AppDelegate.m in Sources */,
