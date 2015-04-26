@@ -5,4 +5,3 @@ pod 'YTKKeyValueStore'
 pod 'MBProgressHUD'
 pod "RJImageLoader"
 pod 'SDWebImage'
-pod 'KVOController'
