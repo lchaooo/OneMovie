@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Info.h"
 
 @interface ContentView : UIView <UIScrollViewDelegate,UIGestureRecognizerDelegate>
 @property (strong,nonatomic) UIImageView *posterImage;
@@ -19,7 +20,8 @@
 @property (strong,nonatomic) UILabel *ratingLabel;
 @property (strong,nonatomic) UILabel *typeLabel;
 
--(void)reloadDetaillabel;
+- (void)reloadDetaillabel;
 - (void)allViewShake;
--(void)scrollToTop;
+- (void)scrollToTop;
+- (void)showInfo:(Info *)info;
 @end

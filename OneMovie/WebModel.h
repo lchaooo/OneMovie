@@ -7,9 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Info.h"
 
 @interface WebModel : NSObject
-
+@property (strong,nonatomic) Info *movieInfo;
+@property (strong,nonatomic) Info *bookInfo;
 - (void)getMovieDictionaryByMovieID:(NSString *)ID;
 - (void)getBookIDByBookTag;
 

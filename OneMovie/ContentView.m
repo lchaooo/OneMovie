@@ -8,6 +8,7 @@
 
 #import "ContentView.h"
 #import <POP.h>
+#import "Info.h"
 
 @interface ContentView()
 @property (strong,nonatomic) UIVisualEffectView *blurView;
@@ -567,6 +568,13 @@ CATransform3D CATransform3DPerspect(CATransform3D t, CGPoint center, float disZ)
     [self shakeAnimationForView:_nameLabel];
     [self shakeAnimationForView:_ratingLabel];
     [self shakeAnimationForView:_typeLabel];
+}
+
+- (void)showInfo:(Info *)info{
+    _nameLabel.text = info.name;
+    _ratingLabel.text = info.rating;
+    _typeLabel.text = info.type;
+    _detailLabel.text = info.details;
 }
 
 @end
