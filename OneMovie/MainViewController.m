@@ -31,50 +31,19 @@
 
 @implementation MainViewController
 
-- (id)init{
-    self = [super init];
-    if (self) {
-        _tableName = @"detailsTable";
-        _store = [[YTKKeyValueStore alloc] initDBWithName:@"details.db"];
-        [_store createTableWithName:_tableName];
-        _model = [[WebModel alloc] init];
-        _ableToShake = YES;
-    }
-    return self;
-}
-
-- (void) viewWillAppear:(BOOL)animated
-{
-    [self resignFirstResponder];
-    [super viewWillAppear:animated];
-}
-
 - (void)viewDidLoad {
-    
+    self.ableToShake = YES;
     [[UIApplication sharedApplication]setStatusBarStyle:UIStatusBarStyleLightContent];
     
     [super viewDidLoad];
     [self becomeFirstResponder];
     
-    _movieView = [[ContentView alloc] init];
-    _movieView.posterImage.layer.cornerRadius = 10;
-    [self.view addSubview:_movieView];
+    [self.view addSubview:self.movieView];
+    [self.view addSubview:self.bookView];
+    [self.view addSubview:self.switchView];
+    [self.view bringSubviewToFront:self.movieView];
     
-    _bookView = [[ContentView alloc] init];
-    _bookView.posterImage.userInteractionEnabled = YES;
-    [self.view addSubview:_bookView];
-    
-    _switchView = [[SwitchView alloc]init];
-    _switchView.backgroundColor = [UIColor clearColor];
-    _switchView.translatesAutoresizingMaskIntoConstraints = NO;
-    [self.view addSubview:_switchView];
-    
-    [_switchView addTarget:self action:@selector(valueChanged) forControlEvents:UIControlEventValueChanged];
-    [self.view bringSubviewToFront:_movieView];
-    
-    [self setUpFrame];
-    
-    if (_switchView.isMovie) {
+    if (self.switchView.isMovie) {
         [self showMovieDetails];
     } else{
         [self showBookDetails];
@@ -87,77 +56,10 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showNoticeOfFailure) name:@"Net is not working" object:nil];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
-
-#pragma CustomMethods
-//autolayout
-- (void)setUpFrame{
-    //movieView Center Constraint
-    _movieViewConstraint = @[[NSLayoutConstraint constraintWithItem:_movieView
-                                                          attribute:NSLayoutAttributeHeight
-                                                          relatedBy:NSLayoutRelationEqual
-                                                             toItem:self.view
-                                                          attribute:NSLayoutAttributeHeight
-                                                         multiplier:0.8
-                                                           constant:0],
-                             [NSLayoutConstraint constraintWithItem:_movieView
-                                                          attribute:NSLayoutAttributeBottom
-                                                          relatedBy:NSLayoutRelationEqual
-                                                             toItem:self.view
-                                                          attribute:NSLayoutAttributeBottom
-                                                         multiplier:1.0
-                                                           constant:0],
-                             [NSLayoutConstraint constraintWithItem:_movieView
-                                                          attribute:NSLayoutAttributeLeft
-                                                          relatedBy:NSLayoutRelationEqual
-                                                             toItem:self.view
-                                                          attribute:NSLayoutAttributeLeft
-                                                         multiplier:1.0
-                                                           constant:0],
-                             [NSLayoutConstraint constraintWithItem:_movieView
-                                                          attribute:NSLayoutAttributeRight
-                                                          relatedBy:NSLayoutRelationEqual
-                                                             toItem:self.view
-                                                          attribute:NSLayoutAttributeRight
-                                                         multiplier:1.0
-                                                           constant:0]
-                             ];
-    
-    //movieView Center Constraint
-    _bookViewConstraint = @[[NSLayoutConstraint constraintWithItem:_bookView
-                                                          attribute:NSLayoutAttributeHeight
-                                                          relatedBy:NSLayoutRelationEqual
-                                                             toItem:self.view
-                                                          attribute:NSLayoutAttributeHeight
-                                                         multiplier:0.8
-                                                           constant:0],
-                             [NSLayoutConstraint constraintWithItem:_bookView
-                                                          attribute:NSLayoutAttributeBottom
-                                                          relatedBy:NSLayoutRelationEqual
-                                                             toItem:self.view
-                                                          attribute:NSLayoutAttributeBottom
-                                                         multiplier:1.0
-                                                           constant:0],
-                             [NSLayoutConstraint constraintWithItem:_bookView
-                                                          attribute:NSLayoutAttributeLeft
-                                                          relatedBy:NSLayoutRelationEqual
-                                                             toItem:self.view
-                                                          attribute:NSLayoutAttributeLeft
-                                                         multiplier:1.0
-                                                           constant:0],
-                             [NSLayoutConstraint constraintWithItem:_bookView
-                                                          attribute:NSLayoutAttributeRight
-                                                          relatedBy:NSLayoutRelationEqual
-                                                             toItem:self.view
-                                                          attribute:NSLayoutAttributeRight
-                                                         multiplier:1.0
-                                                           constant:0]
-                             ];
-    
-    //switchView Constraint
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_switchView
+- (void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.switchView
                                                           attribute:NSLayoutAttributeCenterY
                                                           relatedBy:NSLayoutRelationEqual
                                                              toItem:self.view
@@ -165,7 +67,7 @@
                                                          multiplier:0.25
                                                            constant:0]];
     
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_switchView
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.switchView
                                                           attribute:NSLayoutAttributeCenterX
                                                           relatedBy:NSLayoutRelationEqual
                                                              toItem:self.view
@@ -173,7 +75,7 @@
                                                          multiplier:1.0
                                                            constant:0]];
     
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_switchView
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.switchView
                                                           attribute:NSLayoutAttributeWidth
                                                           relatedBy:NSLayoutRelationEqual
                                                              toItem:self.view
@@ -181,7 +83,7 @@
                                                          multiplier:0.6
                                                            constant:50]];
     
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_switchView
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.switchView
                                                           attribute:NSLayoutAttributeHeight
                                                           relatedBy:NSLayoutRelationEqual
                                                              toItem:self.view
@@ -190,84 +92,90 @@
                                                            constant:0]];
     
     for (int i = 0; i<4; ++i) {
-        [self.view addConstraint:[_movieViewConstraint objectAtIndex:i]];
+        [self.view addConstraint:[self.movieViewConstraint objectAtIndex:i]];
     }
     
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_bookView
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.bookView
                                                           attribute:NSLayoutAttributeCenterY
                                                           relatedBy:NSLayoutRelationEqual
-                                                             toItem:_movieView
+                                                             toItem:self.movieView
                                                           attribute:NSLayoutAttributeCenterY
                                                          multiplier:1.0
                                                            constant:0]];
     
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_bookView
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.bookView
                                                           attribute:NSLayoutAttributeLeft
                                                           relatedBy:NSLayoutRelationEqual
-                                                             toItem:_movieView
+                                                             toItem:self.movieView
                                                           attribute:NSLayoutAttributeRight
                                                          multiplier:1.0
                                                            constant:0]];
     
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_bookView
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.bookView
                                                           attribute:NSLayoutAttributeWidth
                                                           relatedBy:NSLayoutRelationEqual
-                                                             toItem:_movieView
+                                                             toItem:self.movieView
                                                           attribute:NSLayoutAttributeWidth
                                                          multiplier:1.0
                                                            constant:0]];
     
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_bookView
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.bookView
                                                           attribute:NSLayoutAttributeHeight
                                                           relatedBy:NSLayoutRelationEqual
-                                                             toItem:_movieView
+                                                             toItem:self.movieView
                                                           attribute:NSLayoutAttributeHeight
                                                          multiplier:1.0
                                                            constant:0]];
 }
 
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+}
+
+#pragma CustomMethods
+
 - (void)valueChanged{
-    NSLog(_switchView.isMovie? @"yes" :@"no");
-    if (_switchView.isMovie) {
+    NSLog(self.switchView.isMovie? @"yes" :@"no");
+    if (self.switchView.isMovie) {
         [UIView animateWithDuration:0.5 animations:^{
             for (int i = 0; i<4; ++i) {
-                [self.view removeConstraint:[_bookViewConstraint objectAtIndex:i]];
+                [self.view removeConstraint:[self.bookViewConstraint objectAtIndex:i]];
             }
             for (int j = 0; j<4; ++j) {
-                [self.view addConstraint:[_movieViewConstraint objectAtIndex:j]];
+                [self.view addConstraint:[self.movieViewConstraint objectAtIndex:j]];
             }
             [self.view layoutIfNeeded];
             [self showMovieDetails];
         }];
-        [self.view bringSubviewToFront:_movieView];
-    } else if(!_switchView.isMovie){
+        [self.view bringSubviewToFront:self.movieView];
+    } else if(!self.switchView.isMovie){
         [UIView animateWithDuration:0.5 animations:^{
             for (int i = 0; i<4; ++i) {
-                [self.view removeConstraint:[_movieViewConstraint objectAtIndex:i]];
+                [self.view removeConstraint:[self.movieViewConstraint objectAtIndex:i]];
             }
             for (int j = 0; j<4; ++j) {
-                [self.view addConstraint:[_bookViewConstraint objectAtIndex:j]];
+                [self.view addConstraint:[self.bookViewConstraint objectAtIndex:j]];
             }
             [self.view layoutIfNeeded];
             [self showBookDetails];
         }];
-        [self.view bringSubviewToFront:_bookView];
+        [self.view bringSubviewToFront:self.bookView];
     }
 }
 
 - (void)enableSwitchview{
-    _switchView.userInteractionEnabled = NO;
-    _ableToShake = NO;
+    self.switchView.userInteractionEnabled = NO;
+    self.ableToShake = NO;
 }
 
 - (void)notenableSwitchview{
-    if (_switchView.isMovie){
-        [_movieView scrollToTop];
+    if (self.switchView.isMovie){
+        [self.movieView scrollToTop];
     } else{
-        [_bookView scrollToTop];
+        [self.bookView scrollToTop];
     }
-    _switchView.userInteractionEnabled = YES;
-    _ableToShake = YES;
+    self.switchView.userInteractionEnabled = YES;
+    self.ableToShake = YES;
 }
 
 //发出网络请求
@@ -275,29 +183,29 @@
     NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"MovieID" ofType:@"plist"];
     NSMutableArray *movieIDArray = [[NSMutableArray alloc] initWithContentsOfFile:plistPath];
     NSString *ID = [movieIDArray objectAtIndex:arc4random()%249];
-    [_model getMovieDictionaryByMovieID:ID];
+    [self.model getMovieDictionaryByMovieID:ID];
     [self posterImageUserInterfactionEnbaledNo];
 }
 
 - (void)getBookDetails{
-    [_model getBookIDByBookTag];
+    [self.model getBookIDByBookTag];
     [self posterImageUserInterfactionEnbaledNo];
 }
 
 //页面显示
 - (void)showMovieDetails{
-    NSDictionary *dic = [_store getObjectById:@"movie" fromTable:_tableName];
+    NSDictionary *dic = [self.store getObjectById:@"movie" fromTable:self.tableName];
     if (dic) {
-        _movieView.posterImage.userInteractionEnabled = YES;
+        self.movieView.posterImage.userInteractionEnabled = YES;
         //nameLabel
-        _movieView.nameLabel.text = dic[@"title"];
+        self.movieView.nameLabel.text = dic[@"title"];
     
         //ratingLabel
         NSString *rating = [NSString stringWithFormat:@"评分：%@",dic[@"rating"][@"average"]];
         if ([rating length]>6) {
             rating = [rating substringToIndex:6];
         }
-        _movieView.ratingLabel.text = rating;
+        self.movieView.ratingLabel.text = rating;
 
         //typeLabel
         NSString *type = @"类型：";
@@ -305,48 +213,48 @@
             type = [type stringByAppendingString:[NSString stringWithFormat:@"%@/",[dic[@"genres"] objectAtIndex:i]]];
         }
         NSString *realType = [type substringToIndex:[type length]-1];
-        _movieView.typeLabel.text = realType;
+        self.movieView.typeLabel.text = realType;
         
         //poster
-        [_movieView.posterImage startLoaderWithTintColor:[UIColor blackColor]];
+        [self.movieView.posterImage startLoaderWithTintColor:[UIColor blackColor]];
         __weak typeof(self)weakSelf = self;
-        [_movieView.posterImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",dic[@"images"][@"large"]]] placeholderImage:[UIImage imageNamed:@"透明.png"] options:SDWebImageCacheMemoryOnly |       SDWebImageRefreshCached progress:^(NSInteger receivedSize,NSInteger expectedSize){
+        [self.movieView.posterImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",dic[@"images"][@"large"]]] placeholderImage:[UIImage imageNamed:@"透明.png"] options:SDWebImageCacheMemoryOnly |       SDWebImageRefreshCached progress:^(NSInteger receivedSize,NSInteger expectedSize){
             [weakSelf.movieView.posterImage updateImageDownloadProgress:(CGFloat)receivedSize/expectedSize];
         }completed:^(UIImage *image,NSError *error,SDImageCacheType cacheType,NSURL *imageURL){
             [weakSelf.movieView.posterImage reveal];
             weakSelf.backgroundImage.image = image;
             weakSelf.movieView.posterImage.userInteractionEnabled = YES;
-            _ableToShake = YES;
+            self.ableToShake = YES;
         }];
         
-        _movieView.detailLabel.text = dic[@"summary"];
-        _movieView.detailLabel.text = [NSString stringWithFormat:@"%@\n\n主演:",_movieView.detailLabel.text];
+        self.movieView.detailLabel.text = dic[@"summary"];
+        self.movieView.detailLabel.text = [NSString stringWithFormat:@"%@\n\n主演:",self.movieView.detailLabel.text];
         for (NSDictionary *castDic in dic[@"casts"]) {
-            _movieView.detailLabel.text = [NSString stringWithFormat:@"%@%@/",_movieView.detailLabel.text,castDic[@"name"]];
+            self.movieView.detailLabel.text = [NSString stringWithFormat:@"%@%@/",self.movieView.detailLabel.text,castDic[@"name"]];
         }
-        _movieView.detailLabel.text = [_movieView.detailLabel.text substringToIndex:[_movieView.detailLabel.text length]-1];
-        _movieView.detailLabel.numberOfLines = 0;
+        self.movieView.detailLabel.text = [self.movieView.detailLabel.text substringToIndex:[self.movieView.detailLabel.text length]-1];
+        self.movieView.detailLabel.numberOfLines = 0;
     }else{
         [self getMovieIDAndSendRequest];
     }
     
-    [_movieView reloadDetaillabel];
+    [self.movieView reloadDetaillabel];
 }
 
 
 - (void)showBookDetails{
-    NSDictionary *dic = [_store getObjectById:@"book" fromTable:_tableName];
+    NSDictionary *dic = [self.store getObjectById:@"book" fromTable:self.tableName];
     if (dic) {
-        _bookView.posterImage.userInteractionEnabled = YES;
+        self.bookView.posterImage.userInteractionEnabled = YES;
         //nameLabel
-        _bookView.nameLabel.text = dic[@"title"];
+        self.bookView.nameLabel.text = dic[@"title"];
         
         //ratingLabel
         NSString *rating = [NSString stringWithFormat:@"评分：%@",dic[@"rating"][@"average"]];
         if ([rating length]>6) {
             rating = [rating substringToIndex:6];
         }
-        _bookView.ratingLabel.text = rating;
+        self.bookView.ratingLabel.text = rating;
         
         //typeLabel
         NSString *type = @"类型：";
@@ -354,28 +262,28 @@
             type = [type stringByAppendingString:[NSString stringWithFormat:@"%@/",[dic[@"tags"] objectAtIndex:i][@"name"]]];
         }
         NSString *realType = [type substringToIndex:[type length]-1];
-        _bookView.typeLabel.text = realType;
+        self.bookView.typeLabel.text = realType;
         
         //poster
-        [_bookView.posterImage startLoaderWithTintColor:[UIColor blackColor]];
+        [self.bookView.posterImage startLoaderWithTintColor:[UIColor blackColor]];
         __weak typeof(self)weakSelf = self;
-        [_bookView.posterImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",dic[@"images"][@"large"]]] placeholderImage:[UIImage imageNamed:@"透明.png"] options:SDWebImageCacheMemoryOnly |       SDWebImageRefreshCached progress:^(NSInteger receivedSize,NSInteger expectedSize){
+        [self.bookView.posterImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",dic[@"images"][@"large"]]] placeholderImage:[UIImage imageNamed:@"透明.png"] options:SDWebImageCacheMemoryOnly |       SDWebImageRefreshCached progress:^(NSInteger receivedSize,NSInteger expectedSize){
             [weakSelf.bookView.posterImage updateImageDownloadProgress:(CGFloat)receivedSize/expectedSize];
         }completed:^(UIImage *image,NSError *error,SDImageCacheType cacheType,NSURL *imageURL){
             [weakSelf.bookView.posterImage reveal];
             weakSelf.backgroundImage.image = image;
             weakSelf.bookView.posterImage.userInteractionEnabled = YES;
-            _ableToShake = YES;
+            self.ableToShake = YES;
         }];
-        _bookView.detailLabel.text = dic[@"summary"];
-        _bookView.detailLabel.text = [NSString stringWithFormat:@"介绍：%@\n\n作者介绍:",_bookView.detailLabel.text];
-        _bookView.detailLabel.text = [NSString stringWithFormat:@"%@%@/",_bookView.detailLabel.text,dic[@"author_intro"]];
-        _bookView.detailLabel.text = [_bookView.detailLabel.text substringToIndex:[_bookView.detailLabel.text length]-1];
-        _bookView.detailLabel.numberOfLines = 0;
+        self.bookView.detailLabel.text = dic[@"summary"];
+        self.bookView.detailLabel.text = [NSString stringWithFormat:@"介绍：%@\n\n作者介绍:",self.bookView.detailLabel.text];
+        self.bookView.detailLabel.text = [NSString stringWithFormat:@"%@%@/",self.bookView.detailLabel.text,dic[@"author_intro"]];
+        self.bookView.detailLabel.text = [self.bookView.detailLabel.text substringToIndex:[self.bookView.detailLabel.text length]-1];
+        self.bookView.detailLabel.numberOfLines = 0;
     }else{
         [self getBookDetails];
     }
-    [_bookView reloadDetaillabel];
+    [self.bookView reloadDetaillabel];
 }
 
 //显示连接失败提示
@@ -395,8 +303,8 @@
 }
 
 - (void)posterImageUserInterfactionEnbaledNo{
-    _movieView.posterImage.userInteractionEnabled = NO;
-    _bookView.posterImage.userInteractionEnabled = NO;
+    self.movieView.posterImage.userInteractionEnabled = NO;
+    self.bookView.posterImage.userInteractionEnabled = NO;
 }
 
 #pragma shake
@@ -406,19 +314,134 @@
 }
 
 - (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event{
-    if (_ableToShake) {
-        if (_switchView.isMovie) {
-            [_movieView allViewShake];
-            _ableToShake = NO;
+    if (self.ableToShake) {
+        if (self.switchView.isMovie) {
+            [self.movieView allViewShake];
+            self.ableToShake = NO;
             [self performSelector:@selector(getMovieIDAndSendRequest) withObject:nil afterDelay:0.6];
         } else{
-            [_bookView allViewShake];
-            _ableToShake = NO;
+            [self.bookView allViewShake];
+            self.ableToShake = NO;
             [self performSelector:@selector(getBookDetails) withObject:nil afterDelay:0.6];
         }
     }
 }
 
+#pragma getters and setters
 
+- (ContentView *)movieView{
+    if (_movieView == nil) {
+        _movieView = [[ContentView alloc] init];
+        _movieView.posterImage.userInteractionEnabled = YES;
+    }
+    return _movieView;
+}
+
+- (ContentView *)bookView{
+    if (_bookView == nil) {
+        _bookView = [[ContentView alloc] init];
+        _bookView.posterImage.userInteractionEnabled = YES;
+    }
+    return _bookView;
+}
+
+- (SwitchView *)switchView{
+    if (_switchView == nil) {
+        _switchView = [[SwitchView alloc]init];
+        _switchView.backgroundColor = [UIColor clearColor];
+        _switchView.translatesAutoresizingMaskIntoConstraints = NO;
+        [_switchView addTarget:self action:@selector(valueChanged) forControlEvents:UIControlEventValueChanged];
+    }
+    return _switchView;
+}
+
+- (NSString *)tableName{
+    return @"detailsTable";
+}
+
+- (YTKKeyValueStore *)store{
+    if (_store == nil) {
+        _store = [[YTKKeyValueStore alloc] initDBWithName:@"details.db"];
+        [_store createTableWithName:self.tableName];
+    }
+    return _store;
+}
+
+- (WebModel *)model{
+    if (_model == nil) {
+        _model = [[WebModel alloc] init];
+    }
+    return _model;
+}
+
+- (NSArray *)movieViewConstraint{
+    if (_movieViewConstraint == nil) {
+        _movieViewConstraint = @[[NSLayoutConstraint constraintWithItem:self.movieView
+                                                              attribute:NSLayoutAttributeHeight
+                                                              relatedBy:NSLayoutRelationEqual
+                                                                 toItem:self.view
+                                                              attribute:NSLayoutAttributeHeight
+                                                             multiplier:0.8
+                                                               constant:0],
+                                 [NSLayoutConstraint constraintWithItem:self.movieView
+                                                              attribute:NSLayoutAttributeBottom
+                                                              relatedBy:NSLayoutRelationEqual
+                                                                 toItem:self.view
+                                                              attribute:NSLayoutAttributeBottom
+                                                             multiplier:1.0
+                                                               constant:0],
+                                 [NSLayoutConstraint constraintWithItem:self.movieView
+                                                              attribute:NSLayoutAttributeLeft
+                                                              relatedBy:NSLayoutRelationEqual
+                                                                 toItem:self.view
+                                                              attribute:NSLayoutAttributeLeft
+                                                             multiplier:1.0
+                                                               constant:0],
+                                 [NSLayoutConstraint constraintWithItem:self.movieView
+                                                              attribute:NSLayoutAttributeRight
+                                                              relatedBy:NSLayoutRelationEqual
+                                                                 toItem:self.view
+                                                              attribute:NSLayoutAttributeRight
+                                                             multiplier:1.0
+                                                               constant:0]
+                                 ];
+    }
+    return _movieViewConstraint;
+}
+
+- (NSArray *)bookViewConstraint{
+    if (_bookViewConstraint == nil) {
+        _bookViewConstraint = @[[NSLayoutConstraint constraintWithItem:self.bookView
+                                                             attribute:NSLayoutAttributeHeight
+                                                             relatedBy:NSLayoutRelationEqual
+                                                                toItem:self.view
+                                                             attribute:NSLayoutAttributeHeight
+                                                            multiplier:0.8
+                                                              constant:0],
+                                [NSLayoutConstraint constraintWithItem:self.bookView
+                                                             attribute:NSLayoutAttributeBottom
+                                                             relatedBy:NSLayoutRelationEqual
+                                                                toItem:self.view
+                                                             attribute:NSLayoutAttributeBottom
+                                                            multiplier:1.0
+                                                              constant:0],
+                                [NSLayoutConstraint constraintWithItem:self.bookView
+                                                             attribute:NSLayoutAttributeLeft
+                                                             relatedBy:NSLayoutRelationEqual
+                                                                toItem:self.view
+                                                             attribute:NSLayoutAttributeLeft
+                                                            multiplier:1.0
+                                                              constant:0],
+                                [NSLayoutConstraint constraintWithItem:self.bookView
+                                                             attribute:NSLayoutAttributeRight
+                                                             relatedBy:NSLayoutRelationEqual
+                                                                toItem:self.view
+                                                             attribute:NSLayoutAttributeRight
+                                                            multiplier:1.0
+                                                              constant:0]
+                                ];
+    }
+    return _bookViewConstraint;
+}
 
 @end
