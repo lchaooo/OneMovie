@@ -378,7 +378,6 @@
                 [UIView animateWithDuration:0.5 animations:^{
                     _detailLabel.frame = CGRectMake(20, 20, _standardSize.width*1.2-40, _labelheight+20);
                     _blurView.frame = _detailLabel.frame;
-                    NSLog(@"2");
                 }];
                 [UIView animateWithDuration:0.2 animations:^{
                     scrollView.layer.transform = CATransform3DMakeRotation(0 , 0, 1, -M_PI);
@@ -567,6 +566,13 @@ CATransform3D CATransform3DPerspect(CATransform3D t, CGPoint center, float disZ)
     [self shakeAnimationForView:_nameLabel];
     [self shakeAnimationForView:_ratingLabel];
     [self shakeAnimationForView:_typeLabel];
+}
+
+- (void)showDetailsOfInfo:(Info *)info{
+    self.nameLabel.text = info.name;
+    self.ratingLabel.text = info.rating;
+    self.typeLabel.text = info.type;
+    self.detailLabel.text = info.details;
 }
 
 @end
